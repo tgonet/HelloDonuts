@@ -1,5 +1,6 @@
 <style>
 .background{
+    padding: 40px 0 40px 0;
     width: 70%;
     background: #CAF0F8;
     border-radius: 30px;
@@ -8,6 +9,8 @@
     left: 0;
     right: 0;
     margin: auto;
+    border-radius:30px; 
+    box-shadow:0.8em 0.8em #FCDDEC
 }
 
 .maxWidth{
@@ -20,7 +23,8 @@
 }
 
 form{
-    margin: 0 auto; 
+    vertical-align: middle;
+    margin: auto; 
     width:75%;
     padding:30px;
 }
@@ -46,8 +50,8 @@ button{
     include("header.php");
 ?>
 
-<div class="background" style="border-radius:30px; box-shadow:5px 5px #FCDDEC">
-    <form>
+<div class="background">
+    <form >
         <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Login</h3>
         <div class="form-group row" style="margin-bottom:40px;">
             <label for="email" class="col-sm-2 col-form-label">Email:</label>
@@ -72,9 +76,6 @@ button{
 </div>
 
 <?php
-    //Detext the current session
-    session_start();
-
     //Include the page layout header
     include("footer.php");
 ?>
