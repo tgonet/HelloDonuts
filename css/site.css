@@ -1,12 +1,6 @@
 body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: "Quicksand", sans-serif;
     font-size: 14px;
-}
-
-.row .nav-brand {
-    transform: translateX(-50%);
-    left: 50%;
-    position: absolute;
 }
 
 .page-title {
@@ -29,9 +23,22 @@ button[type="submit"] {
 }
 
 .bg-custom {
-    background-color: #CAF0F8;
+    background-color: #caf0f8;
 }
 
 .nav-item {
-    color: #63200D;
+    color: #63200d;
+}
+
+.navbar-brand {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .navbar-expand-md {
+        -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+        -ms-flex-pack: start;
+        justify-content: center;
+    }
 }

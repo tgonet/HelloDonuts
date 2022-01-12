@@ -16,7 +16,8 @@
         <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet'>
         <!-- Icons? -->
-        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
     </head>
     <body>
         <div class="container">
