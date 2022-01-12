@@ -1,0 +1,37 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+}
+
+.row .nav-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.cart-header {
+    /*background-color: #0040FF;*/
+    background-color: #017ca7;
+    color: white;
+}
+
+button[type="submit"] {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 8px;
+}
+
+.bg-custom {
+    background-color: #CAF0F8;
+}
+
+.nav-item {
+    color: #63200D;
+}
