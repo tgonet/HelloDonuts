@@ -25,11 +25,39 @@ if(isset($_SESSION["ShopperName"])) {
 }
 ?>
 
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="Image/doughnut_pink.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      <h1>hello donuts</h1>
-    </a>
-  </div>
+<nav class="navbar navbar-expand-md navbar-light bg-custom">
+    <div class="navbar-header">
+        <!-- Toggler/Collapsible Button -->
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="Images/logo.svg" alt="Logo" width="100%" class="d-inline-block align-middle">
+        </a>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-md navbar-light bg-custom">
+    <!-- collapsible part of navbar -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <!-- left-justified menu items -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Donuts</a>
+            </li>
+        </ul>
+        <!-- right-justified menu items -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Cart</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Sign Up</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </nav>
