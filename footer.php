@@ -33,9 +33,6 @@
         -->
 
 <style>
-    .footerContent {
-        
-    }
     .footerRefs {
         color:#FFFFFF;
     }
