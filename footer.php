@@ -1,10 +1,3 @@
-<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
-<link rel="stylesheet" href="css/bootstrap.css">
-<!--jQuery library-->
-<script src="js/jquery-3.3.1.min.js"></script>
-<!--Latest compiled Javascript-->
-<script src="js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/site.css">
 </div> <!-- close the column in 3rd row -->
         </div> <!-- close the 3rd Row -->
         <!-- 4th Row -->
@@ -12,25 +5,25 @@
             <div style="text-align:right">
                 <img src="Images/doughnut_white2.png" style="width:30%; padding-right:20px">
             </div>
-            <div class="row">
+            <div class="row" style="padding: 20px; padding-top: 50px;">
             <div class="col-sm-6" style="color:#FFFFFF">
                 <p>
                     Tel: <a class="footerRefs" href="tel:+65 91234567">+65 91234567</a>
-</p>
+                </p>
                 <p>
                     Email: <a class="footerRefs" href="mailto:hello@donut.com">hello@donut.com</a>
-</p>
+                </p>
                 <p>
                     Address: 123 Donut Street 45 #06-12 S123456  
-</p>
+                </p>
             </div>
-            <div class="col-sm-6" style="color:#FFFFFF">
+            <div class="col-sm-6" style="color:#FFFFFF; text-align:right; ">
                 <p>
                     COPYRIGHT © 2022 ALL RIGHTS RESERVED BY HELLO DONUTS®
-</p>
+                </p>
                 <p>
                     MADE BY MING ZHE, JOLENE, YUXUAN, JOEY 
-</p>
+                </p>
             </div>
 </div>
             
@@ -40,9 +33,6 @@
         -->
 
 <style>
-    .footerContent {
-        
-    }
     .footerRefs {
         color:#FFFFFF;
     }
