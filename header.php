@@ -13,11 +13,12 @@
         <!-- Site specific Cascading Stylesheet -->
         <link rel="stylesheet" href="css/site.css">
         <!-- Font Families -->
-        <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet'>
         <!-- Icons? -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/c120b1c00a.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="container-fluid" style="padding: 0">
@@ -27,6 +28,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12" style="padding: 15px;">
+                <div class="col-sm-12">
                 <!-- content/body -->
                 <!-- closing in footer.php -->

@@ -1,5 +1,5 @@
 body {
-    font-family: "Quicksand", sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-size: 14px;
     padding-right: 0 !important;
 }
@@ -31,8 +31,31 @@ button[type="submit"] {
     color: #63200d;
 }
 
-.navbar-brand {
+.navbar-logo {
     text-align: center;
+}
+
+.mx-auto img, .navbar-brand .d-lg-none .navbar-logo img, .navbar-header img {
+    width: 70%;
+    padding-bottom: 6px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #63200d;
+    font-weight: 700;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.nav-icon {
+    color: #63200d;
+    background-color: transparent;
+}
+
+.nav-item-dd {
+    color: #63200d;
+    text-decoration: none;
+    font-weight: 600;
 }
 
 .background{
