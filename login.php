@@ -1,47 +1,3 @@
-<style>
-.background{
-    padding: 40px 0 40px 0;
-    width: 70%;
-    background: #CAF0F8;
-    border-radius: 30px;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border-radius:30px; 
-    box-shadow:0.8em 0.8em #FCDDEC
-}
-
-.maxWidth{
-    width: 60%;
-}
-
-.center{
-    display: block;
-    margin: auto;
-}
-
-form{
-    vertical-align: middle;
-    margin: auto; 
-    width:75%;
-    padding:30px;
-}
-
-button{
-    border-radius: 10px  !important;
-    background: #63200D;
-    border: none;
-    color: white;
-}
-
-.textfield{
-    border-radius : 20px !important;
-    border: 0 solid #FFFF !important;
-}
-</style>
-
 <?php
     //Detext the current session
     session_start();
@@ -50,6 +6,7 @@ button{
     include("header.php");
 ?>
 
+<div style="margin: 7em 0 7em 0; padding: 0">
 <div class="background">
     <form >
         <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Login</h3>
@@ -71,9 +28,11 @@ button{
         </div>
         <p align="right" style="margin-top: -15px">Forget Password</p>
         <button type="button" class="center" style="padding: 10px 100px 10px 100px">Time to get that dough!</button>
-        <p align="center" style="padding:10px;">New User?<a href="https://www.w3schools.com" style="font-weight: 600;color:black"> Register Here</a></p>
+        <p align="center" style="padding-top: 25px; font-size: 23px;">New User?<a href="https://www.w3schools.com" style="font-weight: 600;color:black"> Register Here</a></p>
     </form>
 </div>
+</div>
+
 
 <?php
     //Include the page layout header

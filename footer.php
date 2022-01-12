@@ -5,7 +5,7 @@
             <div style="text-align:right">
                 <img src="Images/doughnut_white2.png" style="width:30%; margin-right:20px">
             </div>
-            <div class="row" style="margin: 20px; padding-top: 50px;">
+            <div class="row" style="margin: 20px 20px 0 20px; padding-top: 50px;">
             <div class="col-sm-6" style="color:#FFFFFF">
                 <p>
                     Tel: <a class="footerRefs" href="tel:+65 91234567">+65 91234567</a>

@@ -20,7 +20,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid" style="padding: 0">
             <div class="row">
                 <div class="col-sm-12">
                     <?php include("navbar.php"); ?>

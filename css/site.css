@@ -1,6 +1,7 @@
 body {
     font-family: "Quicksand", sans-serif;
     font-size: 14px;
+    padding-right: 0 !important;
 }
 
 .page-title {
@@ -32,6 +33,48 @@ button[type="submit"] {
 
 .navbar-brand {
     text-align: center;
+}
+
+.background{
+    padding: 50px 0 50px 0;
+    width: 50%;
+    background: #CAF0F8;
+    border-radius: 30px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto !important;
+    border-radius:30px; 
+    box-shadow:0.8em 0.8em #FCDDEC
+}
+
+.center{
+    display: block;
+    margin: auto;
+}
+
+form{
+    vertical-align: middle;
+    margin: auto; 
+    width:75%;
+    padding:30px;
+}
+
+label{
+    font-size: 20px !important;
+}
+
+button{
+    border-radius: 10px  !important;
+    background: #63200D;
+    border: none;
+    color: white;
+}
+
+.textfield{
+    border-radius : 20px !important;
+    border: 0 solid #FFFF !important;
 }
 
 @media (min-width: 768px) {
