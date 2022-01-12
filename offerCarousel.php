@@ -48,3 +48,11 @@ include("header.php");
 <?php 
 include("footer.php"); 
 ?>
+
+<style>
+  .carousel-inner > .item > img {
+  height:360px;
+  object-fit:contain;
+}
+
+</style>
