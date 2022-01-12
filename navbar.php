@@ -32,7 +32,7 @@ if(isset($_SESSION["ShopperName"])) {
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            <img src="Images/logo.svg" alt="Logo" width="100%" class="d-inline-block align-middle">
+            <img src="Images/logo.svg" alt="Logo" width="70%">
         </a>
     </div>
 </nav>
@@ -49,10 +49,10 @@ if(isset($_SESSION["ShopperName"])) {
         <!-- right-justified menu items -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link">Cart</a>
+                <a href="#" class="nav-link"><span class="material-icons-outlined">shopping_cart</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+                <a href="#" class="btn btn-secondary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="material-icons-outlined">account_circle</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Login</a></li>
                     <li><a href="#">Sign Up</a></li>
