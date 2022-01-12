@@ -1,7 +1,7 @@
 </div> <!-- close the column in 3rd row -->
         </div> <!-- close the 3rd Row -->
         <!-- 4th Row -->
-        <div style="background:#63200D;font-family: 'Quicksand'">
+        <div style="background:#63200D;font-family: 'Quicksand' ">
             <div style="text-align:right">
                 <img src="Images/doughnut_white2.png" style="width:30%; margin-right:20px">
             </div>
