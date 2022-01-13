@@ -1,58 +1,145 @@
-<?php 
-session_start();
-include("header.php"); 
-?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="css\site.css">
-<div class="mainWrapper">
-  <div class="child1">
-    <div class="container"> 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="Images\Donut_honeydewchocolate.jpg" alt="Honeydew Chocolate" style="width:100%;">
-        </div>
-
-        <div class="item">
-          <img src="Images\Donut_mangocheesecake.jpg" alt="Mango Cheesecake" style="width:100%;">
-        </div>
-      
-        <div class="item">
-          <img src="Images\Donut_shortcake.jpg" alt="Shortcake" style="width:100%;">
-        </div>
+<div class="wrapper">
+<div class="child1">
+  <div id="ImageCarouselCSS" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#ImageCarouselCSS" data-slide-to="0" class="active"></li>
+      <li data-target="#ImageCarouselCSS" data-slide-to="1"></li>
+      <li data-target="#ImageCarouselCSS" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+          <img
+              src="Images\Donut_honeydewchocolate.jpg" 
+              alt="Honeydew Chocolate"
+          />
+          <div class="carousel-caption">
+            <h3>Honeydew Chocolate</h3>
+          </div>
       </div>
-
-      <!-- Left and right controls -->
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
+      <div class="carousel-item">
+          <img
+              src="Images\Donut_mangocheesecake.jpg" 
+              alt="Mango Cheesecake"
+          />
+          <div class="carousel-caption">
+            <h3>Mango Cheesecake</h3>
+          </div>
+      </div>
+      <div class="carousel-item">
+          <img
+              src="Images\Donut_shortcake.jpg" 
+              alt="Shortcake"
+          />
+          <div class="carousel-caption">
+            <h3>Shortcake</h3>
+          </div>
+      </div>
     </div>
   </div>
 </div>
-<?php 
-include("footer.php"); 
-?>
+<div class="child2">
+  <div class="image-wrapper">
+  <img
+    class="side-image"
+    src="Images\Donut_matcha.png" 
+    alt="Matcha Ring Donut"
+  />
+  <h3 class="image1">Try Our New Flavour Here!</h3>
+  </div>
+  <div class="image-wrapper">
+  <img
+    class="side-image2"
+    src="Images\join_now.jpg" 
+    alt="Join Donut"
+  />
+  <h3 class="image2"style=" ">Sign Up Now!</h3>
+  </div>
+</div>
+</div>
+
 
 <style>
-  .carousel-inner > .item > img {
-  height:360px;
+  .slides{
+    display: flex;
+    overflow-x:auto;
+    scroll-snap-type: x mandatory;
+  }
+  .slides > div{
+    display: flex;
+    flex-shrink:0;
+    width: 100%;
+    height: 300px;
+    scroll-snap-align: start;
+    scroll-behavior:smooth;
+    background: #74ABE2;
+    justify-content: center;
+    align-items: center;
+    font-size:100px;
+  }
+  .wrapper{
+    display:flex;
+  }
+  .child1{
+    width:80%;
+    text-align: center;
+  }
+  .child2{
+    height: 100%;
+    text-align: center;
+  }
+  .carousel-inner > .carousel-item > img {
+  height:500px;
   object-fit:contain;
+  opacity: 0.85;
 }
 
+.carousel-caption{
+  /* change color code to change caption background color */
+  background: #4a4e69;
+}
+
+.side-image{
+  height: 330px;
+  padding-bottom: 20px;
+  width:100%;
+  opacity: 0.7;
+}
+.side-image2{
+  height: 170px;
+  width:100%;
+}
+
+.side-image:hover{
+  opacity: 0.4;
+}
+
+
+.image-wrapper{
+  position: relative; 
+  text-align: center; 
+  color: white;
+}
+
+.image1{
+  position: absolute; 
+  bottom: 1%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 80%; 
+  background: #3d405b
+}
+
+.image2{
+  position: absolute; 
+  bottom: 35%; 
+  left: 30%; 
+  transform: translate(-50%, -50%); 
+  width: 80%;
+}
+
+.image2:hover{
+  padding-left: 20px;
+  font-size: 30px;
+}
 </style>
