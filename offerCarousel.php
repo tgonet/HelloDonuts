@@ -53,7 +53,7 @@
     src="Images\join_now.jpg" 
     alt="Join Donut"
   />
-  <h3 class="image2"style=" ">Sign Up Now!</h3>
+  <h3 class="image2">Sign Up </br>Now!</h3>
   </div>
 </div>
 </div>
@@ -96,7 +96,8 @@
 
 .carousel-caption{
   /* change color code to change caption background color */
-  background: #4a4e69;
+  background: #CAF0F8;
+  color: #63200D;
 }
 
 .side-image{
@@ -110,15 +111,10 @@
   width:100%;
 }
 
-.side-image:hover{
-  opacity: 0.4;
-}
-
-
 .image-wrapper{
   position: relative; 
   text-align: center; 
-  color: white;
+  color: #63200D;
 }
 
 .image1{
@@ -127,13 +123,13 @@
   left: 50%; 
   transform: translate(-50%, -50%); 
   width: 80%; 
-  background: #3d405b
+  background: #FCDDEC
 }
 
 .image2{
   position: absolute; 
-  bottom: 35%; 
-  left: 30%; 
+  bottom: 15%; 
+  left: 25%; 
   transform: translate(-50%, -50%); 
   width: 80%;
 }
