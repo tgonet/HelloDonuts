@@ -8,8 +8,14 @@
 
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background" style="width: 80% !important">
-        <form >
+        <form action="checkLogin.php" method="post">
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Register</h3>
+            <div class="form-group row" style="margin-bottom:40px;">
+                <label for="name" class="col-sm-3 col-form-label">Full Name:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control textfield" id="name" name="name" required>
+                </div>
+            </div>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="DOB" class="col-sm-3 col-form-label">Date of Birth:</label>
                 <div class="col-sm-9">
@@ -40,30 +46,31 @@
                     <input type="email" class="form-control textfield" id="email" name="email" placeholder="Please enter your email" required>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" style="margin-bottom:40px;">
                 <label for="password" class="col-sm-3 col-form-label">Password: </label>
                 <div class="col-sm-9">
                     <input class="form-control textfield" type="password" name="password" id="password" required/>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" style="margin-bottom:40px;">
                 <label for="password2" class="col-sm-3 col-form-label">Retype Password: </label>
                 <div class="col-sm-9">
                     <input class="form-control textfield" type="password" name="password2" id="password2" required/>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" style="margin-bottom:40px;">
                 <label for="SecQns" class="col-sm-3 col-form-label">Security Question: </label>
                 <div class="col-sm-9">
-                    <select id="SecQns" name="SecQns" class="textfield form-control minimal" placeholder="Please select a security question">
+                    <select id="SecQns" name="SecQns" class="textfield form-control minimal">
+                    <option value="" disabled selected>Please choose a security question only you know the answer for</option>
                         <option value="volvo">Volvo</option>
                         <option value="saab">Saab</option>
-                        <option value="fiat" selected>Fiat</option>
+                        <option value="fiat">Fiat</option>
                         <option value="audi">Audi</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" style="margin-bottom:40px;">
                 <label for="SecAns" class="col-sm-3 col-form-label">Security Answer: </label>
                 <div class="col-sm-9">
                     <input class="form-control textfield" type="test" name="SecAns" id="SecAns" placeholder="Please enter your answer" required/>
