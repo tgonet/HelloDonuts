@@ -31,7 +31,7 @@ include("header.php");
             <h2>Tan Ming Zhe</h2>
         </div>
         <div class="col-sm-6" style="align-items:center">
-            <img src="Images/Developers/jolene.jpg" id="developers">
+            <img src="Images/Developers/jolene.png" id="developers">
             <h2>Jolene Cheong</h2>
         </div>
     </div>
