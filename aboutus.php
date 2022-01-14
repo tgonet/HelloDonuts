@@ -52,19 +52,3 @@ include("header.php");
 //Include the Page Layout footer
 include("footer.php");
 ?>
-
-<style>
-    h1,h2 {
-        color: pink;
-        font-family:'Quicksand';
-    }
-
-    #developers {
-        border-radius: 50%;
-        width: 10em;
-        height: 10em;
-        object-fit: cover;
-        margin-bottom: 5%;
-    }
-
-</style>

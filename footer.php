@@ -3,7 +3,7 @@
         <!-- 4th Row -->
         <div style="background:#63200D;font-family: 'Quicksand' ">
             <div style="text-align:right">
-                <img src="Images/doughnut_white2.png" style="width:30%; margin-right:20px">
+                <img src="Images/doughnut_white2.png" style="width:20%; margin-right:20px">
             </div>
             <div class="row" style="margin: 20px 20px 0 20px; padding-top: 50px;">
             <div class="col-sm-6" style="color:#FFFFFF">

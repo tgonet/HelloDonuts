@@ -9,7 +9,7 @@
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background">
         <form >
-            <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Login</h3>
+            <h3 align="center">Login</h3>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="email" class="col-sm-3 col-form-label">Email:</label>
                 <div class="col-sm-9">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <p align="right" style="margin-top: -15px">Forget Password</p>
-            <button type="button" class="center" style="padding: 10px 90px 10px 90px">Time to get that dough!</button>
+            <button type="button" class="center">Time to get that dough!</button>
             <p align="center" style="padding-top: 25px; font-size: 23px;">New User? <a href="register.php" style="font-weight: 600;color:black">Register Here</a></p>
         </form>
     </div>
