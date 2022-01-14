@@ -4,6 +4,8 @@ session_start();
 // Include the Page Layout header
 include("header.php");
 ?>
+<!-- CSS to invert columns -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" />
 <!-- Create a centrally located container -->
 <div style="width:80%; margin:auto; text-align:center">
     <h1>ABOUT US</h1>
@@ -16,10 +18,10 @@ include("header.php");
         </div>
     </div>
     <div class="row" style="margin-top:5%; align-items:center">
-        <div class="col-sm-6">
+        <div class="col-sm-6 order-sm-1 order-2">
                 <p style="font-family:'Sacramento'; font-size: 40px;align-items:center">To serve the best donuts, freshly made for you</p>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6 order-sm-2 order-1">
             <h2>OUR MISSION</h2>
         </div>
     </div>
