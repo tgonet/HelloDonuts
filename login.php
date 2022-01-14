@@ -24,7 +24,7 @@
                 </div>
             </div>
             <p align="right" style="margin-top: -15px">Forget Password</p>
-            <button type="button" class="center">Time to get that dough!</button>
+            <button type="login" class="center">Time to get that dough!</button>
             <p align="center" style="padding-top: 25px; font-size: 23px;">New User? <a href="register.php" style="font-weight: 600;color:black">Register Here</a></p>
         </form>
     </div>

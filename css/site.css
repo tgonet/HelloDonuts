@@ -124,13 +124,6 @@ td{
     color:#63200d;
 }
 
-button[type="submit"] {
-    background-color: blue;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    padding: 2px 8px;
-}
 
 .bg-custom {
     background-color: #caf0f8;
@@ -183,11 +176,30 @@ label{
     font-size: 1.1em !important;
 }
 
-button, button[type="submit"]{
+button[type="submit"]{
     border-radius: 10px  !important;
     background: #63200D !important;
     border: none;
     color: white;
+}
+
+button[type="login"]{
+    border-radius: 10px  !important;
+    background: #63200D !important;
+    border: none;
+    color: white;
+}
+
+button[type="moredonut"]{
+    padding: 10px 90px 10px 90px;
+    display: block; 
+    margin: auto;
+    border-radius: 10px  !important;
+    background: #CAF0F8;
+    border: none;
+    font-weight: 900;
+    font-size: 30px;
+    color: #63200D;
 }
 
 .textfield{
