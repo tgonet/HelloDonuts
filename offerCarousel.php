@@ -128,7 +128,7 @@
 
 .image2{
   position: absolute; 
-  bottom: 15%; 
+  bottom: 2%; 
   left: 25%; 
   transform: translate(-50%, -50%); 
   width: 80%;
