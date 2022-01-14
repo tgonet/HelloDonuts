@@ -6,9 +6,39 @@
     include("header.php");
 ?>
 
+<script type="text/javascript">
+function validateForm()
+{
+    if (/r'.+@\w+\.\w{2,}'/.test(myForm.emailAddr.value) != true)
+    {
+        alert("You have entered an invalid email address!");
+        return false;
+    }
+	if(document.register.password.value != document.register.password2.value){
+        alert("Passwords not match!");
+        return false;   // cancel submission
+    }
+    if(document.register.phone.value != ""){
+        var str = document.register.phone.value;
+        if(str.length != 8){
+            alert("Please enter a 8-digit phone number.");
+            return false;   //cancel submission
+        }
+        else if(str.substr(0,1) != "6" &&
+                str.substr(0,1) != "8" &&
+                str.substr(0,1) != "9"){
+            alert("Phone number in Singapore should start with 6,8 or 9.");
+            return false;   //cancel submission
+        }
+    }
+    
+    return true;  // No error found
+}
+</script>
+
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background" style="width: 80% !important">
-        <form action="checkLogin.php" method="post">
+        <form name="register" action="addMember.php" method="post" onsubmit="return validateForm()">
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Register</h3>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="name" class="col-sm-3 col-form-label">Full Name:</label>
@@ -61,8 +91,8 @@
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="SecQns" class="col-sm-3 col-form-label">Security Question: </label>
                 <div class="col-sm-9">
-                    <select id="SecQns" name="SecQns" class="textfield form-control minimal">
-                    <option value="" disabled selected>Please choose a security question only you know the answer for</option>
+                    <select id="SecQns" name="SecQns" class="textfield form-control minimal" required>
+                        <option value="" disabled selected>Please choose a security question only you know the answer for</option>
                         <option value="volvo">Volvo</option>
                         <option value="saab">Saab</option>
                         <option value="fiat">Fiat</option>
@@ -76,7 +106,7 @@
                     <input class="form-control textfield" type="test" name="SecAns" id="SecAns" placeholder="Please enter your answer" required/>
                 </div>
             </div>
-            <button type="button" class="center" style="padding: 10px 90px 10px 90px">Register</button>
+            <button type="submit" class="center" style="padding: 10px 90px 10px 90px">Register</button>
         </form>
     </div>
 </div>
