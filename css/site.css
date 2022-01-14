@@ -18,6 +18,10 @@ h3 {
     color:black;
 }
 
+h3.outsideBackground{
+    margin-bottom: 20px; 
+}
+
 .background{
     padding: 40px 0 40px 0;
     width: 70%;
@@ -28,18 +32,83 @@ h3 {
     left: 0;
     right: 0;
     margin: auto !important;
+    margin-bottom:5% !important;
     border-radius: 2em; 
     box-shadow:0.8em 0.8em #FCDDEC
 }
 
 button{
-    padding: 10px 90px 10px 90px
+    padding: 10px 90px 10px 90px;
+    font-weight: bold;
 }
 
+/* shopping cart and checkout breadcrumb */
+.circle{
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    background: #82BCC7;
+    display: inline-block;
+    text-align: center;
+    color:#ffffff;
+}
+
+.mybreadcrumb{
+    padding:40px 20px 40px 20px;
+}
+
+.mybreadcrumb-circle{
+    width: 25px;
+    height: 25px;
+    background: #afafaf;
+    font-size:16px;
+    padding-bottom:14px;
+  }
+  .mybreadcrumb-circle.complete{
+    background-color:#FA8596;
+  }
+
+.mybreadcrumb-content{
+    display: inline-block;
+    text-align:center;
+    color: #afafaf;
+    padding-bottom:14px;
+}
+.mybreadcrumb-content.complete{
+    color: #FA8596;
+}
+
+/* order review table */
+.table thead th{
+    border-bottom: none;
+    border-top: none;
+    font-size:15px;
+}
+td{
+    border-top: none !important;
+}
+.order-header{
+    background-color: transparent;
+    color:#63200d;
+}
+#orderSummaryTitle{
+    text-align: left;
+    padding-left:20px;
+}
+
+/* images */
 #developers {
     border-radius: 50%;
     width: 10em;
     height: 10em;
+    object-fit: cover;
+    margin-bottom: 5%;
+}
+
+#donutImg{
+    border-radius: 15%;
+    width: 8em;
+    height: 8em;
     object-fit: cover;
     margin-bottom: 5%;
 }
@@ -49,10 +118,10 @@ button{
     font-weight: bold;
 }
 
+
 .cart-header {
-    /*background-color: #0040FF;*/
-    background-color: #017ca7;
-    color: white;
+    background-color: transparent;
+    color:#63200d;
 }
 
 button[type="submit"] {
