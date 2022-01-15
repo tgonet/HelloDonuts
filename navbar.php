@@ -64,10 +64,10 @@ if(isset($_SESSION["ShopperName"])) {
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a class="dropdown-item nav-item-dd" href="#">Login</a>
+                        <a class="dropdown-item nav-item-dd" href="login.php">Login</a>
                     </li>
                     <li>
-                        <a class="dropdown-item nav-item-dd" href="#">Sign Up</a>
+                        <a class="dropdown-item nav-item-dd" href="register.php">Sign Up</a>
                     </li>
                 </ul>
             </li>
