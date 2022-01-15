@@ -37,9 +37,36 @@ h3.outsideBackground{
     box-shadow:0.8em 0.8em #FCDDEC
 }
 
+/* buttons */
 button{
     padding: 10px 90px 10px 90px;
     font-weight: bold;
+}
+    
+button[type="submit"]{
+    border-radius: 10px  !important;
+    background: #63200D !important;
+    border: none;
+    color: white;
+}
+
+button[type="login"]{
+    border-radius: 10px  !important;
+    background: #63200D !important;
+    border: none;
+    color: white;
+}
+
+button[type="moredonut"]{
+    padding: 10px 90px 10px 90px;
+    display: block; 
+    margin: auto;
+    border-radius: 10px  !important;
+    background: #CAF0F8;
+    border: none;
+    font-weight: 900;
+    font-size: 30px;
+    color: #63200D;
 }
 
 /* shopping cart and checkout breadcrumb */
@@ -174,32 +201,6 @@ form{
 
 label{
     font-size: 1.1em !important;
-}
-
-button[type="submit"]{
-    border-radius: 10px  !important;
-    background: #63200D !important;
-    border: none;
-    color: white;
-}
-
-button[type="login"]{
-    border-radius: 10px  !important;
-    background: #63200D !important;
-    border: none;
-    color: white;
-}
-
-button[type="moredonut"]{
-    padding: 10px 90px 10px 90px;
-    display: block; 
-    margin: auto;
-    border-radius: 10px  !important;
-    background: #CAF0F8;
-    border: none;
-    font-weight: 900;
-    font-size: 30px;
-    color: #63200D;
 }
 
 .textfield{

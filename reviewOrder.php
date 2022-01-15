@@ -106,7 +106,7 @@ include("header.php");
 
     <div class="row">
         <div class="col-md-12">
-            <button action="checkoutProcess.php">Proceed to Payment</button>
+            <button type="submit" action="checkoutProcess.php">Proceed to Payment</button>
         </div>
     </div>
 </div>
