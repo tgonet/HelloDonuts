@@ -10,7 +10,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
           <img
-              src="Images\Donut_honeydewchocolate.jpg" 
+              src="Images\Products\Donut_honeydewchocolate.jpg" 
               alt="Honeydew Chocolate"
           />
           <div class="carousel-caption">
@@ -19,7 +19,7 @@
       </div>
       <div class="carousel-item">
           <img
-              src="Images\Donut_mangocheesecake.jpg" 
+              src="Images\Products\Donut_mangocheesecake.jpg" 
               alt="Mango Cheesecake"
           />
           <div class="carousel-caption">
@@ -28,7 +28,7 @@
       </div>
       <div class="carousel-item">
           <img
-              src="Images\Donut_shortcake.jpg" 
+              src="Images\Products\Donut_shortcake.jpg" 
               alt="Shortcake"
           />
           <div class="carousel-caption">
@@ -42,7 +42,7 @@
   <div class="image-wrapper">
   <img
     class="side-image"
-    src="Images\Donut_matcha.png" 
+    src="Images\Products\Donut_matcha.png" 
     alt="Matcha Ring Donut"
   />
   <h3 class="image1">Try Our New Flavour Here!</h3>
@@ -123,7 +123,8 @@
   left: 50%; 
   transform: translate(-50%, -50%); 
   width: 80%; 
-  background: #FCDDEC
+  background: #FCDDEC;
+  color: #63200D;
 }
 
 .image2{
@@ -132,6 +133,7 @@
   left: 25%; 
   transform: translate(-50%, -50%); 
   width: 80%;
+  color: #63200D;
 }
 
 .image2:hover{

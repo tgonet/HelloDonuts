@@ -1,4 +1,18 @@
 <?php
+    function checkUnique($email){
+        include_once("mysql_conn.php");
+        $qry = "SELECT Email FROM Shopper WHERE Email = ?";
+        $stmt = $conn->prepare($qry);
+        // "ssssss" - 6 string parameters
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if($result->num_rows > 0){
+            return false;
+        }
+        return true;
+    }
+
     //Detext the current session
     session_start();
 
@@ -6,35 +20,38 @@
     include("header.php");
 ?>
 
-<script type="text/javascript">
-function validateForm()
-{
-    if (/r'.+@\w+\.\w{2,}'/.test(myForm.emailAddr.value) != true)
-    {
-        alert("You have entered an invalid email address!");
-        return false;
-    }
-	if(document.register.password.value != document.register.password2.value){
-        alert("Passwords not match!");
-        return false;   // cancel submission
-    }
-    if(document.register.phone.value != ""){
-        var str = document.register.phone.value;
-        if(str.length != 8){
-            alert("Please enter a 8-digit phone number.");
-            return false;   //cancel submission
-        }
-        else if(str.substr(0,1) != "6" &&
-                str.substr(0,1) != "8" &&
-                str.substr(0,1) != "9"){
-            alert("Phone number in Singapore should start with 6,8 or 9.");
-            return false;   //cancel submission
-        }
-    }
-    
-    return true;  // No error found
-}
-</script>
+<!-- <?php 
+    echo "<script>
+            function validateForm()
+            {
+                console.log('hi');
+                if(document.register.password.value != document.register.password2.value){
+                    alert('Passwords not match!');
+                    return false;   // cancel submission
+                }
+                if(document.register.phone.value != ''){
+                    var str = document.register.phone.value;
+                    if(str.length != 8){
+                        alert('Please enter a 8-digit phone number.');
+                        return false;   //cancel submission
+                    }
+                    else if(str.substr(0,1) != '6' &&
+                            str.substr(0,1) != '8' &&
+                            str.substr(0,1) != '9'){
+                        alert('Phone number in Singapore should start with 6,8 or 9.');
+                        return false;   //cancel submission
+                    }
+                }";
+                echo "document.cookie = 'email = ' + document.register.email.value";
+                $test = checkUnique($_COOKIE["email"]);
+                echo "if($test == false){
+                    alert('Test');
+                }
+                return true;  // No error found
+            }
+    </script>"
+
+?> -->
 
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background" style="width: 80% !important">
@@ -93,10 +110,9 @@ function validateForm()
                 <div class="col-sm-9">
                     <select id="SecQns" name="SecQns" class="textfield form-control minimal" required>
                         <option value="" disabled selected>Please choose a security question only you know the answer for</option>
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="fiat">Fiat</option>
-                        <option value="audi">Audi</option>
+                        <option value="Which polytechnic?">Which polytechnic?</option>
+                        <option value="Wife's name?">Wife's name?</option>
+                        <option value="How many brothers and sisters?">How many brothers and sisters?</option>
                     </select>
                 </div>
             </div>

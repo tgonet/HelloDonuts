@@ -5,7 +5,7 @@ body {
 }
 
 h1,h2 {
-    color: pink !important;
+    color: #FA8596;
 }
 
 h1{
@@ -193,6 +193,13 @@ td{
     margin: auto;
 }
 
+.catImage{
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+    object-fit: cover;
+    margin-bottom: 5%;
+}
 form{
     vertical-align: middle;
     margin: auto; 
