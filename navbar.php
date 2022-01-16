@@ -43,7 +43,7 @@ if(isset($_SESSION["ShopperName"])) {
         <!-- left-justified menu items -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link">DONUTS</a>
+                <a href="category.php" class="nav-link">DONUTS</a>
             </li>
         </ul>
         <ul class="navbar-nav mx-auto">

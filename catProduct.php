@@ -6,7 +6,7 @@ include("header.php");
 <div style=' margin: 0 10em 0 10em;'>
 <div class="row" style="padding:5px; ">
 	<div class="col-12">
-		<h3 style='text-align: center; padding-top: 40px; padding-bottom: 10px; font-size: 45px; color: #FA8596; font-weight: 900'><?php echo "$_GET[catName]"; ?></h3>
+		<h3 style='text-align: center; padding-top: 40px; padding-bottom: 10px; font-size: 55px; color: #FA8596; font-weight: 900'><?php echo "$_GET[catName]"; ?></h3>
 	</div>
 	<a href="search.php" style="margin:0 auto;">
 	<button type="search" style="text-align: center;" >Search...</button>
