@@ -70,6 +70,19 @@ button[type="moredonut"]{
     color: #63200D;
 }
 
+button[type="search"]{
+    padding: 10px 600px 10px 10px;
+    display: block; 
+    border-radius: 10px  !important;
+    background: transparent;
+    border: #63200D solid;
+    font-weight: 900;
+    font-size: 30px;
+    color: #63200D;
+    margin:0 auto;
+    margin-bottom: 80px;
+}
+
 /* shopping cart and checkout breadcrumb */
 .circle{
     width: 20px;
