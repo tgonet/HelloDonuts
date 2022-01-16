@@ -6,7 +6,6 @@ $_SESSION["PaymentMethod"] = "PayPal";
 if(isset($_SESSION["OrderID"])) {
     // Establish connection with SQL in this page
     include_once("mysql_conn.php"); 
-
     // Get order details
     $qry = "SELECT * FROM OrderData
 				WHERE OrderID = ?";

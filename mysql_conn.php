@@ -2,7 +2,7 @@
 //Connection Parameters
 $servername = 'localhost';
 $username = 'root';
-$userpwd = '07G48u00!';
+$userpwd = '';
 $dbname = 'hellodonuts'; 
 
 // Create connection
