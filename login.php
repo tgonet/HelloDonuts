@@ -22,8 +22,8 @@
                     <input class="form-control textfield" type="password" name="password" id="password" required/>
                 </div>
             </div>
-            <p align="right" style="margin-top: -15px"><a  href="forgetPassword.php">Forget Password</a></p>
-            <button type="login" class="center" style="padding: 10px 90px 10px 90px">Time to get that dough!</button>
+            <p align="right" style="margin-top: -15px"><a style="color:black" href="forgetPassword.php">Forget Password</a></p>
+            <button type="login" class="center">Time to get that dough!</button>
             <p align="center" style="padding-top: 25px; font-size: 23px;">New User? <a href="register.php" style="font-weight: 600;color:black">Register Here</a></p>
         </form>
     </div>
