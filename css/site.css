@@ -1,15 +1,16 @@
 body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', sans-serif !important;
     font-size: 14px;
     padding-right: 0 !important;
 }
 
-h1{
-    font-weight: 500;
+h1,h2 {
+    color: pink !important;
 }
 
-h1,h2 {
-    color: pink;
+h1{
+    font-weight: 500;
+    margin-top: 20px !important; 
 }
 
 h3 {

@@ -71,7 +71,7 @@ if($_POST) // Redirected from reviewOrder.php
 			header('Location: '.$paypalurl);
 		}
 		else {
-			/* THINK OF HOW TO DISPLAY ERROR MESSAGE (1) */
+			/* THINK OF HOW TO DISPLAY ERROR MESSAGE (1/3) */
 			//Show error message
 			echo "<div style='color:red'><b>SetExpressCheckOut failed : </b>".
 				urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."</div>";
@@ -89,7 +89,7 @@ if($_POST) // Redirected from reviewOrder.php
 		$paypal_data = '';
 		
 		// Get all items from the shopping cart, concatenate to the variable $paypal_data (called again as it is not stored in session)
-		// $_SESSION['Items'] is an associative array
+		// $_SESSION['Items'] is an associative array created in shoppingcart.php
 		foreach($_SESSION['Items'] as $key=>$item) 
 		{
 			$paypal_data .= '&L_PAYMENTREQUEST_0_QTY'.$key.'='.urlencode($item["quantity"]);
@@ -121,37 +121,43 @@ if($_POST) // Redirected from reviewOrder.php
 		if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || 
 		"SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])) 
 		{
+			// Update the product inventory
+
+			//Get the items from shopcart
 			$qry = "SELECT ProductID, Quantity FROM ShopCartItem 
 					WHERE ShopCartID = ?";
 			$stmt = $conn->prepare($qry);
 			$stmt->bind_param("i", $_SESSION["Cart"]);
 			$stmt->execute();
 			$items = $stmt->get_result();
-			$stmt->close();
+			$stmt->close(); // close statement
 
+			// Update the product quantity by deducting shopping cart items' quantity
 			while ($item = $items->fetch_array()) {
 				$qry = "UPDATE Product SET Quantity = Quantity - ?
 						WHERE ProductID = ?";
 				$stmt = $conn->prepare($qry);
 				$stmt->bind_param("ii", $item["Quantity"], $item["ProductID"]);
 				$stmt->execute();
-				$stmt->close();
+				$stmt->close();	// close statement
 			}
 		
-			// Update shopcart table, close the shopping cart (OrderPlaced=1)
+			// Update shopcart table, close the shopping cart (i.e. OrderPlaced=1)
 			$total = $_SESSION["SubTotal"] + $_SESSION["Tax"] + $_SESSION["ShipCharge"];
 			$qry = "UPDATE shopcart SET OrderPlaced=1, Quantity=?,
 					SubTotal=?, ShipCharge=?, Tax=?, Total=?
 					WHERE ShopCartID=?";
 			$stmt = $conn->prepare($qry);
 			// "i" - integer, "d" - double
-			$stmt->bind_param("iddddi", $_SESSION["NumCartItem"],
-							$_SESSION["SubTotal"], $_SESSION["ShipCharge"],
-							$_SESSION["Tax"], $total,
+			$stmt->bind_param("iddddi", 
+							$_SESSION["NumCartItem"],
+							$_SESSION["SubTotal"], 
+							$_SESSION["ShipCharge"],
+							$_SESSION["Tax"], 
+							$total,
 							$_SESSION["Cart"]);
 			$stmt->execute();
 			$stmt->close();
-			// End of To Do 2
 			
 			//We need to execute the "GetTransactionDetails" API Call at this point 
 			//to get customer details
@@ -165,7 +171,7 @@ if($_POST) // Redirected from reviewOrder.php
 			if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || 
 			"SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])) 
 			{
-				//gennerate order entry and feed back orderID information
+				//generate order entry and feed back orderID information
 				//You may have more information for the generated order entry 
 				//if you set those information in the PayPal test accounts.
 				
@@ -216,6 +222,8 @@ if($_POST) // Redirected from reviewOrder.php
 			} 
 			else 
 			{
+				/* THINK OF HOW TO DISPLAY ERROR MESSAGE (2/3) */
+				// Idea: Redirect to revieworder.php, and have an alert message saying that transaction failed.
 				echo "<div style='color:red'><b>GetTransactionDetails failed:</b>".
 								urldecode($httpParsedResponseAr["L_LONGMESSAGE0"]).'</div>';
 				echo "<pre>".print_r($httpParsedResponseAr)."</pre>";
@@ -223,6 +231,7 @@ if($_POST) // Redirected from reviewOrder.php
 			}
 		}
 		else {
+			/* THINK OF HOW TO DISPLAY ERROR MESSAGE (3/3) */
 			echo "<div style='color:red'><b>DoExpressCheckoutPayment failed : </b>".
 							urldecode($httpParsedResponseAr["L_LONGMESSAGE0"]).'</div>';
 			echo "<pre>".print_r($httpParsedResponseAr)."</pre>";

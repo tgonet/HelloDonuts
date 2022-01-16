@@ -8,13 +8,13 @@
             <div class="row" style="margin: 20px 20px 0 20px; padding-top: 50px;">
             <div class="col-sm-6" style="color:#FFFFFF">
                 <p>
+                    Address: 123 Donut Street 45 #06-12 S123456 
+                </p>
+                <p>
                     Tel: <a class="footerRefs" href="tel:+65 91234567">+65 91234567</a>
                 </p>
                 <p>
                     Email: <a class="footerRefs" href="mailto:hello@donut.com">hello@donut.com</a>
-                </p>
-                <p>
-                    Address: 123 Donut Street 45 #06-12 S123456  
                 </p>
             </div>
             <div class="col-sm-6" style="color:#FFFFFF; text-align:right; ">

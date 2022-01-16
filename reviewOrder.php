@@ -3,7 +3,9 @@
 session_start();
 // Include the Page Layout header
 include("header.php");
-
+echo "<script> 
+     console.log('hi');
+     </script>";
 // Check if user logged in and cart is not empty
 /* UNCOMMENT ONCE CART & CATALOGUE DONE
 if (! isset($_SESSION["ShopperID"]) || ($_SESSION["NumCartItem"]) == 0)) { 
@@ -137,7 +139,8 @@ $stmt->close();
 $taxRate = $result["TaxRate"];
 
 // Save Tax Amount as session variable "Tax"
-$_SESSION["Tax"] = round($_SESSION["Subtotal"]*$taxRate,2);
+$totalBeforeGST = $_SESSION["Subtotal"]-$_SESSION["DeliveryCharge"]-$_SESSION["Discount"];
+$_SESSION["Tax"] = round($totalBeforeGST*$taxRate,2);
 
 // Table headers
 echo "<h3 class="outsideBackground">Your Order</h3>";
