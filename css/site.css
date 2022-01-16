@@ -193,13 +193,7 @@ td{
     margin: auto;
 }
 
-.catImage{
-    border-radius: 50%;
-    width: 10em;
-    height: 10em;
-    object-fit: cover;
-    margin-bottom: 5%;
-}
+
 form{
     vertical-align: middle;
     margin: auto; 
