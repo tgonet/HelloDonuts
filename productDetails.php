@@ -23,7 +23,20 @@ while ($row = $result->fetch_array()) {
     echo "</div>"; 
     
     echo "<div class='col-sm-5' style='vertical-align:top; padding:5px'>"; 
-    echo "<h2 style='padding-bottom: 50px; font-size: 45px; color: #63200D; font-weight: 900' >$row[ProductTitle]</h2>";
+    echo "<h2 style='padding-bottom: 15px; font-size: 45px; color: #63200D; font-weight: 900' >$row[ProductTitle]</h2>";
+    if (($row["Quantity"] <= 100) && ($row["Offered"] == 1)){
+        echo "<div style='display: flex'>";
+        echo "<div class='onsale'>ON SALE</div>";
+        echo "<div class='onsale2' style='margin-left: 20px'>SELLING FAST</div>";
+        echo "</div>";
+    }
+    else if ($row["Offered"] == 1){
+        echo "<div class='onsale'>ON SALE</div>";
+    }
+    else if ($row["Quantity"] <= 100){
+        echo "<div class='onsale2'>SELLING FAST</div>";
+    }
+    
     echo "<h4>$row[ProductDesc]</h4>";
 
     $qry =  "SELECT s.SpecName, ps.SpecVal from productspec ps

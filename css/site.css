@@ -283,6 +283,25 @@ input, textarea, select {
     padding: 6px 18px !important;
 }
 
+.onsale {
+    background-color: #DD8331;
+    border-radius: 25px;
+    text-align: center;
+    width: 120px;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.onsale2 {
+    background-color: pink;
+    border-radius: 25px;
+    text-align: center;
+    width: 200px;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
 .field-icon {
     float: right;
     margin-right: 17px;
