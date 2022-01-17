@@ -16,7 +16,6 @@ $result = $stmt->get_result();
 $stmt->close();
 
 while ($row = $result->fetch_array()) {
-    
     echo "<div class='row' style='margin: 3em 4em 3em 4em;'>";
     echo "<div style='margin:0 7em 0 0; '>";
     $img = "./Images/products/$row[ProductImage]";
@@ -66,7 +65,8 @@ else{
     echo "<button type='submit' style='font-weight: bold; margin-top: 30px; border-radius: 25px  !important; '>Add to Cart</button>";
 }
 echo "</form>";
-echo "</div>"; 
+echo "</div>";
+echo "<button type='rate'>RATE!</button>";
 echo "</div>"; 
 
 $conn->close();

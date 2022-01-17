@@ -70,6 +70,18 @@ button[type="moredonut"]{
     color: #63200D;
 }
 
+button[type="rate"]{
+    padding: 10px 90px 10px 90px;
+    display: block; 
+    margin-left: 100px;
+    border-radius: 30px  !important;
+    background: #CAF0F8;
+    border: none;
+    font-weight: 900;
+    font-size: 45px;
+    color: #63200D;
+}
+
 button[type="search"]{
     padding: 10px 600px 10px 10px;
     display: block; 
