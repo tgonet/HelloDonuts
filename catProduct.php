@@ -18,7 +18,7 @@ include("header.php");
 include_once("mysql_conn.php");
 
 $cid=$_GET["cid"]; 
-$qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Quantity
+$qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Quantity, p.Offered, p.OfferedPrice
 		FROM CatProduct cp INNER JOIN product p ON cp.ProductID=p.ProductID
 		WHERE cp.CategoryID=? ORDER BY p.ProductTitle "; 
 $stmt = $conn->prepare($qry);
@@ -32,10 +32,19 @@ while ($row = $result->fetch_array()) {
 
 	$product = "productDetails.php?pid=$row[ProductID]";
 	$formattedPrice = number_format($row["Price"], 2);
+	$formattedOffer = number_format($row["OfferedPrice"], 2);
 	echo "<div class='col-8'style='margin-top: 110px'>"; 
 	echo "<h4 style ='font-size: 30px' ><a style ='color: #63200D; text-decoration: none' href=$product>$row[ProductTitle]</a></h4>";
-	echo "<h5>Price:<span style='font-weight: bold; color: #FA8596; font-size: 18px'>
-		  S$ $formattedPrice</span></h5>";
+	if ($row["Offered"] == 1){
+		echo "<h5>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>
+        S$ $formattedPrice</span>
+		<span style = 'font-weight: bold; font-size: 25px; color: #FA8596'>S$ $formattedOffer</span></h5>";
+		echo "<div class='onsale'>ON SALE</div>";
+	}
+	else{
+		echo "<h5>Price:<span style='font-weight: bold; color: #FA8596; font-size: 18px'>
+			  S$ $formattedPrice</span></h5>";
+	}
 	echo "</div>";
 
 	$img = "./Images/products/$row[ProductImage]";

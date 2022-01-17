@@ -24,7 +24,7 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
 
     $keywords=$_GET["keywords"]; 
     
-    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage
+    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Offered
             FROM product p 
             WHERE p.ProductTitle LIKE '%$keywords%'
             ORDER BY ProductTitle"; 
@@ -36,6 +36,9 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
         $product = "productDetails.php?pid=$row[ProductID]";
         echo "<div class='col-8' >"; 
         echo "<h4 style='margin-top: 110px; margin-left: 150px'><a style='color: #63200D;' href=$product>$row[ProductTitle]</a></h4>";
+        if ($row["Offered"] == 1){
+            echo "<div class='onsale' style='margin-left: 150px'>ON SALE</div>";
+        }
         echo "</div>";
         $img = "./Images/products/$row[ProductImage]";
         echo "<div class='col-4' >";

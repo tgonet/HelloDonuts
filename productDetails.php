@@ -60,8 +60,17 @@ while ($row = $result->fetch_array()) {
     echo "</div>";
     echo "<div style='margin-top: 20px;'>";
     $formattedPrice = number_format($row["Price"], 2);
-    echo "<span style = 'font-weight: bold; font-size: 45px; color: #FA8596'>
-            S$ $formattedPrice</span>";
+    $formattedOffer = number_format($row["OfferedPrice"], 2);
+    if ($row["Offered"] == 1){
+        echo "<span class = 'strikethrough' style = 'font-size: 20px; color: #63200D'>
+        S$ $formattedPrice</span>";
+        echo "<span style = 'font-weight: bold; font-size: 45px; color: #FA8596'>
+        S$ $formattedOffer</span>";
+    }
+    else{
+        echo "<span style = 'font-weight: bold; font-size: 45px; color: #FA8596'>
+                S$ $formattedPrice</span>";
+    }
     echo "</div>";
 }
 
