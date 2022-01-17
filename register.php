@@ -53,6 +53,29 @@
 
 ?> -->
 
+<script>
+    function typeChange(){
+        if(document.getElementById("password").type == "password"){
+            document.getElementById("password").type = "text";
+            document.getElementById("checkbox").className = 'fa fa-fw field-icon toggle-password fa-eye-slash';
+        }
+        else{
+            document.getElementById("password").type = "password";
+            document.getElementById("checkbox").className = 'fa fa-fw fa-eye field-icon toggle-password';
+        }
+    }
+    function typeChangeReset(){
+        if(document.getElementById("password2").type == "password"){
+            document.getElementById("password2").type = "text";
+            document.getElementById("checkbox2").className = 'fa fa-fw field-icon toggle-password fa-eye-slash';
+        }
+        else{
+            document.getElementById("password2").type = "password";
+            document.getElementById("checkbox2").className = 'fa fa-fw fa-eye field-icon toggle-password';
+        }
+    }
+</script>
+
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background" style="width: 80% !important">
         <form name="register" action="addMember.php" method="post" onsubmit="return validateForm()">
@@ -97,12 +120,14 @@
                 <label for="password" class="col-sm-3 col-form-label">Password: </label>
                 <div class="col-sm-9">
                     <input class="form-control textfield" type="password" name="password" id="password" required/>
+                    <span onclick="typeChange()" id="checkbox" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="password2" class="col-sm-3 col-form-label">Retype Password: </label>
                 <div class="col-sm-9">
                     <input class="form-control textfield" type="password" name="password2" id="password2" required/>
+                    <span onclick="typeChangeReset()" id="checkbox2" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
