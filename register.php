@@ -78,7 +78,7 @@
 
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background" style="width: 80% !important">
-        <form name="register" action="addMember.php" method="post" onsubmit="return validateForm()">
+        <form style="margin: auto" name="register" action="addMember.php" method="post" onsubmit="return validateForm()">
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Register</h3>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="name" class="col-sm-3 col-form-label">Full Name:</label>

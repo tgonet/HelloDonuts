@@ -21,7 +21,7 @@
 
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background">
-        <form action="checkLogin.php" method="post">
+        <form action="checkLogin.php" method="post" style="margin: auto">
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Login</h3>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="email" class="col-sm-3 col-form-label">Email:</label>

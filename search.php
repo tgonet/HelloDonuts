@@ -3,7 +3,7 @@ session_start();
 include("header.php"); 
 ?>
 
-<form name="frmSearch" method="get" action="">
+<form style="margin: auto" name="frmSearch" method="get" action="">
     <h2 style='text-align: center; font-size: 45px; color: #63200d; font-weight: 900; padding-bottom: 50px'>Product Search</h2>
     <div class="form-group row"> 
         <label for="keywords" 
@@ -35,7 +35,7 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
 
         $product = "productDetails.php?pid=$row[ProductID]";
         echo "<div class='col-8' >"; 
-        echo "<h4 style='margin-top: 110px; margin-left: 150px'><a href=$product>$row[ProductTitle]</a></h4>";
+        echo "<h4 style='margin-top: 110px; margin-left: 150px'><a style='color: #63200D;' href=$product>$row[ProductTitle]</a></h4>";
         echo "</div>";
         $img = "./Images/products/$row[ProductImage]";
         echo "<div class='col-4' >";
