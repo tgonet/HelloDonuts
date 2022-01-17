@@ -6,6 +6,19 @@
     include("header.php");
 ?>
 
+<script>
+    function typeChange(){
+        if(document.getElementById("password").type == "password"){
+            document.getElementById("password").type = "text";
+            document.getElementById("checkbox").className = 'fa fa-fw field-icon toggle-password fa-eye-slash';
+        }
+        else{
+            document.getElementById("password").type = "password";
+            document.getElementById("checkbox").className = 'fa fa-fw fa-eye field-icon toggle-password';
+        }
+    }
+</script>
+
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background">
         <form action="checkLogin.php" method="post">
@@ -20,6 +33,7 @@
                 <label for="password" class="col-sm-3 col-form-label">Password: </label>
                 <div class="col-sm-9">
                     <input class="form-control textfield" type="password" name="password" id="password" required/>
+                    <span onclick="typeChange()" id="checkbox" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                 </div>
             </div>
             <p align="right" style="margin-top: -15px"><a style="color:black" href="forgetPassword.php">Forget Password</a></p>
