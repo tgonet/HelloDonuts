@@ -70,6 +70,18 @@ button[type="moredonut"]{
     color: #63200D;
 }
 
+button[type="rate"]{
+    padding: 10px 90px 10px 90px;
+    display: block; 
+    margin-left: 100px;
+    border-radius: 30px  !important;
+    background: #CAF0F8;
+    border: none;
+    font-weight: 900;
+    font-size: 45px;
+    color: #63200D;
+}
+
 button[type="search"]{
     padding: 10px 600px 10px 10px;
     display: block; 
@@ -209,10 +221,10 @@ td{
 
 form{
     vertical-align: middle;
-    margin: auto; 
     width:75%;
     padding:30px 0 30px 0;
 }
+
 
 label{
     font-size: 1.1em !important;
@@ -269,6 +281,98 @@ select:-moz-focusring {
 
 input, textarea, select {
     padding: 6px 18px !important;
+}
+
+.onsale {
+    background-color: #DD8331;
+    border-radius: 25px;
+    text-align: center;
+    width: 120px;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.onsale2 {
+    background-color: pink;
+    border-radius: 25px;
+    text-align: center;
+    width: 170px;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+    
+}
+
+.strikethrough{
+    background-color: transparent;
+    background-image: gradient(linear, 19.1% -7.9%, 81% 107.9%, color-stop(0, transparent), color-stop(.48, transparent), color-stop(.5, #000), color-stop(.52, transparent), color-stop(1, transparent));
+    background-image: repeating-linear-gradient(163deg, transparent 0%, transparent 48%, #63200D 50%, transparent 52%, transparent 100%);
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 1px;
+    border-radius: 5px;
+    background: white;
+    outline: none;
+    opacity: 0.7;
+    position: relative;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+  }
+.price-input .field{
+    height: 45px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.suggest{
+   margin-top: 150px;
+   background-color: #F2F2F2;
+   width: 100%;
+   height: 500px !important;
+}
+
+.field input{
+    height: 100%;
+    outline: none;
+    font-size: 19px;
+    text-align: center;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.price-input .separator{
+    padding-left: 40px;
+    width: 100px;
+    display: flex;
+    font-size: 19px;
+    align-items: center;
 }
 
 .field-icon {

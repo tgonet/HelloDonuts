@@ -15,15 +15,20 @@ include_once("mysql_conn.php");
 
 $qry = "SELECT * FROM Category"; 
 $result = $conn->query($qry);
+echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center;'>";
 while ($row = $result->fetch_array()){
+    echo"<li style=' margin: 0 40px 0 40px; display: inline;'>";
     $img = "./Images/category/$row[CatImage]";
-    echo "<img style='border-radius: 20%; width: 20em; height: 20em; object-fit: cover; margin-bottom: 30px;' src='$img' />";
-
+    echo "<img style='border-radius: 20%; width: 25em; height: 25em; object-fit: cover; margin-bottom: 30px;' src='$img' />";
+    echo "<div style='margin-left: 20px'>";
     $catname = urlencode($row["CatName"]);
     $catproduct = "catProduct.php?cid=$row[CategoryID]&catName=$catname";
-    echo "<h2><a href=$catproduct style= 'margin-left: 55px;'>$row[CatName]</a></h2>";
-    echo "<p style='width: 15em; text-align: center; font-size: 18px; '>$row[CatDesc]</p>";
+    echo "<h2><a style ='color: #63200D; margin-left: 60px; font-weight: bold' href=$catproduct>$row[CatName]</a></h2>";
+    echo "<p style='width: 15em; text-align: center; font-size: 18px; margin-left: 18px;'>$row[CatDesc]</p>";
+    echo "</div>";
+    echo"</li>";
 }
+echo"</ul>";
 $conn->close(); 
 echo "</div>"; 
 include("footer.php"); 

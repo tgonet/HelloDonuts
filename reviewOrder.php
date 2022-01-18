@@ -109,7 +109,7 @@ if (! isset($_SESSION["ShopperID"]) || ($_SESSION["NumCartItem"]) == 0)) {
     </div>
     <h3 class="outsideBackground">Payment Method</h3>
     <div class='background'>
-        <form action='checkoutProcess.php' method='post'>
+        <form style = 'margin: auto' action='checkoutProcess.php' method='post'>
             <input type="radio" name="paymentMethod" value="paypal" checked>
             <img src="https://1000logos.net/wp-content/uploads/2021/04/Paypal-logo.png" style="width:30%">
         </form>
@@ -190,7 +190,7 @@ echo "</div>";
 echo "</div>";
 echo "<h3 class='outsideBackground'>Payment Method</h3>";
 echo "<div class='background'>";
-echo "<form action='checkoutProcess.php' method='post'>";
+echo "<form style='margin: auto' action='checkoutProcess.php' method='post'>";
 echo "<input type='radio' name='paymentMethod' value='paypal' checked>";
 echo "<img src='https://1000logos.net/wp-content/uploads/2021/04/Paypal-logo.png' style='width:30%'>";
 echo "</form>";
