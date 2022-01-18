@@ -21,9 +21,9 @@
         <script src="https://kit.fontawesome.com/c120b1c00a.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="container-fluid" style="padding: 0">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12" style="background: #caf0f8;">
                     <?php include("navbar.php"); ?>
                 </div>
             </div>

@@ -36,7 +36,6 @@ while ($row = $result->fetch_array()){
 }
 echo"</ul>";
 $conn->close(); 
-echo "</div>";
 
 ?>
 <a href="category.php" style="margin:0 auto; text-decoration: none">

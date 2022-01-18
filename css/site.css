@@ -38,6 +38,16 @@ h3.outsideBackground{
     box-shadow:0.8em 0.8em #FCDDEC
 }
 
+/* footer */
+div.footer-background {
+    background:#63200D; 
+    font-family: 'Quicksand'; 
+    margin-top:10%;
+}
+.footerRefs {
+    color:#FFFFFF;
+}
+
 /* buttons */
 button{
     padding: 10px 90px 10px 90px;
@@ -179,7 +189,7 @@ td{
 
 
 .bg-custom {
-    background-color: #caf0f8;
+    background: #caf0f8;
 }
 
 .nav-item {

@@ -47,7 +47,7 @@ if(isset($_SESSION["ShopperName"])) {
             </li>
         </ul>
         <ul class="navbar-nav mx-auto">
-            <a class="d-none d-lg-block navbar-logo" href="#">
+            <a class="d-none d-lg-block navbar-logo" href="index.php">
                 <img src="Images/hello_donut_logo.svg" alt="Logo" class="logo-img">
             </a>
         </ul>
