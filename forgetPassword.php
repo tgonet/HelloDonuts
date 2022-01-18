@@ -21,7 +21,7 @@ include("header.php"); // Include the Page Layout header
 					window.location.href = "login.php";
 				}
 			},
-			errorerror: function (data) {
+			error: function (data) {
             console.log('An error occurred.');
             console.log(data);
         }
@@ -31,7 +31,7 @@ include("header.php"); // Include the Page Layout header
 
 <!-- Create a cenrally located container -->
 <div style="margin: 7em 0 7em 0; padding: 0">
-	<div style="width:80%; margin:auto;" class="background">
+	<div style="width:60%; margin:auto;" class="background">
 		<form id="testForm" method="POST" onsubmit="subForm(event)" action="#" style="margin: auto">
 			<h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Forget Password</h3>
 			<div class="form-group row" style="margin-bottom:40px;">

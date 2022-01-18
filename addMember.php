@@ -65,5 +65,6 @@ else{
     $stmt->close();
     // Close the database connection
     $conn->close();
+    exit;
 }
 ?>

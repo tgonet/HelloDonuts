@@ -6,20 +6,13 @@
 	$email = $_POST["email"];
 	$password = $_POST["password"];
 
-	// Include the PHP file that establishes database connection handle: $conn
 	include_once("mysql_conn.php");
 
-	// Define thge INSERT SQL statement
 	$qry = "SELECT ShopperID, Name, Email, Password FROM Shopper WHERE Email=?";
-
 	$stmt = $conn->prepare($qry);
-
-	// "ssssss" - 6 string parameters
 	$stmt->bind_param("s", $email);
 
-	// To Do 1 (Practical 2): Validate login credentials with database
-
-	if ($stmt->execute()) {  // SQL statement executed successfully
+	if ($stmt->execute()) {  
 
 		$result = $stmt->get_result();
 		$stmt->close();
@@ -34,11 +27,10 @@
 				$_SESSION["ShopperID"] = $row["ShopperID"];
 				$_SESSION["ShopperName"] = $row["Name"];
 				
-				// To Do 2 (Practical 4): Get active shopping cart
-				include_once("mysql_conn.php"); // Establish database connection handle: $conn
+				include_once("mysql_conn.php"); 
 				$qry1 = "SELECT sc.ShopCartID, COUNT(sci.productid) AS NumOfRows FROM Shopcart sc LEFT JOIN ShopCartItem sci ON sci.ShopCartID=sc.ShopCartID WHERE ShopperID=? AND OrderPlaced=0";
 				$stmt1 = $conn->prepare($qry1);
-				$stmt1->bind_param("i", $_SESSION["ShopperID"]); //"i" - integer
+				$stmt1->bind_param("i", $_SESSION["ShopperID"]); 
 				$stmt1->execute();
 				$row = $stmt1->get_result()->fetch_array();
 				$_SESSION["Cart"] = $row["ShopCartID"];
@@ -46,7 +38,6 @@
 				echo "Login Successful";
 			}
 		}
-		//echo  "<h3 style='color:red'>Invalid Login Credentials</h3>";
 		echo "Your email or password is incorrect.";
 		
 	}

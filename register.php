@@ -1,18 +1,4 @@
 <?php
-    function checkUnique($email){
-        include_once("mysql_conn.php");
-        $qry = "SELECT Email FROM Shopper WHERE Email = ?";
-        $stmt = $conn->prepare($qry);
-        // "ssssss" - 6 string parameters
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if($result->num_rows > 0){
-            return false;
-        }
-        return true;
-    }
-
     //Detext the current session
     session_start();
 
@@ -45,42 +31,46 @@
     function validateForm(e)
     {
         if(document.register.password.value != document.register.password2.value){
+            e.preventDefault();
             alert("Passwords not match!");
+            return;
         }
-        if(document.register.phone.value != ""){
+        else if(document.register.phone.value != ""){
+            e.preventDefault();
             var str = document.register.phone.value;
             if(str.length != 8){
                 alert("Please enter a 8-digit phone number.");
+                return;
             }
             else if(str.substr(0,1) != "6" &&
                     str.substr(0,1) != "8" &&
                     str.substr(0,1) != "9"){
                 alert("Phone number in Singapore should start with 6,8 or 9.");
+                return;
             }
+            $.ajax({
+                url:'addMember.php',
+                type:'POST',
+                data: $("#RegisterForm").serialize(),
+                success: function(response){
+                    console.log(response);
+                    if(response == "This email is taken. Please use another email or login instead."){
+                        alert(response);
+                    }
+                    else if(response == "Error in inserting record"){
+                        alert(response);
+                    }
+                    else{
+                        alert(response);
+                        window.location.href = "index.php";
+                    }
+                },
+                error: function (data) {
+                    console.log('An error occurred.');
+                    console.log(data);
+            }
+            });
         }
-        e.preventDefault();
-		$.ajax({
-			url:'addMember.php',
-			type:'POST',
-			data: $("#RegisterForm").serialize(),
-			success: function(response){
-				console.log(response);
-				if(response == "This email is taken. Please use another email or login instead."){
-                    alert(response);
-				}
-                else if(response == "Error in inserting record"){
-                    alert(response);
-                }
-				else{
-                    alert(response);
-					window.location.href = "index.php";
-				}
-			},
-			error: function (data) {
-                console.log('An error occurred.');
-                console.log(data);
-        }
-    	});
     }
     function typeChange(){
         if(document.getElementById("password").type == "password"){
@@ -105,7 +95,7 @@
 </script>
 
 <div style="margin: 7em 0 7em 0; padding: 0">
-    <div class="background" style="width: 80% !important">
+    <div class="background" style="width: 60% !important">
         <form id="RegisterForm" style="margin: auto" name="register" action="#" method="post" onsubmit="validateForm(event)">
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Register</h3>
             <div class="form-group row" style="margin-bottom:40px;">
@@ -175,7 +165,7 @@
                     <input class="form-control textfield" type="test" name="SecAns" id="SecAns" placeholder="Please enter your answer" required/>
                 </div>
             </div>
-            <button type="submit" class="center" style="padding: 10px 90px 10px 90px">Register</button>
+            <button type="submit" class="center" style="padding: 10px 150px 10px 150px">Register</button>
         </form>
     </div>
 </div>

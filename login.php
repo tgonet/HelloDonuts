@@ -42,7 +42,7 @@
 </script>
 
 <div style="margin: 7em 0 7em 0; padding: 0">
-    <div class="background">
+    <div class="background" style='width: 60% !important'>
         <form action="#" method="post" id="LoginForm" onsubmit="subForm(event)" style="margin: auto"> 
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Login</h3>
             <p style="color:red" align="center" id="loginMessage"></p>
