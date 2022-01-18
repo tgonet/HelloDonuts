@@ -16,12 +16,12 @@ include_once("mysql_conn.php");
 $qry = "SELECT * FROM Product 
         WHERE Offered = 1"; 
 $result = $conn->query($qry);
-echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center;'>";
+echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
 
 while ($row = $result->fetch_array()){
     echo"<li style=' display: inline; margin: 0 50px 50px 50px;'>";
     $img = "./Images/products/$row[ProductImage]";
-    echo "<img style='border-radius: 20%; width: 18em; height: 18em; object-fit: cover; margin-bottom: 10px;' src='$img' />";
+    echo "<img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover; margin-bottom: 10px;' src='$img' />";
     $product = "productDetails.php?pid=$row[ProductID]";
     $formattedPrice = number_format($row["Price"], 2);
     $formattedOffer = number_format($row["OfferedPrice"], 2);
@@ -40,7 +40,7 @@ echo "</div>";
 
 ?>
 <a href="category.php" style="margin:0 auto; text-decoration: none">
-  <button type="moredonut" style="margin-bottom: 100px;">MORE DONUTS GOODNESS</button>
+  <button type="moredonut" style="margin-bottom: 50px;">MORE DONUTS GOODNESS</button>
 </a>
 <?php 
 include("footer.php"); 
