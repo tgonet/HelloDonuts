@@ -3,7 +3,7 @@ session_start();
 include("header.php"); 
 ?>
 
-<form style="margin: auto" name="frmSearch" method="get" action="">
+<form style="margin: 0 0 0 180px" name="frmSearch" method="get" action="">
     <h2 style='text-align: center; font-size: 45px; color: #63200d; font-weight: 900; padding-bottom: 50px'>Product Search</h2>
     <div class="form-group row"> 
         <label for="keywords" 
@@ -17,6 +17,9 @@ include("header.php");
         </div>
     </div> 
 </form>
+<a href="filter.php" style="margin:0 auto; text-decoration: none">
+	<button type="moredonut" style="padding: 5px 70px 5px 70px; margin: 0 0 0 150px; font-size: 20px;" >FILTER</button>
+</a>
 
 <?php
 if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {

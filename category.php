@@ -23,7 +23,7 @@ while ($row = $result->fetch_array()){
     echo "<div style='margin-left: 20px'>";
     $catname = urlencode($row["CatName"]);
     $catproduct = "catProduct.php?cid=$row[CategoryID]&catName=$catname";
-    echo "<h2><a style ='color: #63200D; margin-left: 60px;' href=$catproduct>$row[CatName]</a></h2>";
+    echo "<h2><a style ='color: #63200D; margin-left: 60px; font-weight: bold' href=$catproduct>$row[CatName]</a></h2>";
     echo "<p style='width: 15em; text-align: center; font-size: 18px; margin-left: 18px;'>$row[CatDesc]</p>";
     echo "</div>";
     echo"</li>";

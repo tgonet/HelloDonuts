@@ -309,6 +309,65 @@ input, textarea, select {
     background-image: repeating-linear-gradient(163deg, transparent 0%, transparent 48%, #63200D 50%, transparent 52%, transparent 100%);
 }
 
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 1px;
+    border-radius: 5px;
+    background: white;
+    outline: none;
+    opacity: 0.7;
+    position: relative;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+  }
+.price-input .field{
+    height: 45px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.field input{
+    height: 100%;
+    outline: none;
+    font-size: 19px;
+    text-align: center;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.price-input .separator{
+    padding-left: 40px;
+    width: 100px;
+    display: flex;
+    font-size: 19px;
+    align-items: center;
+}
+
 .field-icon {
     float: right;
     margin-right: 17px;
