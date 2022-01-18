@@ -20,40 +20,68 @@
     include("header.php");
 ?>
 
-<!-- <?php 
-    echo "<script>
-            function validateForm()
-            {
-                console.log('hi');
-                if(document.register.password.value != document.register.password2.value){
-                    alert('Passwords not match!');
-                    return false;   // cancel submission
-                }
-                if(document.register.phone.value != ''){
-                    var str = document.register.phone.value;
-                    if(str.length != 8){
-                        alert('Please enter a 8-digit phone number.');
-                        return false;   //cancel submission
-                    }
-                    else if(str.substr(0,1) != '6' &&
-                            str.substr(0,1) != '8' &&
-                            str.substr(0,1) != '9'){
-                        alert('Phone number in Singapore should start with 6,8 or 9.');
-                        return false;   //cancel submission
-                    }
-                }";
-                echo "document.cookie = 'email = ' + document.register.email.value";
-                $test = checkUnique($_COOKIE["email"]);
-                echo "if($test == false){
-                    alert('Test');
-                }
-                return true;  // No error found
-            }
-    </script>"
-
-?> -->
 
 <script>
+     function getDate(){
+        // For date input (Max Today)
+        var today = new Date();
+        var dd = today.getDate();
+         mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        } 
+    
+        today = yyyy + '-' + mm + '-' + dd;
+        console.log(today);
+        document.getElementById("bday").setAttribute("max", today);
+    }
+
+    function validateForm(e)
+    {
+        if(document.register.password.value != document.register.password2.value){
+            alert("Passwords not match!");
+        }
+        if(document.register.phone.value != ""){
+            var str = document.register.phone.value;
+            if(str.length != 8){
+                alert("Please enter a 8-digit phone number.");
+            }
+            else if(str.substr(0,1) != "6" &&
+                    str.substr(0,1) != "8" &&
+                    str.substr(0,1) != "9"){
+                alert("Phone number in Singapore should start with 6,8 or 9.");
+            }
+        }
+        e.preventDefault();
+		$.ajax({
+			url:'addMember.php',
+			type:'POST',
+			data: $("#RegisterForm").serialize(),
+			success: function(response){
+				console.log(response);
+				if(response == "This email is taken. Please use another email or login instead."){
+                    alert(response);
+				}
+                else if(response == "Error in inserting record"){
+                    alert(response);
+                }
+				else{
+                    alert(response);
+					window.location.href = "index.php";
+				}
+			},
+			error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+        }
+    	});
+    }
     function typeChange(){
         if(document.getElementById("password").type == "password"){
             document.getElementById("password").type = "text";
@@ -78,7 +106,7 @@
 
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background" style="width: 80% !important">
-        <form style="margin: auto" name="register" action="addMember.php" method="post" onsubmit="return validateForm()">
+        <form id="RegisterForm" style="margin: auto" name="register" action="#" method="post" onsubmit="validateForm(event)">
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Register</h3>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="name" class="col-sm-3 col-form-label">Full Name:</label>
@@ -87,19 +115,19 @@
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
-                <label for="DOB" class="col-sm-3 col-form-label">Date of Birth:</label>
+                <label for="bday" class="col-sm-3 col-form-label">Date of Birth:</label>
                 <div class="col-sm-9">
-                    <input type="date" class="form-control textfield" id="DOB" name="DOB" required>
+                    <input type="date" class="form-control textfield" id="bday" name="bday" min="1900-01-01" onclick="getDate()" required>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
-                <label for="DOB" class="col-sm-3 col-form-label">Address:</label>
+                <label for="address" class="col-sm-3 col-form-label">Address:</label>
                 <div class="col-sm-9">
                     <textarea class="form-control textfield" id="address" name="address" rows="4" cols="50" placeholder="Please enter your address"  required></textarea>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
-                <label for="countryl" class="col-sm-3 col-form-label">Country:</label>
+                <label for="country" class="col-sm-3 col-form-label">Country:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control textfield" id="country" name="country" placeholder="Please enter your country" required>
                 </div>
