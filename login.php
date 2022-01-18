@@ -17,12 +17,35 @@
             document.getElementById("checkbox").className = 'fa fa-fw fa-eye field-icon toggle-password';
         }
     }
+
+    function subForm(e){
+		e.preventDefault();
+		$.ajax({
+			url:'checkLogin.php',
+			type:'POST',
+			data: $("#LoginForm").serialize(),
+			success: function(response){
+				console.log(response);
+				if(response == "Your email or password is incorrect."){
+                    document.getElementById("loginMessage").innerText = response;
+				}
+				else{
+					window.location.href = "index.php";
+				}
+			},
+			error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+        }
+    	});
+	}
 </script>
 
 <div style="margin: 7em 0 7em 0; padding: 0">
     <div class="background">
-        <form action="checkLogin.php" method="post">
+        <form action="#" method="post" id="LoginForm" onsubmit="subForm(event)">
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Login</h3>
+            <p style="color:red" align="center" id="loginMessage"></p>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="email" class="col-sm-3 col-form-label">Email:</label>
                 <div class="col-sm-9">
