@@ -350,6 +350,13 @@ input, textarea, select {
     align-items: center;
 }
 
+.suggest{
+   margin-top: 150px;
+   background-color: #F2F2F2;
+   width: 100%;
+   height: 500px !important;
+}
+
 .field input{
     height: 100%;
     outline: none;

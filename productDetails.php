@@ -90,8 +90,33 @@ echo "</form>";
 echo "</div>";
 echo "<button type='rate'>RATE!</button>";
 echo "</div>"; 
+echo "<div class='suggest'>";
+echo "<div class='row' style='margin: 3em 4em 3em 4em;'>";
+echo "<h3 style='margin-top:50px; color: #63200D; width: 100%;'>You may like this:</h3>";
+$qry = "SELECT * from product where NOT ProductID=? ORDER BY RAND() LIMIT 3"; 
+$result = $conn->query($qry);
+$stmt = $conn->prepare($qry);
+$stmt->bind_param("i", $pid); 	
+$stmt->execute();
+$result = $stmt->get_result();
+$stmt->close();
+echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
+while ($row = $result->fetch_array()){
+    echo"<li style=' display: inline; margin: 0 50px 50px 50px;'>";
+    $img = "./Images/products/$row[ProductImage]";
+    echo "<div style='height:100%; width:100%;'>";
+    echo "<img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover; margin-bottom: 10px;' src='$img' />";
+    echo "</div>"; 
+    $product = "productDetails.php?pid=$row[ProductID]";
+    echo "<h2><a style ='color: #63200D; margin-left:15px; font-weight: bold; font-size: 25px;text-align:center'  href=$product>$row[ProductTitle]</a></h2>";
+    echo"</li>";
+}
+echo"</ul>";
+echo "</div>"; 
+echo "</div>"; 
 
 $conn->close();
 echo "</div>"; 
 include("footer.php"); 
 ?>
+
