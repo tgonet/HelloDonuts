@@ -1,4 +1,5 @@
 <?php
+// !!!FOR CHECKOUT: echo $_SESSION["DeliveryDate"]->format('Y-m-d');!!!!!!!
 session_start();
 include("header.php"); // Include the Page Layout header
 include_once("myPayPal.php"); // Include the file that contains PayPal settings
@@ -18,7 +19,7 @@ if($_POST) // Redirected from reviewOrder.php
 		
         // Check that quantity ordered is more than inventory quantity
 		if ($result["Quantity"] < $item["quantity"]) {
-			header ("Location: login.php");
+			header ("Location: shoppingCart.php");
 	        exit;
 		}
 	}
@@ -30,24 +31,27 @@ if($_POST) // Redirected from reviewOrder.php
 		// $_SESSION['Items'] is an associative array, from shoppingCart.php
 		foreach($_SESSION['Items'] as $key=>$item) {
 			$paypal_data .= '&L_PAYMENTREQUEST_0_QTY'.$key.'='.urlencode($item["quantity"]);
-			$paypal_data .= '&L_PAYMENTREQUEST_0_AMT'.$key.'='.urlencode($item["price"]);
+			$paypal_data .= '&L_PAYMENTREQUEST_0_AMT'.$key.'='.urlencode($item["total"]);
 			$paypal_data .= '&L_PAYMENTREQUEST_0_NAME'.$key.'='.urlencode($item["name"]);
 			$paypal_data .= '&L_PAYMENTREQUEST_0_NUMBER'.$key.'='.urlencode($item["productId"]);
 		}
 		
+		$SubTotalWithDiscount = $_SESSION["SubTotal"] - $_SESSION["Discount"];
 		// Data to be sent to PayPal
 		// Session variable "Tax" calculated in reviewOrder.php
 		$padata = '&CURRENCYCODE='.urlencode($PayPalCurrencyCode).
 				'&PAYMENTACTION=Sale'.
 				'&ALLOWNOTE=1'.
 				'&PAYMENTREQUEST_0_CURRENCYCODE='.urlencode($PayPalCurrencyCode).
-				'&PAYMENTREQUEST_0_AMT='.urlencode($_SESSION["SubTotal"] +
+				'&PAYMENTREQUEST_0_AMT='.urlencode($SubTotalWithDiscount +
 													$_SESSION["Tax"] + 
-													$_SESSION["ShipCharge"]).
-				'&PAYMENTREQUEST_0_ITEMAMT='.urlencode($_SESSION["SubTotal"]). 
-				'&PAYMENTREQUEST_0_SHIPPINGAMT='.urlencode($_SESSION["ShipCharge"]). 
+													$_SESSION["DeliveryCharge"] - 
+													$_SESSION["DeliveryDiscount"]).
+				'&PAYMENTREQUEST_0_ITEMAMT='.urlencode($SubTotalWithDiscount). // note: this amount will be compared with item amounts
+				'&PAYMENTREQUEST_0_SHIPPINGAMT='.urlencode($_SESSION["DeliveryCharge"]). 
+				'&PAYMENTREQUEST_0_SHIPDISCAMT='.urlencode(-$_SESSION["DeliveryDiscount"]). // added shipping discount in the event where delivery charge is waived 
 				'&PAYMENTREQUEST_0_TAXAMT='.urlencode($_SESSION["Tax"]). 
-				'&BRANDNAME='.urlencode("Mamaya e-BookStore").
+				'&BRANDNAME='.urlencode("Hello Donuts").
 				$paypal_data.				
 				'&RETURNURL='.urlencode($PayPalReturnURL ).
 				'&CANCELURL='.urlencode($PayPalCancelURL);	
@@ -73,9 +77,20 @@ if($_POST) // Redirected from reviewOrder.php
 		else {
 			/* THINK OF HOW TO DISPLAY ERROR MESSAGE (1/3) */
 			//Show error message
+			header("shoppingCart.php");
+			echo "<script>alert('Checkout failed, please try again.');
+			console.log('SetExpressCheckOut failed :".urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."');
+			</script>;";	
+			
+			//Show error message
+			echo "<div style='color:red'><b>SetExpressCheckOut failed : </b>".
+				urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."</div>";
+			echo "<pre>".print_r($httpParsedResponseAr)."</pre>"; // DK about this
+			/*
 			echo "<div style='color:red'><b>SetExpressCheckOut failed : </b>".
 				urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."</div>";
 			echo "<pre>".print_r($httpParsedResponseAr)."</pre>";
+			*/
 		}
 	}
 
@@ -85,7 +100,7 @@ if($_POST) // Redirected from reviewOrder.php
 		//we will be using these two variables to execute the "DoExpressCheckoutPayment"
 		//Note: we haven't received any payment yet.
 		$token = $_GET["token"];
-		$playerid = $_GET["PayerID"];
+		$payerid = $_GET["PayerID"];
 		$paypal_data = '';
 		
 		// Get all items from the shopping cart, concatenate to the variable $paypal_data (called again as it is not stored in session)
@@ -93,22 +108,24 @@ if($_POST) // Redirected from reviewOrder.php
 		foreach($_SESSION['Items'] as $key=>$item) 
 		{
 			$paypal_data .= '&L_PAYMENTREQUEST_0_QTY'.$key.'='.urlencode($item["quantity"]);
-			$paypal_data .= '&L_PAYMENTREQUEST_0_AMT'.$key.'='.urlencode($item["price"]);
+			$paypal_data .= '&L_PAYMENTREQUEST_0_AMT'.$key.'='.urlencode($item["total"]);
 			$paypal_data .= '&L_PAYMENTREQUEST_0_NAME'.$key.'='.urlencode($item["name"]);
 			$paypal_data .= '&L_PAYMENTREQUEST_0_NUMBER'.$key.'='.urlencode($item["productId"]);
 		}
 		
 		//Data to be sent to PayPal
 		$padata = '&TOKEN='.urlencode($token).
-				'&PAYERID='.urlencode($playerid).
+				'&PAYERID='.urlencode($payerid).
 				'&PAYMENTREQUEST_0_PAYMENTACTION='.urlencode("SALE").
 				$paypal_data.	
-				'&PAYMENTREQUEST_0_ITEMAMT='.urlencode($_SESSION["SubTotal"]).
+				'&PAYMENTREQUEST_0_ITEMAMT='.urlencode($SubTotalWithDiscount).
 				'&PAYMENTREQUEST_0_TAXAMT='.urlencode($_SESSION["Tax"]).
-				'&PAYMENTREQUEST_0_SHIPPINGAMT='.urlencode($_SESSION["ShipCharge"]).
-				'&PAYMENTREQUEST_0_AMT='.urlencode($_SESSION["SubTotal"] + 
+				'&PAYMENTREQUEST_0_SHIPPINGAMT='.urlencode($_SESSION["DeliveryCharge"]).
+				'&PAYMENTREQUEST_0_SHIPDISCAMT='.urlencode(-$_SESSION["DeliveryDiscount"]). 
+				'&PAYMENTREQUEST_0_AMT='.urlencode($SubTotalWithDiscount+ 
 													$_SESSION["Tax"] + 
-													$_SESSION["ShipCharge"]).
+													$_SESSION["DeliveryCharge"] -
+													$_SESSION["DeliveryDiscount"]).
 				'&PAYMENTREQUEST_0_CURRENCYCODE='.urlencode($PayPalCurrencyCode);
 		
 		//We need to execute the "DoExpressCheckoutPayment" at this point 
@@ -143,7 +160,6 @@ if($_POST) // Redirected from reviewOrder.php
 			}
 		
 			// Update shopcart table, close the shopping cart (i.e. OrderPlaced=1)
-			$total = $_SESSION["SubTotal"] + $_SESSION["Tax"] + $_SESSION["ShipCharge"];
 			$qry = "UPDATE shopcart SET OrderPlaced=1, Quantity=?,
 					SubTotal=?, ShipCharge=?, Tax=?, Total=?
 					WHERE ShopCartID=?";
@@ -154,7 +170,7 @@ if($_POST) // Redirected from reviewOrder.php
 							$_SESSION["SubTotal"], 
 							$_SESSION["ShipCharge"],
 							$_SESSION["Tax"], 
-							$total,
+							$_SESSION["Total"],
 							$_SESSION["Cart"]);
 			$stmt->execute();
 			$stmt->close();
@@ -195,11 +211,11 @@ if($_POST) // Redirected from reviewOrder.php
 				// Insert an Order record with shipping information
 				// Get the Order ID and save it in session variable.
 				$qry = "INSERT INTO orderdata (ShipName, ShipAddress, ShipCountry,
-												ShipEmail, ShopCartID)
+												ShipEmail, ShopCartID, DeliveryDate, DeliveryMode, Message, OrderStatus)
 						VALUES(?,?,?,?,?)";
 				$stmt = $conn->prepare($qry);	
 				// "i" - integer, "s" - string
-				$stmt->bind_param("ssssi", $ShipName, $ShipAddress, $ShipCountry, $ShipEmail, $_SESSION["Cart"]);
+				$stmt->bind_param("ssssi", $ShipName, $ShipAddress, $ShipCountry, $ShipEmail, $_SESSION["Cart"], $_SESSION["DeliveryDate"], $_SESSION["DeliveryMode"], $_POST["message"], 3); // RMB TO DO DATE ORDERED
 				$stmt->execute();
 				$stmt->close();
 				$qry = "SELECT LAST_INSERT_ID() AS OrderID";
