@@ -1,33 +1,48 @@
 <?php
 //Display guest welcome message, Login and Registration links
 //when shopper has yet to login,
-$content1 = "Welcome Guest<br />";
-$content2 = "<li class='nav-item'>
-		     <a class='nav-link' href='register.php'>Sign Up</a></li>
-			 <li class='nav-item'>
-		     <a class='nav-link' href='login.php'>Login</a></li>";
+$itemsintray = "";
+$content1 = "Guest";
+$content2 = "<ul class='dropdown-menu dropdown-menu-right'>
+                <li>
+                    <span class='dropdown-item nav-user'>Hi, Guest</span>
+                </li>
+                <li class='dropdown-divider'></li>
+                <li>
+                    <a class='dropdown-item nav-item-dd' href='login.php'>Login</a>
+                </li>
+                <li>
+                    <a class='dropdown-item nav-item-dd' href='register.php'>Sign Up</a>
+                </li>
+            </ul>";
 
 if(isset($_SESSION["ShopperName"])) { 
-	//To Do 1 (Practical 2) - 
     //Display a greeting message, Change Password and logout links 
     //after shopper has logged in.
-    $content1 = "Welcome <b>$_SESSION[ShopperName]</b>";
-    $content2 = "<li class='nav-item'>
-                 <a class='nav-link' href='changePassword.php'>Change Password</a></li>
-                 <li class='nav-item'>
-                 <a class='nav-link' href='logout.php'>Logout</a></li>";
+    $content1 = "$_SESSION[ShopperName]";
+    $content2 = "<ul class='dropdown-menu dropdown-menu-right'>
+                    <li>
+                        <span class='dropdown-item nav-user'>Hi, $_SESSION[ShopperName]</span>
+                    </li>
+                    <li class='dropdown-divider'></li>
+                    <li>
+                        <a class='dropdown-item nav-item-dd' href=''>Profile</a>
+                    </li>
+                    <li>
+                        <a class='dropdown-item nav-item-logout' href=''>Log Out</a>
+                    </li>
+                </ul>";
 	
-	//To Do 2 (Practical 4) - 
     //Display number of item in cart
 	if (isset($_SESSION["NumCartItem"])) {
-        $content1 .= ", $_SESSION[NumCartItem] item(s) in shopping cart";
+        $itemsintray = "<span class='badge'>$_SESSION[NumCartItem]</span>";
     }
 }
 ?>
 
-<nav class="navbar navbar-expand-md navbar-light bg-custom">
+<nav class="navbar navbar-expand-md navbar-light">
     <div class="navbar-header">
-        <a class="navbar-brand d-lg-none navbar-logo" href="#">
+        <a class="navbar-brand d-lg-none navbar-logo" href="index.php">
             <img src="Images/hello_donut_logo.svg" alt="Logo" class="logo-img">
         </a>
         <!-- Toggler/Collapsible Button -->
@@ -37,39 +52,33 @@ if(isset($_SESSION["ShopperName"])) {
     </div>
 </nav>
 
-<nav class="navbar navbar-expand-md navbar-light bg-custom">
+<nav class="navbar navbar-expand-md navbar-light">
     <!-- collapsible part of navbar -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <!-- left-justified menu items -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link">DONUTS</a>
+                <a href="category.php" class="nav-link">DONUTS</a>
             </li>
         </ul>
         <ul class="navbar-nav mx-auto">
-            <a class="d-none d-lg-block navbar-logo" href="#">
+            <a class="d-none d-lg-block navbar-logo" href="index.php">
                 <img src="Images/hello_donut_logo.svg" alt="Logo" class="logo-img">
             </a>
         </ul>
         <!-- right-justified menu items -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-shopping-cart nav-icon"></i>
+                <a href="shoppingCart.php" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <?php echo $itemsintray; ?>
                 </a>
             </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user-circle nav-icon"></i>
+                    <i class="fas fa-user-circle"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a class="dropdown-item nav-item-dd" href="login.php">Login</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item nav-item-dd" href="register.php">Sign Up</a>
-                    </li>
-                </ul>
+                <?php echo $content2; ?>
             </li>
         </ul>
     </div>

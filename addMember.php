@@ -18,7 +18,7 @@ function checkUnique($email){
 
 // Read the data input from the previous page
 $name = $_POST["name"];
-$DOB = $_POST["DOB"];
+$DOB = $_POST["bday"];
 $address = $_POST["address"];
 $country = $_POST["country"];
 $phone = $_POST["phone"];
@@ -28,7 +28,7 @@ $Pwd_Questiion = $_POST["SecQns"];
 $Pwd_Answer = $_POST["SecAns"];
 
 if(checkUnique($email) == false){
-    $Message = "<p>This email is taken. Please use another email or click <a href='login.php' >here</a> to login instead.";
+    echo "This email is taken. Please use another email or login instead.";
 }
 else{
     include("mysql_conn.php");
@@ -53,24 +53,18 @@ else{
         }
 
         //Successful message and Shopper ID
-        $Message = "Registration successful!<br />
-                    Your ShopperID is $_SESSION[ShopperID]<br />";
+        echo "Registration successful! Your ShopperID is $_SESSION[ShopperID]";
         // Save the Shopper Name in a session variable
         $_SESSION["ShopperName"] = $name;
     }
     else{  // Error message
-        $Message = "<h3 style='color:red'>Error in inserting record</h3>";
+        echo "Error in inserting record";
     }
 
     // Release the resource allocated for prepared statement
     $stmt->close();
     // Close the database connection
     $conn->close();
+    exit;
 }
-// Display Page Layout header with updated session state and links
-include("header.php");
-// Display message
-echo $Message;
-// Display Page Layout footer
-include("footer.php");
 ?>

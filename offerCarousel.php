@@ -1,5 +1,5 @@
 
-<div class="wrapper">
+<div class="wrapper" style="padding-top:20px;">
 <div class="child1">
   <div id="ImageCarouselCSS" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -10,6 +10,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
           <img
+              style="width:100%"
               src="Images\Products\Donut_honeydewchocolate.jpg" 
               alt="Honeydew Chocolate"
           />
@@ -19,6 +20,7 @@
       </div>
       <div class="carousel-item">
           <img
+              style="width:100%"
               src="Images\Products\Donut_mangocheesecake.jpg" 
               alt="Mango Cheesecake"
           />
@@ -28,6 +30,7 @@
       </div>
       <div class="carousel-item">
           <img
+              style="width:100%"
               src="Images\Products\Donut_shortcake.jpg" 
               alt="Shortcake"
           />
@@ -89,8 +92,8 @@
     text-align: center;
   }
   .carousel-inner > .carousel-item > img {
-  height:500px;
-  object-fit:contain;
+  height:520px;
+  object-fit:cover;
   opacity: 0.85;
 }
 
@@ -100,15 +103,21 @@
   color: #63200D;
 }
 
+img{
+  border-radius: 3%;
+}
+
 .side-image{
   height: 330px;
-  padding-bottom: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
   width:100%;
   opacity: 0.7;
 }
 .side-image2{
   height: 170px;
   width:100%;
+  margin-left: 20px;
 }
 
 .image-wrapper{
@@ -130,7 +139,7 @@
 .image2{
   position: absolute; 
   bottom: 2%; 
-  left: 25%; 
+  left: 30%; 
   transform: translate(-50%, -50%); 
   width: 80%;
   color: #63200D;
