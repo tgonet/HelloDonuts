@@ -3,9 +3,6 @@
 session_start();
 // Include the Page Layout header
 include("header.php");
-echo "<script> 
-     console.log('hi');
-     </script>";
 // Check if user logged in and cart is not empty
 /* UNCOMMENT ONCE CART & CATALOGUE DONE
 if (! isset($_SESSION["ShopperID"]) || ($_SESSION["NumCartItem"]) == 0)) { 
@@ -18,7 +15,7 @@ if (! isset($_SESSION["ShopperID"]) || ($_SESSION["NumCartItem"]) == 0)) {
 
 <div class="row" style="padding:20px 0 0 20px">
     <div class="col-sm-12">
-        <div class="circle"><</div>
+        <div class="circle"><i class="fas fa-chevron-circle-left" style='color:#82BCC7'></i></div>
         <div style="color:#82BCC7; padding-left:8px; display:inline-block">Back</div>
     </div>
 </div>
@@ -184,6 +181,36 @@ foreach($_SESSION['Items'] as $key=>$item) {
     echo "<td style='vertical-align:middle; margin-bottom:10%'>$total</td>";
     echo "</tr>";
 }
+/* how are you gg to store the subtotal, delivery charge, discount?
+echo "<tr style='margin-top:20px;border-top: solid 2px; border-color:#DD8331; font-weight:550'>";
+echo "<td colspan='2' id='orderSummaryTitle'>Subtotal</td>";
+echo "<td></td>";
+echo "<td></td>";
+echo "<td>S$10.00</td>"; // subtotal
+echo "</tr>";
+echo "<tr style='font-weight:550'>";
+echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - Express Delivery'</td>;
+echo "<td></td>";
+echo "<td>S$5.00</td>"; // this is delivery charge
+echo "</tr>";
+echo "<tr style='font-weight:550'>";
+echo "<td colspan='2' id='orderSummaryTitle'>Discount</td>";
+echo "<td></td>";
+echo "<td></td>";
+echo "<td>(S$2.00)</td>"; // this is discount
+echo "</tr>";
+echo "<tr style='font-weight:550'>";
+echo "<td colspan='2' id='orderSummaryTitle'>Tax</td>";
+echo "<td></td>";
+echo "<td></td>";
+echo "<td>$_SESSION[Tax]</td>";
+echo "</tr>";
+echo "<tr style='font-weight:bold; color:#DD8331; font-size:18px'>";
+echo "<td colspan='2' id='orderSummaryTitle'>Total</td>";
+echo "<td></td>";
+echo "<td></td>";
+echo "<td>S$5.00</td>"; // total
+echo "</tr>";
 echo "</tbody>";
 echo "</table>";
 echo "</div>";

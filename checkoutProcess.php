@@ -197,7 +197,7 @@ if($_POST) // Redirected from reviewOrder.php
 				$qry = "INSERT INTO orderdata (ShipName, ShipAddress, ShipCountry,
 												ShipEmail, ShopCartID)
 						VALUES(?,?,?,?,?)";
-				$stmt = $conn->prepare($qry);
+				$stmt = $conn->prepare($qry);	
 				// "i" - integer, "s" - string
 				$stmt->bind_param("ssssi", $ShipName, $ShipAddress, $ShipCountry, $ShipEmail, $_SESSION["Cart"]);
 				$stmt->execute();
@@ -206,13 +206,15 @@ if($_POST) // Redirected from reviewOrder.php
 				$result = $conn->query($qry);
 				$row = $result->fetch_array();
 				$_SESSION["OrderID"] = $row["OrderID"];
+
+				/* STORE session "CheckOutItems"*/
 					
 				$conn->close();
 					
-				// To Do 4A: Reset the "Number of Items in Cart" session variable to zero.
+				// Reset the "Number of Items in Cart" session variable to zero.
 				$_SESSION["NumCartItem"] = 0;
 				
-				// To Do 4B: Clear the session variable that contains Shopping Cart ID.
+				// Clear the session variable that contains Shopping Cart ID.
 				unset($_SESSION["Cart"]);
 				
 				// To Do 4C: Redirect shopper to the order confirmed page.
