@@ -81,6 +81,30 @@ button[type="moredonut"] {
     font-size: 30px;
     color: #63200d;
 }
+.onsale {
+    background-color: #DD8331;
+    border-radius: 25px;
+    text-align: center;
+    width: 120px;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.onsale2 {
+    background-color: pink;
+    border-radius: 25px;
+    text-align: center;
+    width: 200px;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.strikethrough{
+    background-color: transparent;
+    background-image: gradient(linear, 19.1% -7.9%, 81% 107.9%, color-stop(0, transparent), color-stop(.48, transparent), color-stop(.5, #000), color-stop(.52, transparent), color-stop(1, transparent));
+    background-image: repeating-linear-gradient(163deg, transparent 0%, transparent 48%, #63200D 50%, transparent 52%, transparent 100%);
+}
 
 .button-icon {
     border: none;
@@ -390,6 +414,7 @@ form {
     width: 75%;
     padding: 30px 0 30px 0;
 }
+
 
 label {
     font-size: 1.1em !important;
