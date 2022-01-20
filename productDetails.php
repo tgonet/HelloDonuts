@@ -74,7 +74,7 @@ while ($row = $result->fetch_array()) {
     echo "</div>";
 }
 
-echo "<form name='product' action='cartFunctions.php' method='post' ";
+echo "<form name='product' action='cartFunctions.php' method='post'>";
 echo "<input type='hidden' name='action' value='add' />";
 echo "<input type='hidden' name='product_id' value='$pid' />";
 echo "Quantity: <input type='number' name='quantity' value='1'

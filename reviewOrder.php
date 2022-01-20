@@ -40,37 +40,36 @@ $_SESSION['ShopperID']
 */
 ?>
 
-<div class="row" style="padding:20px 0 0 20px">
-    <a href="deliveryMode.php">
-        <div class="circle"><i class="fas fa-chevron-circle-left" style='color:#82BCC7'></i></div>
-        <div style="color:#82BCC7; padding-left:8px; display:inline-block">Back</div>
-    </a>
+<div class='row' style='padding:20px 0 0 20px'>
+    <div class='col-sm-12'>
+        <a class='back-link' href='deliveryMode.php'>
+            <i class='fas fa-chevron-left back-btn'></i> Back
+        </a>
+    </div>
 </div>
 
 <div style="width:100%; margin:auto; text-align:center">
-    <div class="mybreadcrumb">
-        <div class="row">
-            <div class="col-sm-3">
-                <a href="shoppingCart.php">
-                    <div class="circle mybreadcrumb-circle complete">1</div>
-                    <div class="mybreadcrumb-content complete">My Tray</div>
+    <div class='mybreadcrumb'>
+        <div class='row'>
+            <div class='col-sm-3'>
+                <a class='mybreadcrumb-content complete' href='shoppingCart.php'>
+                    <span class='mybreadcrumb-circle complete'>1</span> My Tray
                 </a>
             </div>
-            <div class="col-sm-3">
-                <a href="deliveryMode.php">
-                    <div class="circle mybreadcrumb-circle complete">2</div>
-                    <div class="mybreadcrumb-content complete">Delivery Mode</div>
+            <div class='col-sm-3'>
+                <a class='mybreadcrumb-content complete' href='deliveryMode.php'>
+                    <span class='mybreadcrumb-circle complete'>2</span> Delivery Mode
                 </a>
             </div>
-            <div class="col-sm-3">
-                <a href="#">
-                    <div class="circle mybreadcrumb-circle complete">3</div>
-                    <div class="mybreadcrumb-content complete">Review</div>
+            <div class='col-sm-3'>
+                <a class='mybreadcrumb-content complete' href=''>
+                    <span class='mybreadcrumb-circle complete'>3</span> Review Order
                 </a>
             </div>
-            <div class="col-sm-3">
-                <div class="circle mybreadcrumb-circle">4</div>
-                <div class="mybreadcrumb-content">Payment</div>
+            <div class='col-sm-3'>
+                <a class='mybreadcrumb-content' href=''>
+                    <span class='mybreadcrumb-circle'>4</span> Make Payment
+                </a>
             </div>
         </div>
     </div>
