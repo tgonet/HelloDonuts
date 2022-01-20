@@ -94,7 +94,6 @@ function updateItem() {
 		exit;
 	}
 
-	// TO DO 2
 	// Write code to implement: if a user clicks on "Update" button, update the database
 	// and also the session variable for counting number of items in shopping cart.
 	$cartid = $_SESSION["Cart"];
@@ -117,8 +116,7 @@ function removeItem() {
 		header ("Location: login.php");
 		exit;
 	}
-
-	// TO DO 3
+	
 	// Write code to implement: if a user clicks on "Remove" button, update the database
 	// and also the session variable for counting number of items in shopping cart.
 	$cartid = $_SESSION["Cart"];

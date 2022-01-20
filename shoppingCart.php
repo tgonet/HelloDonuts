@@ -119,13 +119,13 @@ if (isset($_SESSION["Cart"])) {
 			echo "<form id='tray-quantity' action='cartFunctions.php' method='post'>";
 			echo "<div class='input-group plus-minus-input'>"; 
 			echo "<div class='input-group-button'>"; 
-			echo "<button type='button' class='button-icon minus' data-quantity='minus' data-field='quantity'>"; 
+			echo "<button type='button' class='button-icon minus' data-quantity='minus' data-field='$row[ProductID]'>"; 
 			echo "<i class='fas fa-minus plus-minus-btn'></i>"; 
 			echo "</button>"; 
 			echo "</div>"; 
-			echo "<input class='qty-field' type='number' name='quantity' value='$row[Quantity]' min=0 max=100 onChange='this.form.submit()'>"; 
+			echo "<input class='qty-field' type='number' name='quantity' id='$row[ProductID]' value='$row[Quantity]' min=0 max=100 onChange='this.form.submit()'>"; 
 			echo "<div class='input-group-button'>"; 
-			echo "<button type='button' class='button-icon plus' data-quantity='plus' data-field='quantity'>"; 
+			echo "<button type='button' class='button-icon plus' data-quantity='plus' data-field='$row[ProductID]'>"; 
 			echo "<i class='fas fa-plus plus-minus-btn'></i>"; 
 			echo "</button>"; 
 			echo "</div>"; 
@@ -210,43 +210,61 @@ echo "</div>"; // End of container
 ?>
 
 <script>
-jQuery(document).ready(function(){
-    // This button will increment the value
-    $('[data-quantity="plus"]').click(function(e){
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        fieldName = $(this).attr('data-field');
-        // Get its current value
-        var currentVal = parseInt($('input[name=quantity]').val());
-        // If is not undefined
-        if (!isNaN(currentVal) && currentVal < 100) {
-            // Increment
-            $('input[name=quantity]').val(currentVal + 1);
-			$('#tray-quantity').submit();
-        } else {
-            // Otherwise put a 0 there
-            $('input[name=quantity]').val(currentVal);
+$('.button-icon').click(function(e){
+    e.preventDefault();
+    
+    fieldName = $(this).attr('data-field');
+    quantity  = $(this).attr('data-quantity');
+    var input = $("input[id='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+        if(quantity == 'minus') {
+            
+            if(currentVal > input.attr('min')) {
+                input.val(currentVal - 1).change();
+            } 
+            if(parseInt(input.val()) == input.attr('min')) {
+                $(this).attr('disabled', true);
+            }
+
+        } else if(quantity == 'plus') {
+
+            if(currentVal < input.attr('max')) {
+                input.val(currentVal + 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('max')) {
+                $(this).attr('disabled', true);
+            }
+
         }
-    });
-    // This button will decrement the value till 0
-    $('[data-quantity="minus"]').click(function(e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        fieldName = $(this).attr('data-field');
-        // Get its current value
-        var currentVal = parseInt($('input[name=quantity]').val());
-        // If it isn't undefined or its greater than 0
-        if (!isNaN(currentVal) && currentVal > 0) {
-            // Decrement one
-            $('input[name=quantity]').val(currentVal - 1);
-			$('#tray-quantity').submit();
-        } else {
-            // Otherwise put a 0 there
-            $('input[name=quantity]').val(currentVal);
-        }
-    });
+    } else {
+        input.val(0);
+    }
+});
+$('.qty-field').focusin(function(){
+   $(this).data('oldValue', $(this).val());
+});
+$('.qty-field').change(function() {
+    
+    minValue =  parseInt($(this).attr('min'));
+    maxValue =  parseInt($(this).attr('max'));
+    valueCurrent = parseInt($(this).val());
+    
+    id = $(this).attr('id');
+    if(valueCurrent >= minValue) {
+        $(".button-icon[data-quantity='minus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the minimum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    if(valueCurrent <= maxValue) {
+        $(".button-icon[data-quantity='plus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the maximum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    
+    
 });
 </script>
 
