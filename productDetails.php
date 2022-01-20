@@ -1,6 +1,7 @@
 <?php 
 session_start(); 
 include("header.php"); 
+date_default_timezone_set('Asia/Singapore');
 ?>
 <div style='margin:auto;'>
 
@@ -21,19 +22,19 @@ while ($row = $result->fetch_array()) {
     $img = "./Images/products/$row[ProductImage]";
     echo "<p><img style='border-radius: 5%; width: 40em; height: 40em; object-fit: cover; margin-bottom: 30px;'src=$img /></p>";
     echo "</div>"; 
-    
+    $date_now = date("Y-m-d");
     echo "<div class='col-sm-5' style='vertical-align:top; padding:5px'>"; 
     echo "<h2 style='padding-bottom: 15px; font-size: 45px; color: #63200D; font-weight: 900' >$row[ProductTitle]</h2>";
-    if (($row["Quantity"] <= 100) && ($row["Offered"] == 1)){
+    if (( $row["Quantity"] >0 and $row["Quantity"] <= 100) && ($row["Offered"] == 1) and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now ){
         echo "<div style='display: flex'>";
         echo "<div class='onsale'>ON SALE</div>";
         echo "<div class='onsale2' style='margin-left: 20px'>SELLING FAST</div>";
         echo "</div>";
     }
-    else if ($row["Offered"] == 1){
+    else if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
         echo "<div class='onsale'>ON SALE</div>";
     }
-    else if ($row["Quantity"] <= 100){
+    else if ($row["Quantity"] >0 and $row["Quantity"] <= 100){
         echo "<div class='onsale2'>SELLING FAST</div>";
     }
     
@@ -61,7 +62,7 @@ while ($row = $result->fetch_array()) {
     echo "<div style='margin-top: 20px;'>";
     $formattedPrice = number_format($row["Price"], 2);
     $formattedOffer = number_format($row["OfferedPrice"], 2);
-    if ($row["Offered"] == 1){
+    if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
         echo "<span class = 'strikethrough' style = 'font-size: 20px; color: #63200D'>
         S$ $formattedPrice</span>";
         echo "<span style = 'font-weight: bold; font-size: 45px; color: #FA8596'>
@@ -74,11 +75,11 @@ while ($row = $result->fetch_array()) {
     echo "</div>";
 }
 
-echo "<form name='product' action='cartFunctions.php' method='post'>";
+echo "<form name='product' action='cartFunctions.php' method='post' style='margin: 0 0 0 0 !important'>";
 echo "<input type='hidden' name='action' value='add' />";
 echo "<input type='hidden' name='product_id' value='$pid' />";
 echo "Quantity: <input type='number' name='quantity' value='1'
-                min='1' max='10' style='width: 70px; margin-right: 20px; ' required />";
+                min='1' max='10' style=' margin-right: 20px; ' required />";
 if ($quantity <= 0){
     echo "<button style='font-weight: bold; margin-top: 30px; background-color: #B1968F ; border-radius: 25px  !important;' disabled>Add to Cart</button>";
     echo "<h2 style='font-size: 20px; margin-top: 25px'>Out of Dough!</h2>";
@@ -104,8 +105,8 @@ echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center; margin-
 while ($row = $result->fetch_array()){
     echo"<li style=' display: inline; margin: 0 50px 50px 50px;'>";
     $img = "./Images/products/$row[ProductImage]";
-    echo "<div style='height:100%; width:100%;'>";
-    echo "<img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover; margin-bottom: 10px;' src='$img' />";
+    echo "<div style='height:85%; width:100%;'>";
+    echo "<img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover;' src='$img' />";
     echo "</div>"; 
     $product = "productDetails.php?pid=$row[ProductID]";
     echo "<h2><a style ='color: #63200D; margin-left:15px; font-weight: bold; font-size: 25px;text-align:center'  href=$product>$row[ProductTitle]</a></h2>";
@@ -120,3 +121,22 @@ echo "</div>";
 include("footer.php"); 
 ?>
 
+<style>
+    button[type="rate"]{
+    padding: 10px 90px 10px 90px;
+    display: block; 
+    margin-left: 100px;
+    border-radius: 30px  !important;
+    background: #CAF0F8;
+    border: none;
+    font-weight: 900;
+    font-size: 45px;
+    color: #63200D;
+}
+    .suggest{
+   margin-top: 150px;
+   background-color: #F2F2F2;
+   width: 100%;
+   height: 500px !important;
+}
+</style>
