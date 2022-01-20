@@ -82,6 +82,25 @@ button[type="moredonut"] {
     color: #63200d;
 }
 
+.button-icon {
+    border: none;
+    border-radius: 100px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 0;
+}
+
+.button-icon:focus, .button-icon:focus-visible {
+    outline: none;
+}
+
+.plus-minus-btn {
+    background: #fa8596;
+    border-radius: 100px;
+    padding: 7px 8px;
+}
+
 /* shopping cart and checkout breadcrumb */
 .circle {
     width: 20px;
@@ -108,12 +127,13 @@ button[type="moredonut"] {
 
 .back-link:hover {
     text-decoration: none;
-    color: #63200D;
+    color: #82BCC7;
+    /* color: #63200D; */
 }
 
-.back-btn:hover {
+/* .back-btn:hover {
     background: #63200D;
-}
+} */
 
 .mybreadcrumb {
     padding: 40px 20px 40px 20px;
@@ -154,6 +174,10 @@ button[type="moredonut"] {
 .tray-count {
     font-weight: 600;
     color: #dd8331;
+    text-align: left;
+    padding-top: 30px;
+    width: 70%;
+    margin: auto;
 }
 
 .tray-background {
@@ -169,6 +193,63 @@ button[type="moredonut"] {
     margin-bottom: 5% !important;
     border-radius: 2em;
     box-shadow: 0.8em 0.8em #fcddec;
+}
+
+.tray-donut-name {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.tray-donut-price {
+    font-weight: 700;
+}
+
+.tray-donut-offer {
+    font-weight: 600;
+    background: #fa8596;
+    color: #ffffff;
+    padding: 2px;
+    border-radius: 2px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.qty-field {
+    text-align: center;
+    width: 50px;
+    border: none;
+    background: none;
+    font-weight: 600;
+}
+
+.qty-field:focus-visible {
+    outline: none;
+}
+
+.plus-minus-input {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.fa-trash-alt {
+    color: #e71111;
+}
+
+.tray-subtotal {
+    font-weight: 700;
+    font-size: 24px;
+    color: #dd8331;
+}
+
+.tray-divider {
+    border-top: solid 2px; 
+    border-color:#DD8331;
 }
 
 /* order review table */
@@ -204,6 +285,14 @@ td {
     height: 8em;
     object-fit: cover;
     margin-bottom: 5%;
+}
+
+.donut-img {
+    border-radius: 15%;
+    width: 8em;
+    height: 8em;
+    object-fit: cover;
+    vertical-align: middle;
 }
 
 .page-title {

@@ -18,18 +18,17 @@ echo "</a>";
 echo "</div>";
 echo "</div>";
 
-// items in tray
-echo "<div class='row' style='padding:20px 0 0 20px'>";
-echo "<div class='col-sm-12'>";
-echo "<p class='tray-count'>item(s) in tray</p>";
-echo "</div>";
-echo "</div>";
-
 // Start a container
 echo "<div id='myShopCart' style='width:100%; margin:auto; text-align:center'>"; 
 
-// the page header and header row of shopping cart page
+
+// the page header of shopping cart page
 echo "<h1 class='page-title' style='text-align:center'>My Tray</h1>"; 
+// items in tray
+echo "<div class='tray-count'>";
+echo "<p>item(s) in tray</p>";
+echo "</div>";
+// the header row of shopping cart page
 echo "<div class='tray-background'>";
 echo "<div class='table-responsive' >"; // Bootstrap responsive table
 echo "<table class='table table-hover'>"; // Start of table
@@ -37,15 +36,53 @@ echo "<thead class='cart-header'>"; // start of table's header section
 echo "<tr>"; // start of header row
 echo "<th>Donuts</th>";
 echo "<th>&nbsp;</th>";
-echo "<th>Unit Price (S$)</th>";
 echo "<th>Quantity</th>";
 echo "<th>Total (S$)</th>";
 echo "<th>&nbsp;</th>";
 echo "</tr>"; // end of header row
 echo "</thead>"; // end of table's header section
+
+echo "<tbody>";
+echo "<tr>";
+echo "<td><img src='Images/Products/Donut_summersnow.png' alt='Summer Snow Donut' class='donut-img'></td>"; // img
+echo "<td style='text-align: left; vertical-align: middle;'>
+<span class='tray-donut-name'>Summer Snow Donut</span></br>
+<span class='tray-donut-price'>Unit Price: </span><span>$1.50</span></br>
+<span class='tray-donut-offer'>On Offer</span>
+</td>"; // name, unit price, offer
+echo "<td style='vertical-align: middle;'>
+<form action='cartFunctions.php' method='post'>
+<div class='input-group plus-minus-input'>
+  <div class='input-group-button'>
+    <button type='button' class='button-icon minus' data-quantity='minus' data-field='quantity'>
+      <i class='fas fa-minus plus-minus-btn'></i>
+    </button>
+  </div>
+  <input class='qty-field' type='number' name='quantity' id='quantity' value='0' min=0 max=10>
+  <div class='input-group-button'>
+    <button type='button' class='button-icon plus' data-quantity='plus' data-field='quantity'>
+      <i class='fas fa-plus plus-minus-btn'></i>
+    </button>
+  </div>
+</div>
+<input type='hidden' name='action' value='update' />
+</form>
+</td>"; // quantity
+// <input type='hidden' name='product_id' value='$row[ProductID]' />
+echo "<td style='vertical-align: middle;'>1.50</td>"; // total
+echo "<td style='vertical-align: middle;'><i class='far fa-trash-alt'></i></td>"; // delete, TODO: add form
+echo "</tr>";
+echo "<tr class='tray-divider'>";
+echo "<td></td>";
+echo "<td></td>";
+echo "<td class='tray-subtotal'>Subtotal</td>";
+echo "<td class='tray-subtotal'>1.50</td>";
+echo "<td></td>";
+echo "</tr>";
 echo "</tbody>"; // End of table's body section
 echo "</table>"; // End of table
 echo "</div>";
+echo "</div>"; // close container?
 
 if (isset($_SESSION["Cart"])) {
 	include_once("mysql_conn.php");
@@ -183,5 +220,47 @@ else {
     echo "</div>";
 }
 echo "</div>"; // End of container
+?>
+
+<script>
+jQuery(document).ready(function(){
+    // This button will increment the value
+    $('[data-quantity="plus"]').click(function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('data-field');
+        // Get its current value
+        var currentVal = parseInt($('input[name=quantity]').val());
+        // If is not undefined
+        if (!isNaN(currentVal) && currentVal < 10) {
+            // Increment
+            $('input[name=quantity]').val(currentVal + 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name=quantity]').val(currentVal);
+        }
+    });
+    // This button will decrement the value till 0
+    $('[data-quantity="minus"]').click(function(e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('data-field');
+        // Get its current value
+        var currentVal = parseInt($('input[name=quantity]').val());
+        // If it isn't undefined or its greater than 0
+        if (!isNaN(currentVal) && currentVal > 0) {
+            // Decrement one
+            $('input[name=quantity]').val(currentVal - 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name=quantity]').val(currentVal);
+        }
+    });
+});
+</script>
+
+<?php
 include("footer.php"); // Include the Page Layout footer
 ?>
