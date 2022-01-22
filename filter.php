@@ -82,7 +82,7 @@ if (($_GET["input-max"] && $_GET["input-min"]  != "") || $_GET["myRange"]  != ""
     }
     else if ($_GET["myRange"]  != ""){
         $sweet = $_GET["myRange"];
-        $qry =  "SELECT s.SpecName, ps.SpecVal, p.ProductID, p.ProductTitle, p.ProductImage, p.Offered from productspec ps
+        $qry =  "SELECT s.SpecName, ps.SpecVal, p.ProductID, p.ProductTitle, p.ProductImage, p.Offered, p.OfferStartDate, p.OfferEndDate from productspec ps
                 INNER JOIN specification s ON ps.SpecID=s.SpecID
                 INNER JOIN product p ON ps.ProductID=p.ProductID
                 WHERE ps.SpecID = 2 AND ps.SpecVal BETWEEN 0 AND $sweet
@@ -91,12 +91,12 @@ if (($_GET["input-max"] && $_GET["input-min"]  != "") || $_GET["myRange"]  != ""
         $result = $conn->query($qry);
         while ($row = $result->fetch_array()) {
             echo "<div class='row' style='padding: 5px'>"; 
-    
+            $date_now = date("Y-m-d");
             $product = "productDetails.php?pid=$row[ProductID]";
             echo "<div class='col-8' >"; 
             echo "<h4 style='margin-top: 110px; margin-left: 150px'><a style='color: #63200D;' href=$product>$row[ProductTitle]</a></h4>";
             echo "<h4 style='margin-left: 150px; font-size: 18px'>Sweetness: <span>$row[SpecVal]</span><h4>";
-            if ($row["Offered"] == 1){
+            if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
                 echo "<div class='onsale' style='margin-left: 150px'>ON SALE</div>";
             }
             echo "</div>";

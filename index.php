@@ -14,7 +14,7 @@ include("offerCarousel.php");
 include_once("mysql_conn.php");
 
 $qry = "SELECT * FROM Product 
-        WHERE Offered = 1"; 
+        WHERE Offered = 1 and CURDATE() between OfferStartDate and OfferEndDate"; 
 $result = $conn->query($qry);
 echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
 
@@ -25,8 +25,9 @@ while ($row = $result->fetch_array()){
     $product = "productDetails.php?pid=$row[ProductID]";
     $formattedPrice = number_format($row["Price"], 2);
     $formattedOffer = number_format($row["OfferedPrice"], 2);
+    $date_now = date("Y-m-d");
     echo "<h2><a style ='color: #63200D; margin-left:15px; font-weight: bold; font-size: 25px;text-align:center'  href=$product>$row[ProductTitle]</a></h2>";
-    if ($row["Offered"] == 1){
+    if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
       echo "<h5 style='margin-left:22px;'>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>
           S$ $formattedPrice</span>
       <span style = 'font-weight: bold; font-size: 25px; color: #FA8596'>S$ $formattedOffer</span></h5>";
