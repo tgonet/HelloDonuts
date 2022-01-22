@@ -18,34 +18,8 @@ echo "</a>";
 echo "</div>";
 echo "</div>";
 
-// items in tray
-echo "<div class='row' style='padding:20px 0 0 20px'>";
-echo "<div class='col-sm-12'>";
-echo "<p class='tray-count'>item(s) in tray</p>";
-echo "</div>";
-echo "</div>";
-
 // Start a container
 echo "<div id='myShopCart' style='width:100%; margin:auto; text-align:center'>"; 
-
-// the page header and header row of shopping cart page
-echo "<h1 class='page-title' style='text-align:center'>My Tray</h1>"; 
-echo "<div class='tray-background'>";
-echo "<div class='table-responsive' >"; // Bootstrap responsive table
-echo "<table class='table table-hover'>"; // Start of table
-echo "<thead class='cart-header'>"; // start of table's header section
-echo "<tr>"; // start of header row
-echo "<th>Donuts</th>";
-echo "<th>&nbsp;</th>";
-echo "<th>Unit Price (S$)</th>";
-echo "<th>Quantity</th>";
-echo "<th>Total (S$)</th>";
-echo "<th>&nbsp;</th>";
-echo "</tr>"; // end of header row
-echo "</thead>"; // end of table's header section
-echo "</tbody>"; // End of table's body section
-echo "</table>"; // End of table
-echo "</div>";
 
 if (isset($_SESSION["Cart"])) {
 	include_once("mysql_conn.php");
@@ -65,108 +39,158 @@ if (isset($_SESSION["Cart"])) {
         echo "<div class='mybreadcrumb'>";
         echo "<div class='row'>";
         echo "<div class='col-sm-3'>";
-        echo "<div class='circle mybreadcrumb-circle complete'>1</div>";
-        echo "<div class='mybreadcrumb-content complete'>My Tray</div>";
+		echo "<a class='mybreadcrumb-content complete' href=''>";
+		echo "<span class='mybreadcrumb-circle complete'>1</span> My Tray";
+		echo "</a>";
         echo "</div>";
         echo "<div class='col-sm-3'>";
-        echo "<div class='circle mybreadcrumb-circle'>2</div>";
-        echo "<div class='mybreadcrumb-content'>Delivery Mode</div>";
+		echo "<a class='mybreadcrumb-content' href=''>";
+		echo "<span class='mybreadcrumb-circle'>2</span> Delivery Mode";
+		echo "</a>";
         echo "</div>";
         echo "<div class='col-sm-3'>";
-        echo "<div class='circle mybreadcrumb-circle'>3</div>";
-        echo "<div class='mybreadcrumb-content'>Review</div>";
+		echo "<a class='mybreadcrumb-content' href=''>";
+		echo "<span class='mybreadcrumb-circle'>3</span> Review Order";
+		echo "</a>";
         echo "</div>";
         echo "<div class='col-sm-3'>";
-        echo "<div class='mybreadcrumb-content'>Payment</div>";
-        echo "<div class='circle mybreadcrumb-circle'>4</div>";
+		echo "<a class='mybreadcrumb-content' href=''>";
+		echo "<span class='mybreadcrumb-circle'>4</span> Make Payment";
+		echo "</a>";
         echo "</div>";
         echo "</div>";
         echo "</div>";
 
-        // items in tray
-        echo "<span>item(s) in tray</span>";
+		// the page header of shopping cart page
+		echo "<h1 class='page-title'>My Tray</h1>"; 
 
-		// the page header and header row of shopping cart page
-		echo "<h1 class='page-title' style='text-align:center'>My Tray</h1>"; 
-        echo "<div class='background'>";
-		echo "<div class='table-responsive' >"; // Bootstrap responsive table
-		echo "<table class='table table-hover'>"; // Start of table
-		echo "<thead class='cart-header'>"; // start of table's header section
+		// the header row of shopping cart page
+		echo "<div class='tray-background'>";
+		echo "<div class='table-responsive tray-table' >"; // Bootstrap responsive table
+		echo "<table class='table'>"; // Start of table
+		echo "<thead class='brown-text'>"; // start of table's header section
 		echo "<tr>"; // start of header row
-		echo "<th width='250px'>Item</th>";
-		echo "<th width='90px'>Price (S$)</th>";
-		echo "<th width='60px'>Quantity</th>";
-		echo "<th width='120px'>Total (S$)</th>";
+		echo "<th colspan='2'>Donuts</th>";
+		// echo "<th>&nbsp;</th>";
+		echo "<th>Quantity</th>";
+		echo "<th>Total (S$)</th>";
 		echo "<th>&nbsp;</th>";
 		echo "</tr>"; // end of header row
 		echo "</thead>"; // end of table's header section
 
-		// To Do 5 (Practical 5):
 		// Declare an array to store the shopping cart items in session variable 
 		$_SESSION["Items"] = array();	
+		// Declare a variables
+		$subTotal = 0; 
+		$totalItems = 0;
+		$discount = 0;
 
-		// To Do 3 (Practical 4): 
 		// Display the shopping cart content
-		$subTotal = 0; // Declare a variable to compute subtotal before tax
 		echo "<tbody>"; // Start of table's body section
 		while ($row = $result->fetch_array()) {
+			// get image of product
+			$qry1 = "SELECT ProductImage, Offered, OfferStartDate, OfferEndDate, OfferedPrice 
+					 FROM Product WHERE ProductID = ?";
+			$stmt1 = $conn->prepare($qry1);
+			$stmt1->bind_param("i", $row["ProductID"]); 
+			$stmt1->execute();
+			$row1 = $stmt1->get_result()->fetch_array();
+			$stmt1->close();
+
+			// image
+			$img = "./Images/products/$row1[ProductImage]";
 			echo "<tr>";
-			echo "<td style='width:50%'>$row[Name]<br />";
-			echo "Product ID: $row[ProductID]</td>";
+			echo "<td style='width: 8em;'><img src=$img class='donut-img'></td>"; 
+
+			// name, unit price, offer
 			$formattedPrice = number_format($row["Price"], 2);
-			echo "<td>$formattedPrice</td>";
-			echo "<td>"; // column for update quantity of purchase
-			echo "<form action='cartFunctions.php' method='post'>";
-			echo "<select name='quantity' onChange='this.form.submit()'>";
-			for ($i = 1; $i <= 10; $i++) { // to populate drop-down list from 1 to 10
-				if ($i == $row["Quantity"])
-					// select drop-down list item with value same as the quantity of purchase
-					$selected = "selected";
-				else
-					$selected = ""; // no specific item selected
-				echo "<option value='$i' $selected>$i</option>";
-			} 
-			echo "</select>";
+			echo "<td style='text-align: left; vertical-align: middle;'>";
+			echo "<span class='tray-donut-name'>$row[Name]</span></br>";
+			echo "<span style='font-weight: 600;'>Unit Price: $$formattedPrice</span></br>";
+			if ($row1["Offered"] == 1 && date("Y-m-d") < $row1["OfferEndDate"] 
+				&& date("Y-m-d") > $row1["OfferStartDate"]) {
+				echo "<span class='tray-donut-offer'>On Offer</span>";
+				$discount = $row1["OfferedPrice"];
+			}
+			echo "</td>"; 
+
+			// column for update quantity of purchase
+			echo "<td style='vertical-align: middle;'>"; 
+			echo "<form id='tray-quantity' action='cartFunctions.php' method='post'>";
+			echo "<div class='input-group plus-minus-input'>"; 
+			echo "<div class='input-group-button'>"; 
+			echo "<button type='button' class='button-icon minus' data-quantity='minus' data-field='$row[ProductID]'>"; 
+			echo "<i class='fas fa-minus plus-minus-btn'></i>"; 
+			echo "</button>"; 
+			echo "</div>"; 
+			echo "<input class='qty-field' type='number' name='quantity' id='$row[ProductID]' value='$row[Quantity]' min=0 max=100 onChange='this.form.submit()'>"; 
+			echo "<div class='input-group-button'>"; 
+			echo "<button type='button' class='button-icon plus' data-quantity='plus' data-field='$row[ProductID]'>"; 
+			echo "<i class='fas fa-plus plus-minus-btn'></i>"; 
+			echo "</button>"; 
+			echo "</div>"; 
+			echo "</div>"; 
 			echo "<input type='hidden' name='action' value='update' />";
 			echo "<input type='hidden' name='product_id' value='$row[ProductID]' />";
 			echo "</form>";
 			echo "</td>";
+
+			// total for each donut
 			$formattedTotal = number_format($row["Total"], 2);
-			echo "<td>$formattedTotal</td>";
-			echo "<td>"; // column for remove item from shopping cart
-			echo "<form action='cartFunctions.php' method='post'>";
+			echo "<td style='vertical-align: middle; font-weight: 600;'>$formattedTotal</td>";
+			
+			// remove item from shopping cart
+			echo "<td style='vertical-align: middle;'>"; 
+			echo "<form id='tray-delete' action='cartFunctions.php' method='post'>";
 			echo "<input type='hidden' name='action' value='remove' />";
 			echo "<input type='hidden' name='product_id' value='$row[ProductID]' />";
-			echo "<input type='image' src='images/trash-can.png' title='Remove Item' />";
+			echo "<button type='button' class='delete-btn' onClick='this.form.submit()'>"; 
+			echo "<i class='far fa-trash-alt'></i>";
+			echo "</button>"; 
 			echo "</form>";
 			echo "</td>";
 			echo "</tr>";
-
-			// To Do 6 (Practical 5):
-		    // Store the shopping cart items in session variable as an associate array
-			$_SESSION["Items"][] = array("productId" => $row["ProductID"],
-										 "name" => $row["Name"],
-										 "price" => $row["Price"],
-										 "quantity" => $row["Quantity"]);	
-
+			
 			// Accumulate the running sub-total
 			$subTotal += $row["Total"];
+			$totalItems += $row["Quantity"];
+		    
+			// Store the shopping cart items in session variable as an associate array
+			$_SESSION["Items"][] = array("image" => $row1["ProductImage"],
+										 "productId" => $row["ProductID"],
+										 "name" => $row["Name"],
+										 "price" => $row["Price"],
+										 "quantity" => $row["Quantity"],
+										 "total" => $subTotal,
+										 "discount" => $discount);	
 		}
+		// Display the subtotal at the end of the shopping cart
+		$formattedSubtotal = number_format($subTotal, 2);
+		echo "<tr class='tray-divider'>";
+		echo "<td></td>";
+		echo "<td></td>";
+		echo "<td class='tray-subtotal'>Subtotal</td>";
+		echo "<td class='tray-subtotal'>$formattedSubtotal</td>";
+		echo "<td></td>";
+		echo "</tr>";
+		$_SESSION["SubTotal"] = round($subTotal, 2);
+
 		echo "</tbody>"; // End of table's body section
 		echo "</table>"; // End of table
 		echo "</div>"; // End of Bootstrap responsive table
-				
-		// To Do 4 (Practical 4): 
-		// Display the subtotal at the end of the shopping cart
-		echo "<p style='text-align:right; font-size:20px'>
-			  Subtotal = S$". number_format($subTotal, 2);
-		$_SESSION["SubTotal"] = round($subTotal, 2);
+		echo "</div>"; // End of background
+		
+		// items in tray
+		echo "<div class='row tray-count'>";
+		echo "<div class='col-sm-6'>";
+		echo "<p>$totalItems item(s) in tray</p>";
+		echo "</div>";
+		echo "<div class='col-sm-6'>";
+		echo "<a href='deliveryMode.php' class='next-page-btn'>Proceed to Checkout</a>";
+		echo "</div>";
+		echo "</div>";
 
-		// To Do 7 (Practical 5):
-		// Add PayPal Checkout button on the shopping cart page
-		echo "<form method='post' action='checkoutProcess.php'>";
-		echo "<input type='image' style='float: right;' src='https://paypal.com/en_US/i/btn/btn_xpressCheckout.gif' alt='PayPal Checkout'>";
-		echo "</form></p>";
+		// TODO: button to next page
 	}
 	else {
 		echo "<div class='empty-tray-msg'>";
@@ -183,5 +207,67 @@ else {
     echo "</div>";
 }
 echo "</div>"; // End of container
+?>
+
+<script>
+$('.button-icon').click(function(e){
+    e.preventDefault();
+    
+    fieldName = $(this).attr('data-field');
+    quantity  = $(this).attr('data-quantity');
+    var input = $("input[id='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+        if(quantity == 'minus') {
+            
+            if(currentVal > input.attr('min')) {
+                input.val(currentVal - 1).change();
+            } 
+            if(parseInt(input.val()) == input.attr('min')) {
+                $(this).attr('disabled', true);
+            }
+
+        } else if(quantity == 'plus') {
+
+            if(currentVal < input.attr('max')) {
+                input.val(currentVal + 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('max')) {
+                $(this).attr('disabled', true);
+            }
+
+        }
+    } else {
+        input.val(0);
+    }
+});
+$('.qty-field').focusin(function(){
+   $(this).data('oldValue', $(this).val());
+});
+$('.qty-field').change(function() {
+    
+    minValue =  parseInt($(this).attr('min'));
+    maxValue =  parseInt($(this).attr('max'));
+    valueCurrent = parseInt($(this).val());
+    
+    id = $(this).attr('id');
+    if(valueCurrent >= minValue) {
+        $(".button-icon[data-quantity='minus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the minimum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    if(valueCurrent <= maxValue) {
+        $(".button-icon[data-quantity='plus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the maximum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    
+    
+});
+</script>
+
+<?php
 include("footer.php"); // Include the Page Layout footer
 ?>

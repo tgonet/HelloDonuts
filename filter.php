@@ -1,5 +1,6 @@
 <?php 
 include("header.php"); 
+date_default_timezone_set('Asia/Singapore');
 ?>
 
 <form style="margin: auto" name="frmSearch" method="get" action="">
@@ -37,7 +38,7 @@ if (($_GET["input-max"] && $_GET["input-min"]  != "") || $_GET["myRange"]  != ""
         $priceMax = $_GET["input-max"];
         $priceMin = $_GET["input-min"];
         $sweet = $_GET["myRange"];
-        $qry =  "SELECT s.SpecName, ps.SpecVal, p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Offered, p.OfferedPrice from productspec ps
+        $qry =  "SELECT s.SpecName, ps.SpecVal, p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Offered, p.OfferedPrice, p.OfferStartDate, p.OfferEndDate from productspec ps
                         INNER JOIN specification s ON ps.SpecID=s.SpecID
                         INNER JOIN product p ON ps.ProductID=p.ProductID
                         WHERE ps.SpecID = 2 AND (ps.SpecVal BETWEEN 0 AND $sweet) AND ((p.Price BETWEEN $priceMin AND $priceMax) OR (p.OfferedPrice BETWEEN $priceMin AND $priceMax))
@@ -46,13 +47,14 @@ if (($_GET["input-max"] && $_GET["input-min"]  != "") || $_GET["myRange"]  != ""
         $result = $conn->query($qry);
         while ($row = $result->fetch_array()) {
             echo "<div class='row' style='padding: 5px'>"; 
+            $date_now = date("Y-m-d");
             $formattedPrice = number_format($row["Price"], 2);
 	        $formattedOffer = number_format($row["OfferedPrice"], 2);
             $product = "productDetails.php?pid=$row[ProductID]";
             echo "<div class='col-8' >"; 
             echo "<h4 style='margin-top: 110px; margin-left: 150px'><a style='color: #63200D;' href=$product>$row[ProductTitle]</a></h4>";
             echo "<h4 style='margin-left: 150px; font-size: 18px'>Sweetness: <span>$row[SpecVal]</span><h4>";
-            if ($row["Offered"] == 1){
+            if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
                 echo"<div style='margin-left: 150px;'>";
                 echo "<h5>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>
                 S$ $formattedPrice</span>
@@ -148,3 +150,64 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 }
 </script>
+
+<style>
+    .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 1px;
+    border-radius: 5px;
+    background: white;
+    outline: none;
+    opacity: 0.7;
+    position: relative;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+  }
+.price-input .field{
+    height: 45px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.field input{
+    height: 100%;
+    outline: none;
+    font-size: 19px;
+    text-align: center;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.price-input .separator{
+    padding-left: 40px;
+    width: 100px;
+    display: flex;
+    font-size: 19px;
+    align-items: center;
+}
+</style>
