@@ -1,8 +1,7 @@
 <?php 
 session_start(); // Detect the current session
 include("header.php"); // Include the Page Layout header
-$_SESSION["OrderID"] = 1;
-$_SESSION["ShopCartID"] = 1;
+$_SESSION["OrderID"] = 1;;
 $_SESSION["PaymentMethod"] = "PayPal";
 $_SESSION["Tax"] = 0.5;
 if(isset($_SESSION["OrderID"])) {

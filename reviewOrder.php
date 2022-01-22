@@ -153,7 +153,7 @@ $_SESSION['ShopperID']
         <div class="form-group row" style="margin-bottom:40px;">
             <label for="message" class="col-sm-3 col-form-label">Message:</label>
             <div class="col-sm-8" style="padding:0 40px 0 40px">
-                <input type="text" class="form-control textfield" id="message" name="message" required>
+                <input type="text" class="form-control textfield" id="message" name="message">
             </div>
         </div>
         </form>

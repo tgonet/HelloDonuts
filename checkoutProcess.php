@@ -211,11 +211,13 @@ if($_POST) // Redirected from reviewOrder.php
 				// Insert an Order record with shipping information
 				// Get the Order ID and save it in session variable.
 				$qry = "INSERT INTO orderdata (ShipName, ShipAddress, ShipCountry,
-												ShipEmail, ShopCartID, DeliveryDate, DeliveryMode, Message, OrderStatus)
-						VALUES(?,?,?,?,?)";
+												ShipEmail, ShopCartID, DeliveryDate, DeliveryMode, Message, OrderStatus, DateOrdered)
+						VALUES(?,?,?,?,?,?,?,?,?,?)";
 				$stmt = $conn->prepare($qry);	
 				// "i" - integer, "s" - string
-				$stmt->bind_param("ssssi", $ShipName, $ShipAddress, $ShipCountry, $ShipEmail, $_SESSION["Cart"], $_SESSION["DeliveryDate"], $_SESSION["DeliveryMode"], $_POST["message"], 3); // RMB TO DO DATE ORDERED
+				$deliveryDate = $_SESSION["DeliveryDate"]->format('Y-m-d');
+				$stmt->bind_param("ssssisssis", $ShipName, $ShipAddress, $ShipCountry, $ShipEmail, $_SESSION["Cart"], 
+								$deliveryDate, $_SESSION["DeliveryMode"], $_POST["message"], 3, GETDATE());
 				$stmt->execute();
 				$stmt->close();
 				$qry = "SELECT LAST_INSERT_ID() AS OrderID";
