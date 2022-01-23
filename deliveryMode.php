@@ -54,7 +54,7 @@ if (! isset($_SESSION["ShopperID"])) { // Check if user logged in
             <div class='form-input-grp'>
                 <div class='custom-control custom-radio delivery-radio'>
                     <input type='radio' class='custom-control-input' name='delivery_mode' id='Express' value='Express'>
-                    <label for='express' class='delivery-choice custom-control-label'>
+                    <label for='Express' class='delivery-choice custom-control-label'>
                         <div class='row'>
                             <div class='col-sm-10'>
                                 <span class='delivery-name'>Express Delivery</span>    
@@ -66,7 +66,7 @@ if (! isset($_SESSION["ShopperID"])) { // Check if user logged in
 
                 <div class='custom-control custom-radio delivery-radio'>
                     <input type='radio' class='custom-control-input' name='delivery_mode' id='Normal' value='Normal'>
-                    <label for='normal' class='delivery-choice custom-control-label'>
+                    <label for='Normal' class='delivery-choice custom-control-label'>
                         <div class='row'>
                             <div class='col-sm-10'>
                                 <span class='delivery-name'>Normal Delivery</span></br>

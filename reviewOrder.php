@@ -70,12 +70,15 @@ switch ($_POST["delivery_mode"])
         break;
     }
 }
-/*
+
+$isWaived = "";
 if ($_POST["DeliveryWaived"])
 {
     $_SESSION["DeliveryDiscount"] = $_SESSION["DeliveryCharge"];
+    $_SESSION["DeliveryCharge"] = 0;
+    $isWaived  = " (Waived)";
 }
-*/
+
 // Get Current GST Rate from SQL
 $qry = "SELECT MAX(EffectiveDate), TaxRate FROM GST
 WHERE EffectiveDate <= CURRENT_DATE()";
@@ -116,7 +119,7 @@ foreach($_SESSION['Items'] as $key=>$item) {
     if ($item["discount"] != 0)
     {
         $discount = $price - $item["discount"];
-        $totalDiscount += $discount;
+        $totalDiscount += $discount * $item["quantity"];
         $discount = "(".number_format($discount, 2).")";
     }
     $total = number_format($item["total"],2);
@@ -130,56 +133,48 @@ foreach($_SESSION['Items'] as $key=>$item) {
     echo "</tr>";
 }
 
-echo "<tr style='margin-top:20px;border-top: solid 2px; border-color:#DD8331; font-weight:550'>";
-echo "<td colspan='2' class= 'order-contents-summary' id='orderSummaryTitle'>Subtotal</td>";
+echo "<tr style='margin-top:20px;border-top: solid 2px; border-color:#DD8331;'class='order-contents-summary'>";
+echo "<td colspan='2'  id='orderSummaryTitle'>Subtotal</td>";
 echo "<td></td>";
 echo "<td></td>";
 $subtotal = number_format($_SESSION["SubTotal"],2);
-echo "<td class='order-contents-summary'>$subtotal</td>"; // subtotal
+echo "<td>S$$subtotal</td>"; // subtotal
 echo "</tr>";
 echo "<tr class= 'order-contents-summary'>";
-echo "<td colspan='3' class= 'order-contents-summary' id='orderSummaryTitle'>Delivery Charge - $_POST[delivery_mode] Delivery</td>";
+echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - $_POST[delivery_mode] Delivery$isWaived</td>";
 echo "<td></td>";
-if (isset($_SESSION["DeliveryDiscount"]))
-{
-    $deliveryCharge = number_format($_SESSION["DeliveryCharge"]-$_SESSION["DeliveryDiscount"],2);
-    echo "<td class= 'order-contents-summary'>$deliveryCharge</td>"; // this is delivery charge
-}
-else
-{
-    $deliveryCharge = number_format($_SESSION["DeliveryCharge"],2);
-    echo "<td class= 'order-contents-summary'>$deliveryCharge</td>"; // this is delivery charge
-}
+$deliveryCharge = number_format($_SESSION["DeliveryCharge"],2);
+echo "<td>S$$deliveryCharge</td>"; // this is delivery charge
 echo "</tr>";
 if ($totalDiscount != 0)
 {
     $totalDiscount = "(".number_format($totalDiscount, 2).")";
-    echo "<tr style='font-weight:550'>";
+    echo "<tr class='order-contents-summary'>";
     echo "<td colspan='2' id='orderSummaryTitle'>Discount</td>";
     echo "<td></td>";
     echo "<td></td>";
-    echo "<td>$totalDiscount</td>"; // this is discount
+    echo "<td>S$$totalDiscount</td>"; // this is discount
     echo "</tr>";
 }
-echo "<tr style='font-weight:550'>";
+echo "<tr class='order-contents-summary'>";
 echo "<td colspan='2' id='orderSummaryTitle'>Tax</td>";
 echo "<td></td>";
 echo "<td></td>";
-echo "<td>$_SESSION[Tax]</td>";
+echo "<td>S$$_SESSION[Tax]</td>";
 echo "</tr>";
 echo "<tr style='font-weight:bold; color:#DD8331; font-size:18px'>";
 echo "<td colspan='2' id='orderSummaryTitle'>Total</td>";
 echo "<td></td>";
 echo "<td></td>";
-echo "<td>$_SESSION[Total]</td>"; // total
+echo "<td>S$$_SESSION[Total]</td>"; // total
 echo "</tr>";
 
-echo "<tr style='margin-top:20px;border-top: solid 2px; border-color:#DD8331; font-weight:550'>";
+echo "<tr class='order-contents'>";
 $formattedDeliveryDate = $_SESSION["DeliveryDate"]->format('Y-m-d');
 echo "<td colspan='5' id='orderSummaryTitle'>Expected Delivery Date: $formattedDeliveryDate</td>";
 echo "</tr>";
 
-echo "<tr style='font-weight:550'>";
+echo "<tr class='order-contents'>";
 echo "<td colspan='5' id='orderSummaryTitle'>Expected Delivery Time: to be implemented$_SESSION[DeliveryTime]</td>"; //KIV
 echo "</tr>";
 
@@ -213,100 +208,4 @@ echo "</div>";
 
 $conn->close(); // Close database connection
 include("footer.php"); // Include the Page Layout footer
-?>
-
-
-<?php 
-/*
-    <h3 class="outsideBackground">Your Order</h3>
-    <div class='background'>
-        <div class='table-responsive'>
-            <table class='table table-hover'>
-                <thead class= 'order-header'>
-                    <tr>
-                        <th>Donuts</th>
-                        <th>Unit Price (S$)</th>
-                        <th>Discount (S$)</th>
-                        <th>Quantity</th>
-                        <th>Total (S$) </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img id='donutImg' src='Images/Developers/joey.jpg'></br>
-                            Donut 1</td>
-                        <td style="vertical-align:middle">5.00</td> <!--unit price-->
-                        <td style="vertical-align:middle">(2.00)</td> <!--discount-->
-                        <td style="vertical-align:middle">1</td> <!--quantity-->
-                        <td style="vertical-align:middle; margin-bottom:10%">3.00</td> <!--total-->
-                    </tr>
-                    <tr>
-                        <td><img id='donutImg' src='Images/Developers/joey.jpg'></br>
-                            Donut 1</td>
-                        <td style='vertical-align:middle'>5.00</td> <!--unit price-->
-                        <td style='vertical-align:middle'>(2.00)</td> <!--discount-->
-                        <td style='vertical-align:middle'>1</td> <!--quantity-->
-                        <td style='vertical-align:middle; margin-bottom:10%'>3.00</td> <!--total-->
-                    </tr>
-                    <tr style='font-weight:550'>
-                        <td colspan='5' id='orderSummaryTitle'>Expected Delivery Date: sometime</td>
-                    </tr>
-                    <tr style='margin-top:20px;border-top: solid 2px; border-color:#DD8331; font-weight:550'>
-                        <td colspan='2' id='orderSummaryTitle'>Subtotal</td>
-                        <td></td>
-                        <td></td>
-                        <td>S$10.00</td>
-                    </tr>
-                    <tr style='font-weight:550'>
-                        <td colspan='3' id='orderSummaryTitle'>Delivery Charge - Express Delivery</td>
-                        <td></td>
-                        <td>S$5.00</td>
-                    </tr>
-                    <tr style='font-weight:550'>
-                        <td colspan='2' id='orderSummaryTitle'>Discount</td>
-                        <td></td>
-                        <td></td>
-                        <td>(S$2.00)</td>
-                    </tr>
-                    <tr style='font-weight:550'>
-                        <td colspan='2' id='orderSummaryTitle'>GST</td>
-                        <td></td>
-                        <td></td>
-                        <td>$0.70</td>
-                    </tr>
-                    <tr style='font-weight:bold; color:#DD8331; font-size:18px'>
-                        <td colspan='2' id='orderSummaryTitle'>Total</td>
-                        <td></td>
-                        <td></td>
-                        <td>S$5.00</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <h3 class="outsideBackground">Payment Method</h3>
-    <div class='background'>
-        <form style = 'margin: auto' action='checkoutProcess.php' method='post'>
-            <input type="radio" name="paymentMethod" value="paypal" checked>
-            <img src="https://1000logos.net/wp-content/uploads/2021/04/Paypal-logo.png" style="width:30%">
-    </div>
-
-    <h3 class="outsideBackground">Customize Your Order</h3>
-    <div class='background'>
-        <div class="form-group row" style="margin-bottom:40px;">
-            <label for="message" class="col-sm-3 col-form-label">Add a Message:</label>
-            <div class="col-sm-8" style="padding:0 40px 0 40px">
-                <input type="text" class="form-control textfield" id="message" name="message">
-            </div>
-        </div>
-        </form>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <button type="submit" action="checkoutProcess.php">Proceed to Payment</button>
-        </div>
-    </div>
-</div>
-*/
 ?>
