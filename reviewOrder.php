@@ -50,49 +50,6 @@ if (!$_POST) {
 // Establish connection with SQL in this page
 include_once("mysql_conn.php");
 
-// Get today's date
-$_SESSION["DeliveryDate"] = new DateTime('now');
-
-// Calculate Delivery Charge and Date
-switch ($_POST["delivery_mode"])
-{
-    case "Express":
-    {
-        $_SESSION["DeliveryCharge"] = 5;
-        $_SESSION["DeliveryDate"]->modify('+2 hour');
-        break;
-    }
-        
-    case "Normal":
-    {
-        $_SESSION["DeliveryCharge"] = 2;
-        $_SESSION["DeliveryDate"]->modify('+1 day');
-        break;
-    }
-}
-
-$isWaived = "";
-if ($_POST["DeliveryWaived"])
-{
-    $_SESSION["DeliveryDiscount"] = $_SESSION["DeliveryCharge"];
-    $_SESSION["DeliveryCharge"] = 0;
-    $isWaived  = " (Waived)";
-}
-
-// Get Current GST Rate from SQL
-$qry = "SELECT MAX(EffectiveDate), TaxRate FROM GST
-WHERE EffectiveDate <= CURRENT_DATE()";
-$stmt = $conn->prepare($qry);
-$stmt->execute();
-$result = $stmt->get_result()->fetch_array();
-$stmt->close();
-$taxRate = $result["TaxRate"]/100;
-
-// Save Tax Amount as session variable "Tax"
-$totalBeforeGST = $_SESSION["Subtotal"]+$_SESSION["DeliveryCharge"]-$_SESSION["Discount"];
-$_SESSION["Tax"] = round($totalBeforeGST*$taxRate,2);
-$_SESSION["Total"] = $totalBeforeGST + $_SESSION["Tax"];
-
 // Table headers
 echo "<h3 class='outsideBackground'>Your Order</h3>";
 echo "<div class='tray-background'>";
@@ -133,6 +90,59 @@ foreach($_SESSION['Items'] as $key=>$item) {
     echo "</tr>";
 }
 
+// Get today's date
+$_SESSION["DeliveryDate"] = new DateTime('now');
+
+// Calculate Delivery Charge and Date
+switch ($_POST["delivery_mode"])
+{
+    case "Express":
+    {
+        $_SESSION["DeliveryCharge"] = 5;
+        $_SESSION["DeliveryDate"]->modify('+2 hour');
+        break;
+    }
+        
+    case "Normal":
+    {
+        $_SESSION["DeliveryCharge"] = 2;
+        $_SESSION["DeliveryDate"]->modify('+1 day');
+        break;
+    }
+}
+
+echo "<tr class='order-contents'>";
+$formattedDeliveryDate = $_SESSION["DeliveryDate"]->format('Y-m-d');
+echo "<td colspan='5' id='orderSummaryTitle'>Expected Delivery Date: $formattedDeliveryDate</td>";
+echo "</tr>";
+
+echo "<tr class='order-contents'>";
+echo "<td colspan='5' id='orderSummaryTitle'>Expected Delivery Time: to be implemented</td>"; //KIV
+echo "</tr>";
+
+
+$isWaived = "";
+if (isset($_POST["DeliveryWaived"]))
+{
+    $_SESSION["DeliveryDiscount"] = $_SESSION["DeliveryCharge"];
+    $_SESSION["DeliveryCharge"] = 0;
+    $isWaived  = " (Waived)";
+}
+
+// Get Current GST Rate from SQL
+$qry = "SELECT MAX(EffectiveDate), TaxRate FROM GST
+WHERE EffectiveDate <= CURRENT_DATE()";
+$stmt = $conn->prepare($qry);
+$stmt->execute();
+$result = $stmt->get_result()->fetch_array();
+$stmt->close();
+$taxRate = $result["TaxRate"]/100;
+
+// Save Tax Amount as session variable "Tax"
+$totalBeforeGST = $_SESSION["SubTotal"]+$_SESSION["DeliveryCharge"]-$totalDiscount;
+$_SESSION["Tax"] = round($totalBeforeGST*$taxRate,2);
+$_SESSION["Total"] = $totalBeforeGST + $_SESSION["Tax"];
+
 echo "<tr style='margin-top:20px;border-top: solid 2px; border-color:#DD8331;'class='order-contents-summary'>";
 echo "<td colspan='2'  id='orderSummaryTitle'>Subtotal</td>";
 echo "<td></td>";
@@ -162,21 +172,14 @@ echo "<td></td>";
 echo "<td></td>";
 echo "<td>S$$_SESSION[Tax]</td>";
 echo "</tr>";
-echo "<tr style='font-weight:bold; color:#DD8331; font-size:18px'>";
+echo "<tr style='font-weight:800; color:#DD8331; font-size:20px'>";
 echo "<td colspan='2' id='orderSummaryTitle'>Total</td>";
 echo "<td></td>";
 echo "<td></td>";
 echo "<td>S$$_SESSION[Total]</td>"; // total
 echo "</tr>";
 
-echo "<tr class='order-contents'>";
-$formattedDeliveryDate = $_SESSION["DeliveryDate"]->format('Y-m-d');
-echo "<td colspan='5' id='orderSummaryTitle'>Expected Delivery Date: $formattedDeliveryDate</td>";
-echo "</tr>";
 
-echo "<tr class='order-contents'>";
-echo "<td colspan='5' id='orderSummaryTitle'>Expected Delivery Time: to be implemented$_SESSION[DeliveryTime]</td>"; //KIV
-echo "</tr>";
 
 echo "</tbody>";
 echo "</table>";
@@ -187,7 +190,6 @@ echo "<div class='background'>";
 echo "<form style='margin: auto' action='checkoutProcess.php' method='post'>";
 echo "<input type='radio' name='paymentMethod' value='paypal' checked>";
 echo "<img src='https://1000logos.net/wp-content/uploads/2021/04/Paypal-logo.png' style='width:30%'>";
-echo "</form>";
 echo "</div>";
 echo "<h3 class='outsideBackground'>Customize Your Order</h3>";
 echo "<div class='background'>";
@@ -197,11 +199,11 @@ echo "<div class='col-sm-8' style='padding:0 40px 0 40px'>";
 echo "<input type='text' class='form-control textfield' id='message' name='message'>";
 echo "</div>";
 echo "</div>";
-echo "</form>";
 echo "</div>";
 echo "<div class='row'>";
 echo "<div class='col-md-12'>";
 echo "<button type='submit' action='checkoutProcess.php'>Proceed to Payment</button>";
+echo "</form>";
 echo "</div>";
 echo "</div>"; 
 echo "</div>";
