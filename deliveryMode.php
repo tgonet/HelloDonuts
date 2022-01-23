@@ -49,7 +49,7 @@ if (! isset($_SESSION["ShopperID"])) { // Check if user logged in
 
     <h1 class='page-title'>Delivery Mode</h1>
 
-    <form action='deliveryFunction.php' method='post' style='width: 100%; padding: 0;'>
+    <form action='reviewOrder.php' method='post' style='width: 100%; padding: 0;'>
         <div class='tray-background'> <!-- start background -->
             <div class='form-input-grp'>
                 <div class='custom-control custom-radio delivery-radio'>
