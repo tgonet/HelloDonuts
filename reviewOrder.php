@@ -7,7 +7,7 @@ date_default_timezone_set('Asia/Singapore');
 
 if (!$_POST) {  
     // redirect to shopping cart page if no delivery method is provided using $_POST method
-	header ("Location: shoppingCart.php");
+	header ("Location: deliveryMode.php");
 	exit;
 }
 
@@ -58,7 +58,7 @@ echo "<table class='table'>"; // Start of table
 echo "<thead class='brown-text'>"; // start of table's header section
 
 echo "<tr>";
-echo "<th>Donuts</th>";
+echo "<th colspan='2'>Donut Name</th>";
 echo "<th>Unit Price (S$)</th>";
 echo "<th>Discount (S$)</th>";
 echo "<th>Quantity</th>";
@@ -75,13 +75,13 @@ foreach($_SESSION['Items'] as $key=>$item) {
     $totalDiscount = 0;
     if ($item["discount"] != 0)
     {
-        $discount = $price - $item["discount"];
+        $discount = ($price - $item["discount"]);
         $totalDiscount += $discount * $item["quantity"];
         $discount = "(".number_format($discount, 2).")";
     }
     $total = number_format($item["total"],2);
-    echo "<td style='width: 8em;'><img class='donut-img' id='donutImg' src=$imageDir></br>
-        <span class='order-contents'>$item[name]</span></td>";
+    echo "<td style='width: 8em;' colspan='2'>
+        <span class='order-contents'><img id='donutImg' src=$imageDir></br>$item[name]</span></td>";
     echo "<td class='order-contents' style='vertical-align:middle'>$price</td>";
     
     echo "<td class='order-contents' style='vertical-align:middle;'>$discount</td>";
@@ -113,11 +113,11 @@ switch ($_POST["delivery_mode"])
 
 echo "<tr class='order-contents'>";
 $formattedDeliveryDate = $_SESSION["DeliveryDate"]->format('Y-m-d');
-echo "<td colspan='5' id='orderSummaryTitle'>Expected Delivery Date: $formattedDeliveryDate</td>";
+echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Date: $formattedDeliveryDate</td>";
 echo "</tr>";
 
 echo "<tr class='order-contents'>";
-echo "<td colspan='5' id='orderSummaryTitle'>Expected Delivery Time: to be implemented</td>"; //KIV
+echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Time: to be implemented</td>"; //KIV
 echo "</tr>";
 
 
@@ -130,8 +130,10 @@ if (isset($_POST["DeliveryWaived"]))
 }
 
 // Get Current GST Rate from SQL
-$qry = "SELECT MAX(EffectiveDate), TaxRate FROM GST
-WHERE EffectiveDate <= CURRENT_DATE()";
+$qry = "SELECT TaxRate FROM GST 
+        WHERE EffectiveDate <= CURRENT_DATE()
+        ORDER BY EffectiveDate DESC
+        LIMIT  1";
 $stmt = $conn->prepare($qry);
 $stmt->execute();
 $result = $stmt->get_result()->fetch_array();
@@ -147,11 +149,13 @@ echo "<tr style='margin-top:20px;border-top: solid 2px; border-color:#DD8331;'cl
 echo "<td colspan='2'  id='orderSummaryTitle'>Subtotal</td>";
 echo "<td></td>";
 echo "<td></td>";
+echo "<td></td>";
 $subtotal = number_format($_SESSION["SubTotal"],2);
 echo "<td>S$$subtotal</td>"; // subtotal
 echo "</tr>";
 echo "<tr class= 'order-contents-summary'>";
 echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - $_POST[delivery_mode] Delivery$isWaived</td>";
+echo "<td></td>";
 echo "<td></td>";
 $deliveryCharge = number_format($_SESSION["DeliveryCharge"],2);
 echo "<td>S$$deliveryCharge</td>"; // this is delivery charge
@@ -163,6 +167,7 @@ if ($totalDiscount != 0)
     echo "<td colspan='2' id='orderSummaryTitle'>Discount</td>";
     echo "<td></td>";
     echo "<td></td>";
+    echo "<td></td>";
     echo "<td>S$$totalDiscount</td>"; // this is discount
     echo "</tr>";
 }
@@ -170,10 +175,12 @@ echo "<tr class='order-contents-summary'>";
 echo "<td colspan='2' id='orderSummaryTitle'>Tax</td>";
 echo "<td></td>";
 echo "<td></td>";
+echo "<td></td>";
 echo "<td>S$$_SESSION[Tax]</td>";
 echo "</tr>";
 echo "<tr style='font-weight:800; color:#DD8331; font-size:20px'>";
 echo "<td colspan='2' id='orderSummaryTitle'>Total</td>";
+echo "<td></td>";
 echo "<td></td>";
 echo "<td></td>";
 echo "<td>S$$_SESSION[Total]</td>"; // total
