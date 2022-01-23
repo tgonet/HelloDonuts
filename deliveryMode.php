@@ -88,6 +88,9 @@ if (! isset($_SESSION["ShopperID"])) { // Check if user logged in
             </div>
         </div>
     </form>
+
+<!-- TODO: check if need to waive delivery fee -->
+
 </div> <!-- close container -->
         
 <?php

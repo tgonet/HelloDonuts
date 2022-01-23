@@ -83,8 +83,7 @@ if (isset($_SESSION["Cart"])) {
 		// Declare a variables
 		$subTotal = 0; 
 		$totalItems = 0;
-		$discount = 0;
-
+		
 		// Display the shopping cart content
 		echo "<tbody>"; // Start of table's body section
 		while ($row = $result->fetch_array()) {
@@ -96,14 +95,15 @@ if (isset($_SESSION["Cart"])) {
 			$stmt1->execute();
 			$row1 = $stmt1->get_result()->fetch_array();
 			$stmt1->close();
-
+			
 			// image
 			$img = "./Images/products/$row1[ProductImage]";
 			echo "<tr>";
 			echo "<td style='width: 8em;'><img src=$img class='donut-img'></td>"; 
-
+			
 			// name, unit price, offer
 			$formattedPrice = number_format($row["Price"], 2);
+			$discount = 0;
 			echo "<td style='text-align: left; vertical-align: middle;'>";
 			echo "<span class='tray-donut-name'>$row[Name]</span></br>";
 			echo "<span style='font-weight: 600;'>Unit Price: $$formattedPrice</span></br>";
@@ -113,7 +113,7 @@ if (isset($_SESSION["Cart"])) {
 				$discount = $row1["OfferedPrice"];
 			}
 			echo "</td>"; 
-
+			
 			// column for update quantity of purchase
 			echo "<td style='vertical-align: middle;'>"; 
 			echo "<form id='tray-quantity' action='cartFunctions.php' method='post'>";
@@ -151,18 +151,18 @@ if (isset($_SESSION["Cart"])) {
 			echo "</td>";
 			echo "</tr>";
 			
-			// Accumulate the running sub-total
-			$subTotal += $row["Total"];
-			$totalItems += $row["Quantity"];
-		    
 			// Store the shopping cart items in session variable as an associate array
 			$_SESSION["Items"][] = array("image" => $row1["ProductImage"],
 										 "productId" => $row["ProductID"],
 										 "name" => $row["Name"],
 										 "price" => $row["Price"],
 										 "quantity" => $row["Quantity"],
-										 "total" => $subTotal,
+										 "total" => $row["Total"],
 										 "discount" => $discount);	
+			
+			// Accumulate the running sub-total
+			$subTotal += $row["Total"];
+			$totalItems += $row["Quantity"];
 		}
 		// Display the subtotal at the end of the shopping cart
 		$formattedSubtotal = number_format($subTotal, 2);
