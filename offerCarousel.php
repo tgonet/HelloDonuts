@@ -15,27 +15,34 @@
               alt="Honeydew Chocolate"
           />
           <div class="carousel-caption">
+          <a style="text-decoration: none"href="productDetails.php?pid=2">
             <h3>Honeydew Chocolate</h3>
+            </a>
           </div>
       </div>
       <div class="carousel-item">
           <img
               style="width:100%"
-              src="Images\Products\Donut_mangocheesecake.jpg" 
-              alt="Mango Cheesecake"
+              src="Images\Products\Donut_earlgrey.jpg" 
+              alt="Earl Grey"
           />
           <div class="carousel-caption">
-            <h3>Mango Cheesecake</h3>
+          <a style="text-decoration: none"href="productDetails.php?pid=9">
+            <h3>Earl Grey</h3>
           </div>
+          </a>
       </div>
       <div class="carousel-item">
           <img
               style="width:100%"
-              src="Images\Products\Donut_shortcake.jpg" 
-              alt="Shortcake"
+              src="Images\Products\Donut_cinnamoncircle.jpg" 
+              alt="Cinnamon Circle"
+              
           />
           <div class="carousel-caption">
-            <h3>Shortcake</h3>
+            <a style="text-decoration: none"href="productDetails.php?pid=1">
+            <h3>Cinnamon Circle</h3>
+            </a>
           </div>
       </div>
     </div>
@@ -48,7 +55,9 @@
     src="Images\Products\Donut_matcha.png" 
     alt="Matcha Ring Donut"
   />
-  <h3 class="image1">Try Our New Flavour Here!</h3>
+  <a href="productDetails.php?pid=8">
+  <h3 class="image1" >Try Our New Flavour Here!</h3>
+  </a>
   </div>
   <div class="image-wrapper">
   <img
@@ -56,7 +65,9 @@
     src="Images\join_now.jpg" 
     alt="Join Donut"
   />
+  <a href="register.php">
   <h3 class="image2">Sign Up </br>Now!</h3>
+  </a>
   </div>
 </div>
 </div>
