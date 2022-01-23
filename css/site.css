@@ -362,10 +362,17 @@ input::-webkit-inner-spin-button {
 td {
     border-top: none !important;
 }
-.order-header {
-    background-color: transparent;
+.order-contents {
     color: #63200d;
+    font-weight: 600;
+    font-size: 16px;
 }
+.order-contents-summary{
+    color: #63200d;
+    font-weight: 700;
+    font-size: 18px;
+}
+
 #orderSummaryTitle {
     text-align: left;
     padding-left: 20px;

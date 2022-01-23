@@ -96,12 +96,7 @@ echo "<div class='tray-background'>";
 echo "<div class='table-responsive tray-table' >"; // Bootstrap responsive table
 echo "<table class='table'>"; // Start of table
 echo "<thead class='brown-text'>"; // start of table's header section
-/*
-echo "<div class='background'>";
-echo "<div class='table-responsive'>";
-echo "<table class='table table-hover'>";
-echo "<thead class= 'order-header'>";
-*/
+
 echo "<tr>";
 echo "<th>Donuts</th>";
 echo "<th>Unit Price (S$)</th>";
@@ -117,46 +112,55 @@ foreach($_SESSION['Items'] as $key=>$item) {
     $imageDir = "Images/Products/".$item["image"];
     $price = number_format($item["price"],2);
     $discount = "-";
+    $totalDiscount = 0;
     if ($item["discount"] != 0)
     {
         $discount = $price - $item["discount"];
+        $totalDiscount += $discount;
         $discount = "(".number_format($discount, 2).")";
     }
     $total = number_format($item["total"],2);
     echo "<td style='width: 8em;'><img class='donut-img' id='donutImg' src=$imageDir></br>
-        <span class='tray-donut-name'>$item[name]</span></td>";
-    echo "<td style='vertical-align:middle;font-weight: 600;'>$price</td>";
+        <span class='order-contents'>$item[name]</span></td>";
+    echo "<td class='order-contents' style='vertical-align:middle'>$price</td>";
     
-    echo "<td style='vertical-align:middle;font-weight: 600;'>$discount</td>";
-    echo "<td style='vertical-align:middle;font-weight: 600;'>$item[quantity]</td>";
-    echo "<td style='vertical-align:middle;font-weight: 600; margin-bottom:10%'>$item[total]</td>";
+    echo "<td class='order-contents' style='vertical-align:middle;'>$discount</td>";
+    echo "<td class='order-contents' style='vertical-align:middle;'>$item[quantity]</td>";
+    echo "<td class='order-contents' style='vertical-align:middle; margin-bottom:10%'>$total</td>";
     echo "</tr>";
 }
 
 echo "<tr style='margin-top:20px;border-top: solid 2px; border-color:#DD8331; font-weight:550'>";
-echo "<td colspan='2' id='orderSummaryTitle'>Subtotal</td>";
+echo "<td colspan='2' class= 'order-contents-summary' id='orderSummaryTitle'>Subtotal</td>";
 echo "<td></td>";
 echo "<td></td>";
-echo "<td>$_SESSION[Subtotal]</td>"; // subtotal
+$subtotal = number_format($_SESSION["SubTotal"],2);
+echo "<td class='order-contents-summary'>$subtotal</td>"; // subtotal
 echo "</tr>";
-echo "<tr style='font-weight:550'>";
-echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - $_POST[delivery_mode] Delivery</td>";
+echo "<tr class= 'order-contents-summary'>";
+echo "<td colspan='3' class= 'order-contents-summary' id='orderSummaryTitle'>Delivery Charge - $_POST[delivery_mode] Delivery</td>";
 echo "<td></td>";
 if (isset($_SESSION["DeliveryDiscount"]))
 {
-    echo "<td>$_SESSION[DeliveryCharge]-$_SESSION[DeliveryDiscount]</td>"; // this is delivery charge
+    $deliveryCharge = number_format($_SESSION["DeliveryCharge"]-$_SESSION["DeliveryDiscount"],2);
+    echo "<td class= 'order-contents-summary'>$deliveryCharge</td>"; // this is delivery charge
 }
 else
 {
-    echo "<td>$_SESSION[DeliveryCharge]</td>"; // this is delivery charge
+    $deliveryCharge = number_format($_SESSION["DeliveryCharge"],2);
+    echo "<td class= 'order-contents-summary'>$deliveryCharge</td>"; // this is delivery charge
 }
 echo "</tr>";
-echo "<tr style='font-weight:550'>";
-echo "<td colspan='2' id='orderSummaryTitle'>Discount</td>";
-echo "<td></td>";
-echo "<td></td>";
-echo "<td>($_SESSION[Discount])</td>"; // this is discount
-echo "</tr>";
+if ($totalDiscount != 0)
+{
+    $totalDiscount = "(".number_format($totalDiscount, 2).")";
+    echo "<tr style='font-weight:550'>";
+    echo "<td colspan='2' id='orderSummaryTitle'>Discount</td>";
+    echo "<td></td>";
+    echo "<td></td>";
+    echo "<td>$totalDiscount</td>"; // this is discount
+    echo "</tr>";
+}
 echo "<tr style='font-weight:550'>";
 echo "<td colspan='2' id='orderSummaryTitle'>Tax</td>";
 echo "<td></td>";
