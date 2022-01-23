@@ -1,10 +1,13 @@
 <?php
-include_once("deliveryFunction.php");
+session_start();
 include("header.php");
-
 if (! isset($_SESSION["ShopperID"])) { // Check if user logged in 
 	// redirect to login page if the session variable shopperid is not set
 	header ("Location: login.php");
+	exit;
+}
+if ($_SESSION["NumCartItem"] < 1) {
+    header ("Location: index.php");
 	exit;
 }
 ?>
@@ -53,19 +56,7 @@ if (! isset($_SESSION["ShopperID"])) { // Check if user logged in
         <div class='tray-background'> <!-- start background -->
             <div class='form-input-grp'>
                 <div class='custom-control custom-radio delivery-radio'>
-                    <input type='radio' class='custom-control-input' name='delivery_mode' id='Express' value='Express'>
-                    <label for='Express' class='delivery-choice custom-control-label'>
-                        <div class='row'>
-                            <div class='col-sm-10'>
-                                <span class='delivery-name'>Express Delivery</span>    
-                            </div>
-                            <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$5</div>
-                        </div>
-                    </label></br>
-                </div>
-
-                <div class='custom-control custom-radio delivery-radio'>
-                    <input type='radio' class='custom-control-input' name='delivery_mode' id='Normal' value='Normal'>
+                    <input type='radio' class='custom-control-input' name='delivery_mode' id='Normal' value='Normal' checked>
                     <label for='Normal' class='delivery-choice custom-control-label'>
                         <div class='row'>
                             <div class='col-sm-10'>
@@ -76,8 +67,23 @@ if (! isset($_SESSION["ShopperID"])) { // Check if user logged in
                         </div>
                     </label></br>
                 </div>
+                
+                <div class='custom-control custom-radio delivery-radio'>
+                    <input type='radio' class='custom-control-input' name='delivery_mode' id='Express' value='Express'>
+                    <label for='Express' class='delivery-choice custom-control-label'>
+                        <div class='row'>
+                            <div class='col-sm-10'>
+                                <span class='delivery-name'>Express Delivery</span>    
+                            </div>
+                            <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$5</div>
+                        </div>
+                    </label></br>
+                </div>
             </div>    
         </div> <!-- close background -->
+
+        <!-- TODO: delivery timing -->
+        
 
         <input type='hidden' name='action' value='mode' />
 		<input type='hidden' name='shopcart_id' value='$_SESSION["Cart"]' />

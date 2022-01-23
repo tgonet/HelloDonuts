@@ -81,7 +81,8 @@ if (isset($_SESSION["Cart"])) {
 		// Declare an array to store the shopping cart items in session variable 
 		$_SESSION["Items"] = array();	
 		// Declare a variables
-		$subTotal = 0; 
+		$subtotal = 0; 
+		$discountSubtotal = 0; 
 		$totalItems = 0;
 		
 		// Display the shopping cart content
@@ -106,11 +107,15 @@ if (isset($_SESSION["Cart"])) {
 			$discount = 0;
 			echo "<td style='text-align: left; vertical-align: middle;'>";
 			echo "<span class='tray-donut-name'>$row[Name]</span></br>";
-			echo "<span style='font-weight: 600;'>Unit Price: $$formattedPrice</span></br>";
 			if ($row1["Offered"] == 1 && date("Y-m-d") < $row1["OfferEndDate"] 
-				&& date("Y-m-d") > $row1["OfferStartDate"]) {
-				echo "<span class='tray-donut-offer'>On Offer</span>";
+			&& date("Y-m-d") > $row1["OfferStartDate"]) {
 				$discount = $row1["OfferedPrice"];
+				$formattedDiscount = number_format($row1["OfferedPrice"], 2);
+				echo "<span style='font-weight: 600;'>Unit Price: </span>";
+				echo "<span style='font-weight: 600; text-decoration: line-through;'>$$formattedPrice</span>";
+				echo "<span style='font-weight: 700; font-size: 16px; color: #DD8331;'> $$formattedDiscount</span>";
+			} else {
+				echo "<span style='font-weight: 600;'>Unit Price: $$formattedPrice</span></br>";
 			}
 			echo "</td>"; 
 			
@@ -136,8 +141,14 @@ if (isset($_SESSION["Cart"])) {
 			echo "</td>";
 
 			// total for each donut
-			$formattedTotal = number_format($row["Total"], 2);
-			echo "<td style='vertical-align: middle; font-weight: 600;'>$formattedTotal</td>";
+			if ($row1["Offered"] == 1 && date("Y-m-d") < $row1["OfferEndDate"] 
+			&& date("Y-m-d") > $row1["OfferStartDate"]) {
+				$formattedTotal = number_format($row["Quantity"] * $row1["OfferedPrice"], 2);
+				echo "<td style='vertical-align: middle; font-weight: 600;'>$formattedTotal</td>";
+			} else {
+				$formattedTotal = number_format($row["Total"], 2);
+				echo "<td style='vertical-align: middle; font-weight: 600;'>$formattedTotal</td>";
+			}
 			
 			// remove item from shopping cart
 			echo "<td style='vertical-align: middle;'>"; 
@@ -156,24 +167,29 @@ if (isset($_SESSION["Cart"])) {
 										 "productId" => $row["ProductID"],
 										 "name" => $row["Name"],
 										 "price" => $row["Price"],
+										 "offeredPrice" => $discount,
 										 "quantity" => $row["Quantity"],
-										 "total" => $row["Total"],
-										 "discount" => $discount);	
+										 "total" => $formattedTotal);
 			
 			// Accumulate the running sub-total
-			$subTotal += $row["Total"];
+			$subtotal += $row["Total"];
+			$discountSubtotal += $formattedTotal; // with discount
 			$totalItems += $row["Quantity"];
 		}
 		// Display the subtotal at the end of the shopping cart
-		$formattedSubtotal = number_format($subTotal, 2);
+		$formattedDiscountSubtotal = number_format($discountSubtotal, 2); // with discount
+		$formattedSubtotal = number_format($subtotal, 2); // with discount
 		echo "<tr class='tray-divider'>";
 		echo "<td></td>";
 		echo "<td></td>";
 		echo "<td class='tray-subtotal'>Subtotal</td>";
-		echo "<td class='tray-subtotal'>$formattedSubtotal</td>";
+		echo "<td class='tray-subtotal'>"; 
+		echo" <span style='text-decoration: line-through; font-weight: 600; font-size: 18px; color: #bfa288;'>$formattedSubtotal</span>"; 
+		echo " $formattedDiscountSubtotal</td>";
 		echo "<td></td>";
 		echo "</tr>";
-		$_SESSION["SubTotal"] = round($subTotal, 2);
+		$_SESSION["SubTotal"] = round($subtotal, 2);
+		$_SESSION["DiscountSubTotal"] = round($discountSubtotal, 2);
 
 		echo "</tbody>"; // End of table's body section
 		echo "</table>"; // End of table
