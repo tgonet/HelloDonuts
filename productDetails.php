@@ -113,7 +113,6 @@ else{
 }
 echo "</form>";
 echo "</div>";
-echo "<button type='rate' style='display: inline-block;'>RATE!</button>";
 echo "</div>"; 
 echo "</div>"; 
 include_once("ratingSection.php");
