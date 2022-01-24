@@ -18,15 +18,16 @@ $result = $stmt->get_result();
 $stmt->close();
 
 while ($row = $result->fetch_array()) {
-    echo "<div class='row' style='margin: 3em 4em 3em 4em;'>";
-    echo "<div style='margin:0 7em 0 0; '>";
+    echo "<div style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
+    echo "<div class='row' style='margin: 3em 4em 3em 4em; '>";
+    echo "<div style='margin:0 7em 0 0; display: inline;'>";
     $img = "./Images/products/$row[ProductImage]";
     $_SESSION["rateImage"] = $img;
     $_SESSION["rateName"] = $row["ProductTitle"]; 
     echo "<p><img style='border-radius: 5%; width: 40em; height: 40em; object-fit: cover; margin-bottom: 30px;'src=$img /></p>";
     echo "</div>"; 
     $date_now = date("Y-m-d");
-    echo "<div class='col-sm-5' style='vertical-align:top; padding:5px'>"; 
+    echo "<div class='col-sm-5' style='vertical-align:top; padding:5px; display: inline;'>"; 
     echo "<h2 style='padding-bottom: 15px; font-size: 45px; color: #63200D; font-weight: 900' >$row[ProductTitle]</h2>";
     if (( $row["Quantity"] >0 and $row["Quantity"] <= 100) && ($row["Offered"] == 1) and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now ){
         echo "<div style='display: flex'>";
@@ -112,6 +113,8 @@ else{
 }
 echo "</form>";
 echo "</div>";
+echo "<button type='rate' style='display: inline-block;'>RATE!</button>";
+echo "</div>"; 
 echo "</div>"; 
 include_once("ratingSection.php");
 echo "<div class='suggest'>";
@@ -145,7 +148,20 @@ include("footer.php");
 ?>
 
 <style>
-    
+    button[type="rate"]{
+    display: inline-block; 
+    margin-left: 100px;
+    border-radius: 30px  !important;
+    background: #CAF0F8;
+    border: none;
+    font-weight: 900;
+    font-size: 45px;
+    color: #63200D;
+    clear: both;
+    vertical-align: bottom;
+    width: 300px;
+    height: 100px;
+}
     .suggest{
    margin-top: 150px;
    background-color: #F2F2F2;

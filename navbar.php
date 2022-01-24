@@ -29,7 +29,7 @@ if(isset($_SESSION["ShopperName"])) {
                         <a class='dropdown-item nav-item-dd' href=''>Profile</a>
                     </li>
                     <li>
-                        <a class='dropdown-item nav-item-logout' href=''>Log Out</a>
+                        <a class='dropdown-item nav-item-logout' href='logout.php'>Log Out</a>
                     </li>
                 </ul>";
 	
@@ -58,7 +58,13 @@ if(isset($_SESSION["ShopperName"])) {
         <!-- left-justified menu items -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a href="category.php" class="nav-link">DONUTS</a>
+                <a href="category.php" class="nav-link">Donuts</a>
+            </li>
+            <div class="vl d-none d-lg-block"></div>
+            <li class="nav-item ">
+                <a href="search.php" class="nav-link">
+                    Search
+                </a>
             </li>
         </ul>
         <ul class="navbar-nav mx-auto">

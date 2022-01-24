@@ -39,6 +39,13 @@ h3.outsideBackground {
     box-shadow: 0.8em 0.8em #fcddec;
 }
 
+/* header */
+.vl {
+    border-left: 3px solid #63200d;
+    height: 20px;
+    margin: auto;
+  }
+
 /* footer */
 div.footer-background {
     background: #63200d;
@@ -334,7 +341,7 @@ input::-webkit-inner-spin-button {
 
 .delivery-choice {
     text-align: left;
-    width: 80%;
+    width: 70%;
 }
 
 .delivery-name {
