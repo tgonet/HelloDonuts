@@ -553,6 +553,14 @@ select {
     padding: 6px 18px !important;
 }
 
+.field-icon {
+    float: right;
+    margin-right: 17px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+  }
+
 @media (min-width: 768px) {
     .navbar-expand-md {
         -ms-flex-flow: row nowrap;
