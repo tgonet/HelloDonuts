@@ -27,7 +27,7 @@
         $DOB = $_POST["bday"];
         $address = $_POST["address"];
         $country = $_POST["country"];
-        $phone = $_POST["phone"];
+        $phone = "(65) ".$_POST["phone"];
         $email = $_POST["email"];
     
         if(checkUnique($email) == false){
