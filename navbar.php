@@ -26,7 +26,7 @@ if(isset($_SESSION["ShopperName"])) {
                     </li>
                     <li class='dropdown-divider'></li>
                     <li>
-                        <a class='dropdown-item nav-item-dd' href=''>Profile</a>
+                        <a class='dropdown-item nav-item-dd' href='editProfile.php'>Profile</a>
                     </li>
                     <li>
                         <a class='dropdown-item nav-item-logout' href='logout.php'>Log Out</a>

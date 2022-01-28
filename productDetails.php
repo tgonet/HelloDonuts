@@ -7,6 +7,7 @@ date_default_timezone_set('Asia/Singapore');
 
 <?php 
 $pid=$_GET["pid"];
+$_SESSION["pid"] = $pid;
 
 include_once("mysql_conn.php"); 
 $qry = "SELECT * from product where ProductID=?";
@@ -17,13 +18,16 @@ $result = $stmt->get_result();
 $stmt->close();
 
 while ($row = $result->fetch_array()) {
-    echo "<div class='row' style='margin: 3em 4em 3em 4em;'>";
-    echo "<div style='margin:0 7em 0 0; '>";
+    echo "<div style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
+    echo "<div class='row' style='margin: 3em 4em 3em 4em; '>";
+    echo "<div style='margin:0 7em 0 0; display: inline;'>";
     $img = "./Images/products/$row[ProductImage]";
+    $_SESSION["rateImage"] = $img;
+    $_SESSION["rateName"] = $row["ProductTitle"]; 
     echo "<p><img style='border-radius: 5%; width: 40em; height: 40em; object-fit: cover; margin-bottom: 30px;'src=$img /></p>";
     echo "</div>"; 
     $date_now = date("Y-m-d");
-    echo "<div class='col-sm-5' style='vertical-align:top; padding:5px'>"; 
+    echo "<div class='col-sm-5' style='vertical-align:top; padding:5px; display: inline;'>"; 
     echo "<h2 style='padding-bottom: 15px; font-size: 45px; color: #63200D; font-weight: 900' >$row[ProductTitle]</h2>";
     if (( $row["Quantity"] >0 and $row["Quantity"] <= 100) && ($row["Offered"] == 1) and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now ){
         echo "<div style='display: flex'>";
@@ -49,6 +53,14 @@ while ($row = $result->fetch_array()) {
     $stmt->execute();
     $result2 = $stmt->get_result();
     $stmt->close();
+
+    $qry2 = "SELECT AVG(RankInput) AS rating FROM ranking where productid=?";
+    $stmt = $conn->prepare($qry2);
+    $stmt->bind_param("i", $pid); 
+    $stmt->execute();
+    $resultRow = $stmt->get_result();
+    $stmt->close();
+    $row3 = $resultRow->fetch_array();  
     while ($row2 = $result2->fetch_array()) {
         echo "<div style='margin-top: 10px;'>";
         echo "<h6>$row2[SpecName]".": "."<span style='font-weight:bold;'>$row2[SpecVal]</span>"."<br /></h6>";
@@ -62,6 +74,15 @@ while ($row = $result->fetch_array()) {
     echo "<div style='margin-top: 20px;'>";
     $formattedPrice = number_format($row["Price"], 2);
     $formattedOffer = number_format($row["OfferedPrice"], 2);
+    $rating = round($row3["rating"]);
+    echo "<div style='display:block;'>";
+    for ($x = 1; $x <= $rating; $x++) {
+        echo "<img src='Images/rating_show.png' style='margin-right:10px;'>";
+      }
+    for ($x = 1; $x <= 5-$rating; $x++) {
+        echo "<img src='Images/rating_unshown.png' style='margin-right:10px;'>";
+    }
+    echo "</div>";
     if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
         echo "<span class = 'strikethrough' style = 'font-size: 20px; color: #63200D'>
         S$ $formattedPrice</span>";
@@ -74,6 +95,9 @@ while ($row = $result->fetch_array()) {
     }
     echo "</div>";
 }
+
+
+
 
 echo "<form name='product' action='cartFunctions.php' method='post' style='margin: 0 0 0 0 !important'>";
 echo "<input type='hidden' name='action' value='add' />";
@@ -89,8 +113,9 @@ else{
 }
 echo "</form>";
 echo "</div>";
-echo "<button type='rate'>RATE!</button>";
 echo "</div>"; 
+echo "</div>"; 
+include_once("ratingSection.php");
 echo "<div class='suggest'>";
 echo "<div class='row' style='margin: 3em 4em 3em 4em;'>";
 echo "<h3 style='margin-top:50px; color: #63200D; width: 100%;'>You may like this:</h3>";
@@ -123,8 +148,7 @@ include("footer.php");
 
 <style>
     button[type="rate"]{
-    padding: 10px 90px 10px 90px;
-    display: block; 
+    display: inline-block; 
     margin-left: 100px;
     border-radius: 30px  !important;
     background: #CAF0F8;
@@ -132,6 +156,10 @@ include("footer.php");
     font-weight: 900;
     font-size: 45px;
     color: #63200D;
+    clear: both;
+    vertical-align: bottom;
+    width: 300px;
+    height: 100px;
 }
     .suggest{
    margin-top: 150px;

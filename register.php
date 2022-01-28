@@ -5,6 +5,33 @@
     //Include the page layout header
     include("header.php");
 ?>
+<style>
+
+    .form-control:focus{
+        border-color: #cccccc;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .input-box {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border-radius: 20px;
+        padding-left: 0.5rem;
+        overflow: hidden;
+    }
+
+    .input-box .prefix {
+        font-weight: 400;
+        font-size: 16px;
+        color: #999;
+    }
+
+    .input-box:focus-within {
+        border-color: #777;
+    }
+</style>
 
 
 <script>
@@ -125,7 +152,10 @@
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="phone" class="col-sm-3 col-form-label">Phone:</label>
                 <div class="col-sm-9">
-                    <input type="tel" class="form-control textfield" id="phone" name="phone" placeholder="Please enter your mobile number" required>
+                    <div class="input-box">
+                        <span class="prefix">+65</span>
+                        <input type="tel" class="form-control textfield" id="phone" name="phone" placeholder="Please enter your mobile number" required>
+                    </div>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
