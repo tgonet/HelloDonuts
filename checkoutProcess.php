@@ -53,7 +53,7 @@ if($_POST) // Redirected from reviewOrder.php
 				'&PAYMENTREQUEST_0_TAXAMT='.urlencode($_SESSION["Tax"]). 
 				'&BRANDNAME='.urlencode("Hello Donuts").
 				$paypal_data.				
-				'&RETURNURL='.urlencode($PayPalReturnURL ).
+				'&RETURNURL='.urlencode($PayPalReturnURL).
 				'&CANCELURL='.urlencode($PayPalCancelURL);	
 			
 		//We need to execute the "SetExpressCheckOut" method to obtain paypal token
@@ -77,15 +77,13 @@ if($_POST) // Redirected from reviewOrder.php
 		else {
 			/* THINK OF HOW TO DISPLAY ERROR MESSAGE (1/3) */
 			//Show error message
-			header("shoppingCart.php");
 			echo "<script>alert('Checkout failed, please try again.');
 			console.log('SetExpressCheckOut failed :".urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."');
-			</script>;";	
+			</script>;";
+			header("Location: reviewOrder.php");
+			exit;
 			
-			//Show error message
-			echo "<div style='color:red'><b>SetExpressCheckOut failed : </b>".
-				urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."</div>";
-			echo "<pre>".print_r($httpParsedResponseAr)."</pre>"; // DK about this
+			//Show error messages
 			/*
 			echo "<div style='color:red'><b>SetExpressCheckOut failed : </b>".
 				urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."</div>";
@@ -217,7 +215,7 @@ if($_POST) // Redirected from reviewOrder.php
 				// "i" - integer, "s" - string
 				$deliveryDate = $_SESSION["DeliveryDate"]->format('Y-m-d');
 				$stmt->bind_param("ssssisssis", $ShipName, $ShipAddress, $ShipCountry, $ShipEmail, $_SESSION["Cart"], 
-								$deliveryDate, $_SESSION["DeliveryMode"], $_POST["message"], 3, GETDATE());
+								$deliveryDate, $_SESSION["DeliveryMode"], $_POST["Message"], 3, GETDATE());
 				$stmt->execute();
 				$stmt->close();
 				$qry = "SELECT LAST_INSERT_ID() AS OrderID";
@@ -244,10 +242,18 @@ if($_POST) // Redirected from reviewOrder.php
 			{
 				/* THINK OF HOW TO DISPLAY ERROR MESSAGE (2/3) */
 				// Idea: Redirect to revieworder.php, and have an alert message saying that transaction failed.
+				/*
 				echo "<div style='color:red'><b>GetTransactionDetails failed:</b>".
 								urldecode($httpParsedResponseAr["L_LONGMESSAGE0"]).'</div>';
 				echo "<pre>".print_r($httpParsedResponseAr)."</pre>";
 				$conn->close();
+				*/
+				echo "<script>alert('Checkout failed, please try again.');
+				console.log('GetTransactionDetails failed:".urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."');
+				</script>;";
+				$conn->close();
+				header("index.php");
+				exit;
 			}
 		}
 		else {
