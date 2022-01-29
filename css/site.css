@@ -385,6 +385,23 @@ td {
     padding-left: 20px;
 }
 
+.order-table td, th{
+    text-align: center;
+}
+.company-details{
+    color: #63200d;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow-wrap: break-word;
+}
+
+.customer-details{
+    color: #63200d;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: 500;
+    overflow-wrap: break-word;
+}
 /* images */
 #developers {
     border-radius: 50%;
