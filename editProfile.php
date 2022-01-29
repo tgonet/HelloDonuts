@@ -60,6 +60,7 @@
         if(document.editProfile.phone.value != ""){
             e.preventDefault();
             var str = document.editProfile.phone.value;
+            console.log(str.length);
             if(str.length != 8){
                 alert("Please enter a 8-digit phone number.");
                 return;
@@ -109,7 +110,7 @@
             $result = $stmt->get_result();
             $stmt->close();
             $row = $result->fetch_array();
-            $phoneNo = str_replace("(65)", "" , $row["Phone"]);
+            $phoneNo = str_replace("(65) ", "" , $row["Phone"]);
             echo "<div style='margin: 7em 0 7em 0; padding: 0'>
             <div class='background' style='width: 60% !important'>
                 <form id='ProfileForm' style='margin: auto' name='editProfile' action='#' method='post' onsubmit='validateForm(event)'>
@@ -155,7 +156,7 @@
                         </div>
                     </div>
                     <button type='submit' class='center' style='padding: 10px 90px 10px 90px'>Save</button>
-                    <p align='center' style='font-weight:bold;font-size:20px'>Change Password</p>
+                    <p align='center' style='font-weight:bold;font-size:20px;'><a style='color:black;' href='changePassword.php'>Change Password</a></p>
                 </form>
             </div>
         </div>

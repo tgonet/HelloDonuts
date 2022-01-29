@@ -20,9 +20,7 @@
 		while ($row = $result->fetch_array()) {
 			// Get the hashed password from database
 			$hash_pwd = $row["Password"];
-			
-			// Verifies that a passowrd matches a hash
-			if ((password_verify($password, $hash_pwd) == true) || ($password == $row["Password"])){
+			if ((password_verify($password, $hash_pwd) == true) || ($password == $hash_pwd)){
 				// Save user's info in session variables
 				$_SESSION["ShopperID"] = $row["ShopperID"];
 				$_SESSION["ShopperName"] = $row["Name"];

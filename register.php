@@ -57,24 +57,12 @@
 
     function validateForm(e)
     {
+        e.preventDefault();
         if(document.register.password.value != document.register.password2.value){
-            e.preventDefault();
             alert("Passwords not match!");
-            return;
+            //return;
         }
-        else if(document.register.phone.value != ""){
-            e.preventDefault();
-            var str = document.register.phone.value;
-            if(str.length != 8){
-                alert("Please enter a 8-digit phone number.");
-                return;
-            }
-            else if(str.substr(0,1) != "6" &&
-                    str.substr(0,1) != "8" &&
-                    str.substr(0,1) != "9"){
-                alert("Phone number in Singapore should start with 6,8 or 9.");
-                return;
-            }
+        else{
             $.ajax({
                 url:'addMember.php',
                 type:'POST',
@@ -95,8 +83,8 @@
                 error: function (data) {
                     console.log('An error occurred.');
                     console.log(data);
-            }
-            });
+                }
+        });
         }
     }
     function typeChange(){
@@ -147,15 +135,6 @@
                 <label for="country" class="col-sm-3 col-form-label">Country:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control textfield" id="country" name="country" placeholder="Please enter your country" required>
-                </div>
-            </div>
-            <div class="form-group row" style="margin-bottom:40px;">
-                <label for="phone" class="col-sm-3 col-form-label">Phone:</label>
-                <div class="col-sm-9">
-                    <div class="input-box">
-                        <span class="prefix">+65</span>
-                        <input type="tel" class="form-control textfield" id="phone" name="phone" placeholder="Please enter your mobile number" required>
-                    </div>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
