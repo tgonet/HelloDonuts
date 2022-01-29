@@ -73,9 +73,9 @@ foreach($_SESSION['Items'] as $key=>$item) {
     $price = number_format($item["price"],2);
     $discount = "-";
     $totalDiscount = 0;
-    if ($item["discount"] != 0)
+    if ($item["offeredPrice"] != 0)
     {
-        $discount = ($price - $item["discount"]);
+        $discount = ($price - $item["offeredPrice"]);
         $totalDiscount += $discount * $item["quantity"];
         $discount = "(".number_format($discount, 2).")";
     }
@@ -160,17 +160,6 @@ echo "<td></td>";
 $deliveryCharge = number_format($_SESSION["DeliveryCharge"],2);
 echo "<td>S$$deliveryCharge</td>"; // this is delivery charge
 echo "</tr>";
-if ($totalDiscount != 0)
-{
-    $totalDiscount = "(".number_format($totalDiscount, 2).")";
-    echo "<tr class='order-contents-summary'>";
-    echo "<td colspan='2' id='orderSummaryTitle'>Discount</td>";
-    echo "<td></td>";
-    echo "<td></td>";
-    echo "<td></td>";
-    echo "<td>S$$totalDiscount</td>"; // this is discount
-    echo "</tr>";
-}
 echo "<tr class='order-contents-summary'>";
 echo "<td colspan='2' id='orderSummaryTitle'>Tax</td>";
 echo "<td></td>";
@@ -201,9 +190,9 @@ echo "</div>";
 echo "<h3 class='outsideBackground'>Customize Your Order</h3>";
 echo "<div class='background'>";
 echo "<div class='form-group row' style='margin-bottom:40px;'>";
-echo "<label for='message' class='col-sm-3 col-form-label tray-donut-name'>Add a Message:</label>";
+echo "<label for='Message' class='col-sm-3 col-form-label tray-donut-name'>Add a Message:</label>";
 echo "<div class='col-sm-8' style='padding:0 40px 0 40px'>";
-echo "<input type='text' class='form-control textfield' id='message' name='message'>";
+echo "<input type='text' class='form-control textfield' id='Message' name='Message'>";
 echo "</div>";
 echo "</div>";
 echo "</div>";
