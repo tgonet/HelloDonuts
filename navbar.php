@@ -12,7 +12,7 @@ $content2 = "<ul class='dropdown-menu dropdown-menu-right'>
                     <a class='dropdown-item nav-item-dd' href='login.php'>Login</a>
                 </li>
                 <li>
-                    <a class='dropdown-item nav-item-dd' href='register.php'>Sign Up</a>
+                    <a class='dropdown-item nav-item-dd' href='registerOTP.php'>Sign Up</a>
                 </li>
             </ul>";
 
