@@ -116,13 +116,13 @@ echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Date: $_SESSION[D
 echo "</tr>";
 
 echo "<tr class='order-contents'>";
-echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Time: to be implemented</td>"; //KIV
+echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Time: $_SESSION[DeliveryTime]</td>"; //KIV
 echo "</tr>";
 
 // wait for yx
 $_SESSION["isWaived"] = "";
 $_SESSION["DeliveryDiscount"] = 0;
-if (isset($_POST["DeliveryWaived"]))
+if ($_SESSION["WaiveDelivery"])
 {
     $_SESSION["DeliveryDiscount"] = -$_SESSION["DeliveryCharge"];
     $_SESSION["isWaived"]  = " (Waived)";
