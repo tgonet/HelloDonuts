@@ -104,17 +104,16 @@ if (isset($_SESSION["Cart"])) {
 			
 			// name, unit price, offer
 			$formattedPrice = number_format($row["Price"], 2);
-			$discount = 0;
 			echo "<td style='text-align: left; vertical-align: middle;'>";
 			echo "<span class='tray-donut-name'>$row[Name]</span></br>";
 			if ($row1["Offered"] == 1 && date("Y-m-d") < $row1["OfferEndDate"] 
 			&& date("Y-m-d") > $row1["OfferStartDate"]) {
-				$discount = $row1["OfferedPrice"];
 				$formattedDiscount = number_format($row1["OfferedPrice"], 2);
 				echo "<span style='font-weight: 600;'>Unit Price: </span>";
 				echo "<span style='font-weight: 600; text-decoration: line-through;'>$$formattedPrice</span>";
 				echo "<span style='font-weight: 700; font-size: 16px; color: #DD8331;'> $$formattedDiscount</span>";
 			} else {
+				$formattedDiscount = $formattedPrice;
 				echo "<span style='font-weight: 600;'>Unit Price: $$formattedPrice</span></br>";
 			}
 			echo "</td>"; 
@@ -128,7 +127,7 @@ if (isset($_SESSION["Cart"])) {
 			echo "<i class='fas fa-minus plus-minus-btn'></i>"; 
 			echo "</button>"; 
 			echo "</div>"; 
-			echo "<input class='qty-field' type='number' name='quantity' id='$row[ProductID]' value='$row[Quantity]' min=0 max=100 onChange='this.form.submit()'>"; 
+			echo "<input class='qty-field' type='number' name='quantity' id='$row[ProductID]' value='$row[Quantity]' min=1 max=100 onChange='this.form.submit()'>"; 
 			echo "<div class='input-group-button'>"; 
 			echo "<button type='button' class='button-icon plus' data-quantity='plus' data-field='$row[ProductID]'>"; 
 			echo "<i class='fas fa-plus plus-minus-btn'></i>"; 
@@ -166,8 +165,8 @@ if (isset($_SESSION["Cart"])) {
 			$_SESSION["Items"][] = array("image" => $row1["ProductImage"],
 										 "productId" => $row["ProductID"],
 										 "name" => $row["Name"],
-										 "price" => $row["Price"],
-										 "offeredPrice" => $discount,
+										 "price" => $formattedPrice,
+										 "offeredPrice" => $formattedDiscount,
 										 "quantity" => $row["Quantity"],
 										 "total" => $formattedTotal);
 			
@@ -188,8 +187,8 @@ if (isset($_SESSION["Cart"])) {
 		echo " $formattedDiscountSubtotal</td>";
 		echo "<td></td>";
 		echo "</tr>";
-		$_SESSION["SubTotal"] = round($subtotal, 2);
-		$_SESSION["DiscountSubTotal"] = round($discountSubtotal, 2);
+		$_SESSION["SubTotal"] = $formattedSubtotal;
+		$_SESSION["DiscountSubTotal"] = $formattedDiscountSubtotal;
 
 		echo "</tbody>"; // End of table's body section
 		echo "</table>"; // End of table

@@ -61,7 +61,8 @@ if ($_SESSION["NumCartItem"] < 1) {
                         <div class='row'>
                             <div class='col-sm-10'>
                                 <span class='delivery-name'>Normal Delivery</span></br>
-                                <span class='delivery-note'>*Note: Normal delivery is free of charge when subtotal exceeds S$50.</span>   
+                                <span class='delivery-note'>*Note: Normal delivery is free of charge when subtotal exceeds S$50.</span>
+                                <?php $deliveryMode = "Normal" ?>   
                             </div>
                             <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$2</div>
                         </div>
@@ -73,7 +74,8 @@ if ($_SESSION["NumCartItem"] < 1) {
                     <label for='Express' class='delivery-choice custom-control-label'>
                         <div class='row'>
                             <div class='col-sm-10'>
-                                <span class='delivery-name'>Express Delivery</span>    
+                                <span class='delivery-name'>Express Delivery</span> 
+                                <?php $deliveryMode = "Express" ?>   
                             </div>
                             <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$5</div>
                         </div>
@@ -87,6 +89,8 @@ if ($_SESSION["NumCartItem"] < 1) {
 
         <input type='hidden' name='action' value='mode' />
 		<input type='hidden' name='shopcart_id' value='$_SESSION["Cart"]' />
+
+        <?php $_SESSION["DeliveryMode"] = $deliveryMode ?>
 
         <div class='row'>
             <div class='col-md-12'>
