@@ -187,9 +187,7 @@ if (isset($_SESSION["Cart"])) {
 		echo " $formattedDiscountSubtotal</td>";
 		echo "<td></td>";
 		echo "</tr>";
-		$_SESSION["SubTotal"] = $formattedSubtotal;
-		$_SESSION["DiscountSubTotal"] = $formattedDiscountSubtotal;
-
+		
 		echo "</tbody>"; // End of table's body section
 		echo "</table>"; // End of table
 		echo "</div>"; // End of Bootstrap responsive table
@@ -205,7 +203,10 @@ if (isset($_SESSION["Cart"])) {
 		echo "</div>";
 		echo "</div>";
 
-		// TODO: button to next page
+		// add to session
+		$_SESSION["TotalItems"] = $totalItems;
+		$_SESSION["SubTotal"] = $formattedSubtotal;
+		$_SESSION["DiscountSubTotal"] = $formattedDiscountSubtotal;
 	}
 	else {
 		echo "<div class='empty-tray-msg'>";
