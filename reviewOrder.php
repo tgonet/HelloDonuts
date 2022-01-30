@@ -5,11 +5,12 @@ session_start();
 include("header.php");
 date_default_timezone_set('Asia/Singapore');
 
-if (!$_POST) {  
-    // redirect to shopping cart page if no delivery method is provided using $_POST method
-	header ("Location: deliveryMode.php");
-	exit;
-}
+// get from session, redirected from deliveryFunction.php
+// if (!$_POST) {  
+//     // redirect to shopping cart page if no delivery method is provided using $_POST method
+// 	header ("Location: deliveryMode.php");
+// 	exit;
+// }
 
 ?>
 <div class='row' style='padding:20px 0 0 20px'>

@@ -253,33 +253,8 @@ $('.button-icon').click(function(e){
 
         }
     } else {
-        input.val(0);
+        input.val(1);
     }
-});
-$('.qty-field').focusin(function(){
-   $(this).data('oldValue', $(this).val());
-});
-$('.qty-field').change(function() {
-    
-    minValue =  parseInt($(this).attr('min'));
-    maxValue =  parseInt($(this).attr('max'));
-    valueCurrent = parseInt($(this).val());
-    
-    id = $(this).attr('id');
-    if(valueCurrent >= minValue) {
-        $(".button-icon[data-quantity='minus'][data-field='"+name+"']").removeAttr('disabled')
-    } else {
-        alert('Sorry, the minimum value was reached');
-        $(this).val($(this).data('oldValue'));
-    }
-    if(valueCurrent <= maxValue) {
-        $(".button-icon[data-quantity='plus'][data-field='"+name+"']").removeAttr('disabled')
-    } else {
-        alert('Sorry, the maximum value was reached');
-        $(this).val($(this).data('oldValue'));
-    }
-    
-    
 });
 </script>
 

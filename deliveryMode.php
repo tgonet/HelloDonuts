@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once("deliveryFunction.php");
 include("header.php");
 if (! isset($_SESSION["ShopperID"])) { // Check if user logged in 
 	// redirect to login page if the session variable shopperid is not set
@@ -52,7 +52,7 @@ if ($_SESSION["NumCartItem"] < 1) {
 
     <h1 class='page-title'>Delivery Mode</h1>
 
-    <form action='reviewOrder.php' method='post' style='width: 100%; padding: 0;'>
+    <form action='deliveryFunction.php' method='post' style='width: 100%; padding: 0;'>
         <div class='tray-background'> <!-- start background -->
             <div class='form-input-grp'>
                 <div class='custom-control custom-radio delivery-radio'>
@@ -62,7 +62,6 @@ if ($_SESSION["NumCartItem"] < 1) {
                             <div class='col-sm-10'>
                                 <span class='delivery-name'>Normal Delivery</span></br>
                                 <span class='delivery-note'>*Note: Normal delivery is free of charge when subtotal exceeds S$50.</span>
-                                <?php $deliveryMode = "Normal" ?>   
                             </div>
                             <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$2</div>
                         </div>
@@ -75,7 +74,6 @@ if ($_SESSION["NumCartItem"] < 1) {
                         <div class='row'>
                             <div class='col-sm-10'>
                                 <span class='delivery-name'>Express Delivery</span> 
-                                <?php $deliveryMode = "Express" ?>   
                             </div>
                             <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$5</div>
                         </div>
@@ -84,25 +82,54 @@ if ($_SESSION["NumCartItem"] < 1) {
             </div>    
         </div> <!-- close background -->
 
-        <!-- TODO: delivery timing -->
-        
+        <!-- delivery timing -->
+        <h1 class='page-title'>Delivery Timing</h1>
 
-        <input type='hidden' name='action' value='mode' />
-		<input type='hidden' name='shopcart_id' value='$_SESSION["Cart"]' />
-
-        <?php $_SESSION["DeliveryMode"] = $deliveryMode ?>
+        <div class='tray-background'> <!-- start background -->
+            <div class='form-input-grp'>
+                <div class='custom-control custom-radio delivery-radio'>
+                    <input type='radio' class='custom-control-input' name='delivery_time' id='9to12' value='9to12' checked>
+                    <label for='9to12' class='delivery-choice custom-control-label'>
+                        <div class='row'>
+                            <div class='col-sm-10'>
+                                <span class='delivery-name'>9 am - 12 pm</span></br>
+                            </div>
+                        </div>
+                    </label></br>
+                </div>
+                
+                <div class='custom-control custom-radio delivery-radio'>
+                    <input type='radio' class='custom-control-input' name='delivery_time' id='12to3' value='12to3'>
+                    <label for='12to3' class='delivery-choice custom-control-label'>
+                        <div class='row'>
+                            <div class='col-sm-10'>
+                                <span class='delivery-name'>12 pm - 3 pm</span></br>
+                            </div>
+                        </div>
+                    </label></br>
+                </div>
+                
+                <div class='custom-control custom-radio delivery-radio'>
+                    <input type='radio' class='custom-control-input' name='delivery_time' id='3to6' value='3to6'>
+                    <label for='3to6' class='delivery-choice custom-control-label'>
+                        <div class='row'>
+                            <div class='col-sm-10'>
+                                <span class='delivery-name'>3 pm - 6 pm</span> 
+                            </div>
+                        </div>
+                    </label></br>
+                </div>
+            </div>
+        </div> <!-- close background -->
 
         <div class='row'>
             <div class='col-md-12'>
-                <button type='submit'>Continue</button>
+                <button type='submit'">Continue</button>
             </div>
         </div>
     </form>
-
-<!-- TODO: check if need to waive delivery fee -->
-
 </div> <!-- close container -->
-        
+
 <?php
 include("footer.php");
 ?>
