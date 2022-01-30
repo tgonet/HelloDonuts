@@ -61,8 +61,9 @@ echo "</div>";
 //Column 2 - Delivery, payment, and order details
 echo "<div class='col-sm-6' style='width:80%;'>";
 echo "<p style='text-align:left;padding-left:20px;'>Date Ordered: $result[DateOrdered]</p>";
-echo "<p style='text-align:left;padding-left:20px;'>Delivery Date: $result[DeliveryDate]</p>";
 echo "<p style='text-align:left;padding-left:20px;'>Delivery Mode: $result[DeliveryMode]</p>";
+echo "<p style='text-align:left;padding-left:20px;'>Delivery Date: $result[DeliveryDate]</p>";
+echo "<p style='text-align:left;padding-left:20px;'>Delivery Time: $result[DeliveryTime]</p>";
 echo "</div>";
 echo "</div>";
 

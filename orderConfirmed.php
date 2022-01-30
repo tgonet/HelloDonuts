@@ -67,7 +67,7 @@ echo "</div>";
     echo "<div class='col-sm-6' style='width:80%;'>";
     echo "<p style='text-align:left;padding-left:20px;'>Date Ordered: $result[DateOrdered]</p>";
     echo "<p style='text-align:left;padding-left:20px;'>Payment Method: $_SESSION[PaymentMethod]</p>";
-    echo "<p style='text-align:left;padding-left:20px;'>Delivery Date: $result[DeliveryDate]</p>";
+    echo "<p style='text-align:left;padding-left:20px;'>Delivery Date & Time: $result[DeliveryDate], $result[DeliveryTime]</p>";
     echo "<p style='text-align:left;padding-left:20px;'>Delivery Mode: $result[DeliveryMode]</p>";
     echo "</div>";
     echo "</div>";
@@ -88,21 +88,22 @@ echo "</div>";
     foreach($_SESSION['Items'] as $key=>$item) {
         echo "<tr>";
         $imageDir = "Images/Products/".$item["image"];
-        $price = number_format($item["price"],2);
-        $discount = "-";
-        if ($item["offeredPrice"] != 0)
+        $discount = $item["price"] - $item["offeredPrice"];
+        if ($discount != 0)
         {
-            $discount = ($price - $item["offeredPrice"]);
             $discount = "(".number_format($discount, 2).")";
         }
-        $total = number_format($item["total"],2);
+        else
+        {
+            $discount = "-";
+        }
         echo "<td style='width: 8em;' colspan='2'>
             <span class='order-contents'><img id='donutImg' src=$imageDir></br>$item[name]</span></td>";
-        echo "<td class='order-contents' style='vertical-align:middle'>$price</td>";
+        echo "<td class='order-contents' style='vertical-align:middle'>$item[price]</td>";
         
         echo "<td class='order-contents' style='vertical-align:middle;'>$discount</td>";
         echo "<td class='order-contents' style='vertical-align:middle;'>$item[quantity]</td>";
-        echo "<td class='order-contents' style='vertical-align:middle; margin-bottom:10%'>$total</td>";
+        echo "<td class='order-contents' style='vertical-align:middle; margin-bottom:10%'>$item[total]</td>";
         echo "</tr>";
     }
     
@@ -118,26 +119,41 @@ echo "</div>";
     echo "<td></td>";
     echo "<td></td>";
     echo "<td></td>";
-    $formattedsubtotal = number_format($_SESSION["DiscountSubTotal"],2);
     if ($_SESSION["DiscountSubTotal"] == $_SESSION["SubTotal"])
     {
-        echo "<td>S$$formattedsubtotal</td>"; // subtotal
+        echo "<td>S$$_SESSION[SubTotal]</td>"; // subtotal
     }
     else
     { 
-        $formattedOrig = number_format($_SESSION["SubTotal"],2);
         echo "<td>"; // subtotal
-        echo" <span style='text-decoration: line-through; font-weight: 600; font-size: 18px; color: #bfa288;'>S$$formattedOrig</span>"; 
-        echo " S$$formattedsubtotal</td>";
+        echo" <span style='text-decoration: line-through; font-weight: 600; font-size: 18px; color: #bfa288;'>S$$_SESSION[SubTotal]</span>"; 
+        echo " S$$_SESSION[DiscountSubTotal]</td>";
     }
     echo "</tr>";
     echo "<tr class= 'order-contents-summary'>";
-    echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - $_SESSION[DeliveryMode] Delivery$_SESSION[isWaived]</td>";
+    if ($_SESSION["WaiveDelivery"])
+    {
+        echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - $_SESSION[DeliveryMode] Delivery (Waived)</td>";
+    }
+    else
+    {
+        echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - $_SESSION[DeliveryMode] Delivery</td>";
+    }
     echo "<td></td>";
     echo "<td></td>";
-    $deliveryCharge = number_format($_SESSION["DeliveryCharge"],2);
-    //$deliveryCharge = number_format($_SESSION["DeliveryCharge"]+$_SESSION["DeliveryDiscount"],2);
-    echo "<td>S$$deliveryCharge</td>"; // this is delivery charge
+
+    if ($_SESSION["DeliveryDiscount"] != 0)
+    {
+        $waivedDelivery = number_format($_SESSION["DeliveryCharge"]+$_SESSION["DeliveryDiscount"],2);
+        echo "<td>
+        <span style='text-decoration: line-through; font-weight: 600; font-size: 18px; color: #bfa288;'>S$$_SESSION[DeliveryCharge]</span> 
+        S$$waivedDelivery
+        </td>"; // this is delivery charge
+    }
+    else
+    {
+        echo "<td>S$$_SESSION[DeliveryCharge]</td>"; // this is delivery charge
+    }
     echo "</tr>";
     echo "<tr class='order-contents-summary'>";
     echo "<td colspan='2' id='orderSummaryTitle'>Tax</td>";

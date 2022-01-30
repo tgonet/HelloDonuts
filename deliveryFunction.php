@@ -1,6 +1,10 @@
 <?php 
 session_start();
+
 if (isset($_POST['delivery_mode']) && isset($_POST['delivery_time'])) {
+    date_default_timezone_set('Asia/Singapore');
+    $_SESSION["DeliveryDate"] = new DateTime('now');
+    $_SESSION["DeliveryDiscount"] = 0;
  	switch ($_POST['delivery_mode']) {
     	case 'Normal':
         	normalMode();
@@ -14,12 +18,15 @@ if (isset($_POST['delivery_mode']) && isset($_POST['delivery_time'])) {
 function normalMode() {
     $_SESSION["DeliveryMode"] = 'Normal';
     $_SESSION["DeliveryCharge"] = 2;
+    $_SESSION["DeliveryDate"]->modify('+1 day');
     if ($_SESSION["SubTotal"] > 50) {
         $_SESSION["WaiveDelivery"] = true;
+        $_SESSION["DeliveryDiscount"] = -$_SESSION["DeliveryCharge"];
     } else {
         $_SESSION["WaiveDelivery"] = false;
     }
     selectedTime();
+    formatNumbers();
     header("Location: reviewOrder.php");
 	exit;
 }
@@ -27,8 +34,10 @@ function normalMode() {
 function expressMode() {
     $_SESSION["DeliveryMode"] = 'Express';
     $_SESSION["DeliveryCharge"] = 5;
+    $_SESSION["DeliveryDate"]->modify('+2 hour');
     $_SESSION["WaiveDelivery"] = false;
     selectedTime();
+    formatNumbers();
     header("Location: reviewOrder.php");
 	exit;
 }
@@ -45,5 +54,11 @@ function selectedTime() {
             $_SESSION['DeliveryTime'] = "3 pm - 6 pm";
             break;
     }
+}
+
+function formatNumbers(){
+    $_SESSION["DeliveryCharge"] = number_format($_SESSION["DeliveryCharge"],2);
+    $_SESSION["DeliveryDiscount"] = number_format($_SESSION["DeliveryDiscount"],2);
+    $_SESSION["DeliveryDate"] = $_SESSION["DeliveryDate"]->format('Y-m-d');
 }
 ?>

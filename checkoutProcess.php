@@ -188,7 +188,7 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 				WHERE ShopCartID=?";
 		$stmt = $conn->prepare($qry);
 		// "i" - integer, "d" - double
-		$stmt->bind_param("iddddii", $_SESSION["NumCartItem"],
+		$stmt->bind_param("iddddii", $_SESSION["TotalItems"],
 						  $_SESSION["SubTotal"], $shipCharge,
 						  $_SESSION["Tax"], $_SESSION["Total"],$discount,
 						  $_SESSION["Cart"]);
@@ -229,14 +229,14 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 			//          Get the Order ID and save it in session variable.
 			
 			$qry = "INSERT INTO orderdata (ShipName, ShipAddress, ShipCountry,
-											ShipEmail, DeliveryDate, DeliveryMode,
-											Message, ShopCartID)
-					VALUES(?,?,?,?,?,?,?,?)";
+											ShipEmail, DeliveryDate, DeliveryTime, 
+											DeliveryMode, Message, ShopCartID)
+					VALUES(?,?,?,?,?,?,?,?,?)";
 			$stmt = $conn->prepare($qry);
 			// "i" - integer, "s" - string
-			$stmt->bind_param("sssssssi", $ShipName, $ShipAddress, $ShipCountry, 
-										$ShipEmail, $_SESSION["DeliveryDate"], $_SESSION["DeliveryMode"],
-										$_SESSION["Message"], $_SESSION["Cart"]);
+			$stmt->bind_param("ssssssssi", $ShipName, $ShipAddress, $ShipCountry, 
+										$ShipEmail, $_SESSION["DeliveryDate"], $_SESSION["DeliveryTime"], 
+										$_SESSION["DeliveryMode"], $_SESSION["Message"], $_SESSION["Cart"]);
 			$stmt->execute();
 			$stmt->close();
 			$qry = "SELECT LAST_INSERT_ID() AS OrderID";
@@ -249,6 +249,7 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 				  
 			// To Do 4A: Reset the "Number of Items in Cart" session variable to zero.
 			$_SESSION["NumCartItem"] = 0;
+			$_SESSION["TotalItems"] = 0;
 			$_SESSION["PaymentMethod"] = "PayPal";
 	  		
 			// To Do 4B: Clear the session variable that contains Shopping Cart ID.
