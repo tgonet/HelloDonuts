@@ -35,6 +35,14 @@
 
 
 <script>
+    window.onload = function() {
+    var recaptcha = document.forms["register"]["g-recaptcha-response"];
+    recaptcha.required = true;
+    recaptcha.oninvalid = function(e) {
+    // fazer algo, no caso to dando um alert
+    alert("Please verify with CAPTCHA before continuing.");
+      }
+   }
      function getDate(){
         // For date input (Max Today)
         var today = new Date();
@@ -161,7 +169,7 @@
                 <label for="SecQns" class="col-sm-3 col-form-label">Security Question: </label>
                 <div class="col-sm-9">
                     <select id="SecQns" name="SecQns" class="textfield form-control minimal" required>
-                        <option value="" disabled selected>Please choose a security question only you know the answer for</option>
+                        <option value="" disabled selected>Select a question only you can answer</option>
                         <option value="Which polytechnic?">Which polytechnic?</option>
                         <option value="Wife's name?">Wife's name?</option>
                         <option value="How many brothers and sisters?">How many brothers and sisters?</option>
@@ -174,6 +182,7 @@
                     <input class="form-control textfield" type="test" name="SecAns" id="SecAns" placeholder="Please enter your answer" required/>
                 </div>
             </div>
+            <div align="center" style="margin-bottom:30px;" class="g-recaptcha" data-sitekey="6LezB0seAAAAALAeBQuG0QP8YRgD25D75TN-_xlB"></div>
             <button type="submit" class="center" style="padding: 10px 150px 10px 150px">Register</button>
         </form>
     </div>
