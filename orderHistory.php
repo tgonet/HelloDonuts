@@ -1,12 +1,13 @@
 <?php 
-session_start(); // Detect the current session
-include("header.php"); // Include the Page Layout header
-$_SESSION["OrderID"] = 1;
-$_SESSION["ShopCartID"] = 1;
-$_SESSION["PaymentMethod"] = "PayPal";
-$_SESSION["Tax"] = 0.5;
-$_SESSION["ShopperID"] = 1;
-if(isset($_SESSION["ShopperID"])) {
+    session_start(); // Detect the current session
+    include("header.php"); // Include the Page Layout header
+
+    if (!isset($_SESSION["ShopperID"]))
+    {
+        header("Location: login.php");
+        exit;
+    }
+
     // Establish connection with SQL in this page
     include_once("mysql_conn.php"); 
 
@@ -26,7 +27,7 @@ if(isset($_SESSION["ShopperID"])) {
     echo "<th>Order Date</th>";
     echo "<th>Delivery Date</th>";
     echo "<th>Status</th>";
-    echo "<th>Total</th>";
+    echo "<th>Total (S$)</th>";
     echo "<th></th>";
     echo "</tr>";   
     echo "</thead>";
@@ -36,7 +37,8 @@ if(isset($_SESSION["ShopperID"])) {
     $qry = "SELECT OrderID,DateOrdered,DeliveryDate,OrderStatus,sc.Total FROM OrderData o 
     INNER JOIN Shopcart sc ON o.ShopCartID = sc.ShopCartID 
     INNER JOIN Shopper s ON sc.ShopperID = s.ShopperID
-    WHERE s.ShopperID = ?";
+    WHERE s.ShopperID = ?
+    ORDER BY DateOrdered DESC";
     $stmt = $conn->prepare($qry);
     $stmt->bind_param("i", $_SESSION["ShopperID"]);
     $stmt->execute();
@@ -52,17 +54,21 @@ if(isset($_SESSION["ShopperID"])) {
         $status = $row["OrderStatus"];
         switch ($status){
             case 0:
-                echo "<td style='vertical-align:middle'>Cancelled</td>";
+                echo "<td class='text-danger order-contents' style='vertical-align:middle'>Cancelled</td>";
+                break;
             case 1:
-                echo "<td style='vertical-align:middle'>Received</td>";
+                echo "<td class='text-secondary order-contents'style='vertical-align:middle'>Received</td>";
+                break;
             case 2:
-                echo "<td style='vertical-align:middle'>Ready for shipment</td>";
+                echo "<td  class='text-primary order-contents' style='vertical-align:middle'>Ready for shipment</td>";
+                break;
             case 3:
-                echo "<td style='vertical-align:middle'>Delivered</td>";
+                echo "<td  class='text-success order-contents' style='vertical-align:middle'>Delivered</td>";
+                break;
 
         }
         $total = number_format($row["Total"],2);
-        echo "<td style='vertical-align:middle'>S$$total</td>";
+        echo "<td style='vertical-align:middle'>$total</td>";
 
         $order = "orderHistoryDetails.php?orderid=$row[OrderID]";
         echo "<td style='vertical-align:middle'>
@@ -74,12 +80,7 @@ if(isset($_SESSION["ShopperID"])) {
         echo "</table>";
         echo "</div>";
         echo "</div>";
-        echo "</div>";
-        /*
-            echo "<p>Checkout successful. Your order number is $_SESSION[OrderID]</p>";
-            echo "<p>Thank you for your purchase.&nbsp;&nbsp;";
-            echo '<a href="index.php">Continue shopping</a></p>';
-            */  
-    } 
-    include("footer.php"); // Include the Page Layout footer
+        echo "</div>"; 
+
+        include("footer.php"); // Include the Page Layout footer
 ?>

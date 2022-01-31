@@ -1,17 +1,19 @@
 <?php
 //Detect the current session
 session_start();
-// Include the Page Layout header
-include("header.php");
 date_default_timezone_set('Asia/Singapore');
 
-if (!$_POST) {  
-    // redirect to shopping cart page if no delivery method is provided using $_POST method
-	header ("Location: deliveryMode.php");
-	exit;
-}
+// get from session, redirected from deliveryFunction.php
+if (!isset($_SESSION["DeliveryMode"])) {  
+    // redirect to delivery mode page if no delivery method is provided using $_SESSION variable
+ 	header ("Location: deliveryMode.php");
+ 	exit;
+ }
 
+// Include the Page Layout header
+include("header.php");
 ?>
+
 <div class='row' style='padding:20px 0 0 20px'>
     <div class='col-sm-12'>
         <a class='back-link' href='deliveryMode.php'>
@@ -54,7 +56,7 @@ include_once("mysql_conn.php");
 echo "<h3 class='outsideBackground'>Your Order</h3>";
 echo "<div class='tray-background'>";
 echo "<div class='table-responsive tray-table' >"; // Bootstrap responsive table
-echo "<table class='table'>"; // Start of table
+echo "<table class='table order-table'>"; // Start of table
 echo "<thead class='brown-text'>"; // start of table's header section
 
 echo "<tr>";
@@ -70,30 +72,30 @@ echo "<tbody>";
 foreach($_SESSION['Items'] as $key=>$item) {
     echo "<tr>";
     $imageDir = "Images/Products/".$item["image"];
-    $price = number_format($item["price"],2);
-    $discount = "-";
-    $totalDiscount = 0;
-    if ($item["offeredPrice"] != 0)
+    $discount = $item["price"] - $item["offeredPrice"];
+    if ($discount != 0)
     {
-        $discount = ($price - $item["offeredPrice"]);
-        $totalDiscount += $discount * $item["quantity"];
         $discount = "(".number_format($discount, 2).")";
     }
-    $total = number_format($item["total"],2);
+    else
+    {
+        $discount = "-";
+    }
     echo "<td style='width: 8em;' colspan='2'>
         <span class='order-contents'><img id='donutImg' src=$imageDir></br>$item[name]</span></td>";
-    echo "<td class='order-contents' style='vertical-align:middle'>$price</td>";
+    echo "<td class='order-contents' style='vertical-align:middle'>$item[price]</td>";
     
     echo "<td class='order-contents' style='vertical-align:middle;'>$discount</td>";
     echo "<td class='order-contents' style='vertical-align:middle;'>$item[quantity]</td>";
-    echo "<td class='order-contents' style='vertical-align:middle; margin-bottom:10%'>$total</td>";
+    echo "<td class='order-contents' style='vertical-align:middle; margin-bottom:10%'>$item[total]</td>";
     echo "</tr>";
 }
 
 // Get today's date
-$_SESSION["DeliveryDate"] = new DateTime('now');
+//$_SESSION["DeliveryDate"] = new DateTime('now');
 
 // Calculate Delivery Charge and Date
+/*
 switch ($_POST["delivery_mode"])
 {
     case "Express":
@@ -110,24 +112,27 @@ switch ($_POST["delivery_mode"])
         break;
     }
 }
+*/
 
 echo "<tr class='order-contents'>";
-$formattedDeliveryDate = $_SESSION["DeliveryDate"]->format('Y-m-d');
-echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Date: $formattedDeliveryDate</td>";
+//$_SESSION["DeliveryDate"] = $_SESSION["DeliveryDate"]->format('Y-m-d');
+echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Date: $_SESSION[DeliveryDate]</td>";
 echo "</tr>";
 
 echo "<tr class='order-contents'>";
-echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Time: to be implemented</td>"; //KIV
+echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Time: $_SESSION[DeliveryTime]</td>"; //KIV
 echo "</tr>";
 
-
-$isWaived = "";
-if (isset($_POST["DeliveryWaived"]))
+// wait for yx
+//$_SESSION["isWaived"] = "";
+/*
+$_SESSION["DeliveryDiscount"] = 0;
+if ($_SESSION["WaiveDelivery"])
 {
-    $_SESSION["DeliveryDiscount"] = $_SESSION["DeliveryCharge"];
-    $_SESSION["DeliveryCharge"] = 0;
-    $isWaived  = " (Waived)";
+    $_SESSION["DeliveryDiscount"] = -$_SESSION["DeliveryCharge"];
+    //$_SESSION["isWaived"]  = " (Waived)";
 }
+*/
 
 // Get Current GST Rate from SQL
 $qry = "SELECT TaxRate FROM GST 
@@ -141,24 +146,48 @@ $stmt->close();
 $taxRate = $result["TaxRate"]/100;
 
 // Save Tax Amount as session variable "Tax"
-$totalBeforeGST = $_SESSION["SubTotal"]+$_SESSION["DeliveryCharge"]-$totalDiscount;
-$_SESSION["Tax"] = round($totalBeforeGST*$taxRate,2);
-$_SESSION["Total"] = $totalBeforeGST + $_SESSION["Tax"];
+$_SESSION["Tax"] = number_format($_SESSION["SubTotal"]*$taxRate,2);
+$_SESSION["Total"] = number_format($_SESSION["DiscountSubTotal"] + $_SESSION["DeliveryCharge"] + $_SESSION["DeliveryDiscount"] + $_SESSION["Tax"],2);
 
 echo "<tr style='margin-top:20px;border-top: solid 2px; border-color:#DD8331;'class='order-contents-summary'>";
 echo "<td colspan='2'  id='orderSummaryTitle'>Subtotal</td>";
 echo "<td></td>";
 echo "<td></td>";
 echo "<td></td>";
-$subtotal = number_format($_SESSION["SubTotal"],2);
-echo "<td>S$$subtotal</td>"; // subtotal
+
+if ($_SESSION["DiscountSubTotal"] == $_SESSION["SubTotal"])
+{
+    echo "<td>S$$_SESSION[SubTotal]</td>"; // subtotal
+}
+else
+{ 
+    echo "<td>"; // subtotal
+    echo" <span style='text-decoration: line-through; font-weight: 600; font-size: 18px; color: #bfa288;'>S$$_SESSION[SubTotal]</span>"; 
+    echo " S$$_SESSION[DiscountSubTotal]</td>";
+}
+
 echo "</tr>";
 echo "<tr class= 'order-contents-summary'>";
-echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - $_POST[delivery_mode] Delivery$isWaived</td>";
+if ($_SESSION["WaiveDelivery"])
+    echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - $_SESSION[DeliveryMode] Delivery (Waived)</td>";
+else
+    echo "<td colspan='3' id='orderSummaryTitle'>Delivery Charge - $_SESSION[DeliveryMode] Delivery</td>";
 echo "<td></td>";
 echo "<td></td>";
-$deliveryCharge = number_format($_SESSION["DeliveryCharge"],2);
-echo "<td>S$$deliveryCharge</td>"; // this is delivery charge
+
+if ($_SESSION["DeliveryDiscount"] != 0)
+{
+    $waivedDelivery = number_format($_SESSION["DeliveryCharge"]+$_SESSION["DeliveryDiscount"],2);
+    echo "<td>
+    <span style='text-decoration: line-through; font-weight: 600; font-size: 18px; color: #bfa288;'>S$$_SESSION[DeliveryCharge]</span> 
+    S$$waivedDelivery
+    </td>"; // this is delivery charge
+}
+else
+{
+    echo "<td>S$$_SESSION[DeliveryCharge]</td>"; // this is delivery charge
+}
+
 echo "</tr>";
 echo "<tr class='order-contents-summary'>";
 echo "<td colspan='2' id='orderSummaryTitle'>Tax</td>";
@@ -190,8 +219,8 @@ echo "</div>";
 echo "<h3 class='outsideBackground'>Customize Your Order</h3>";
 echo "<div class='background'>";
 echo "<div class='form-group row' style='margin-bottom:40px;'>";
-echo "<label for='Message' class='col-sm-3 col-form-label tray-donut-name'>Add a Message:</label>";
-echo "<div class='col-sm-8' style='padding:0 40px 0 40px'>";
+echo "<label for='Message' class='col-md-3 col-form-label tray-donut-name'>Add a Message:</label>";
+echo "<div class='col-md-8' style='padding:0 40px 0 40px'>";
 echo "<input type='text' class='form-control textfield' id='Message' name='Message'>";
 echo "</div>";
 echo "</div>";
