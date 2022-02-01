@@ -159,7 +159,6 @@
                     <p align='center' style='font-weight:bold;font-size:20px;'><a style='color:black;' href='changePassword.php'>Change Password</a></p>
                 </form>
             </div>
-        </div>
 
         </div>";
         }
