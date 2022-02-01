@@ -80,7 +80,7 @@
     {
         e.preventDefault();
         if(document.register.password.value != document.register.password2.value){
-            alert("Passwords not match!");
+            alert("Passwords do not match!");
             //return;
         }
         else{

@@ -56,7 +56,7 @@ else{
         }
 
         //Successful message and Shopper ID
-        echo "Registration successful! Your ShopperID is $_SESSION[ShopperID]";
+        echo "Registration successful! Your ShopperID is $_SESSION[ShopperID]. \nClick 'OK' to start shopping with us.";
         // Save the Shopper Name in a session variable
         $_SESSION["ShopperName"] = $name;
     }

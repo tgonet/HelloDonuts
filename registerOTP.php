@@ -80,7 +80,7 @@
                 <div class="col-sm-9">
                     <div class="input-box">
                         <span class="prefix">+65</span>
-                        <input type="tel" class="form-control textfield" id="phone" name="phone" placeholder="Please enter your mobile number" required>
+                        <input type="tel" class="form-control textfield" id="phone" name="phone" required>
                     </div>
                 </div>
             </div>
