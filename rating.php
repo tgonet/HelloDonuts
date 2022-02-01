@@ -1,5 +1,10 @@
 <?php 
     session_start();
+    if (!isset($_SESSION["ShopperID"])) {  
+        // redirect to login page if there is no shopper id in session
+        header ("Location: login.php");
+        exit;
+    }
     include("header.php");
     $img = $_SESSION["rateImage"];
     $name = $_SESSION["rateName"];

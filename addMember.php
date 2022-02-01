@@ -19,13 +19,16 @@ function checkUnique($email){
 // Read the data input from the previous page
 $name = $_POST["name"];
 $DOB = $_POST["bday"];
+$postalCode = $_POST["postalCode"];
 $address = $_POST["address"];
+$unitNo = $_POST["unitNo"];
 $country = $_POST["country"];
 $phone = "(65) ".$_SESSION["phone"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 $Pwd_Questiion = $_POST["SecQns"];
 $Pwd_Answer = $_POST["SecAns"];
+$finalAddress = $address." ".$unitNo;
 
 if(checkUnique($email) == false){
     echo "This email is taken. Please use another email or login instead.";
@@ -42,7 +45,7 @@ else{
 
     $stmt = $conn->prepare($qry);
     // "ssssss" - 6 string parameters
-    $stmt->bind_param("sssssssss", $name, $DOB, $address, $country, $phone, $email, $password, $Pwd_Questiion, $Pwd_Answer);
+    $stmt->bind_param("sssssssss", $name, $DOB, $finalAddress, $country, $phone, $email, $password, $Pwd_Questiion, $Pwd_Answer);
 
     if ($stmt->execute()) { // SQL statement executed successfully
         // Retrieve the Shopper ID assigned to the new shopper

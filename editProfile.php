@@ -2,6 +2,12 @@
     //Detect the current session
     session_start();
 
+    if (!isset($_SESSION["ShopperID"])) {  
+        // redirect to login page if there is no shopper id in session
+        header ("Location: login.php");
+        exit;
+    }
+
     //Include the page layout header
     include("header.php");
 ?>

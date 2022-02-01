@@ -39,9 +39,22 @@
     var recaptcha = document.forms["register"]["g-recaptcha-response"];
     recaptcha.required = true;
     recaptcha.oninvalid = function(e) {
-    // fazer algo, no caso to dando um alert
     alert("Please verify with CAPTCHA before continuing.");
       }
+   }
+   
+   function getAddress(value){
+        $.ajax({
+            url:'https://developers.onemap.sg/commonapi/search?searchVal=' + value + '&returnGeom=Y&getAddrDetails=Y',
+            type:'GET',
+            success: function(response){
+                document.register.address.value = response.results["0"].ADDRESS;
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            }
+        });
    }
      function getDate(){
         // For date input (Max Today)
@@ -134,9 +147,21 @@
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
+                <label for="postalCode" class="col-sm-3 col-form-label">Postal Code:</label>
+                <div class="col-sm-9">
+                    <input onchange="getAddress(value)" type="text" class="form-control textfield" id="postalCode" name="postalCode" required>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom:40px;">
                 <label for="address" class="col-sm-3 col-form-label">Address:</label>
                 <div class="col-sm-9">
                     <textarea class="form-control textfield" id="address" name="address" rows="4" cols="50" placeholder="Please enter your address"  required></textarea>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom:40px;">
+                <label for="unitNo" class="col-sm-3 col-form-label">Unit No:</label>
+                <div class="col-sm-9">
+                    <input onchange="getAddress(value)" type="text" class="form-control textfield" id="unitNo" name="unitNo" required>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">

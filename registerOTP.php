@@ -74,7 +74,7 @@
 		<form id="OTPForm" method="POST" onsubmit="subForm(event)" name="otp" action="#" style="margin: auto">
 			<h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Register</h3>
             <h5>Please enter your mobile number.</h5>
-            <h5 style="color: #AFAFAF;">You will receive a 6 digit pin for mobile verification</h5>
+            <h5 style="color: #AFAFAF;font-size:16px;">You will receive a 6 digit pin for mobile verification</h5>
             <div class="form-group row" style="margin-bottom:40px;margin-top:30px;">
                 <label for="phone" class="col-sm-3 col-form-label">Phone:</label>
                 <div class="col-sm-9">
