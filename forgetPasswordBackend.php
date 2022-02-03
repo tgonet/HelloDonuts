@@ -40,7 +40,7 @@
                 	// by shopper, i.e $eMail. In this case, use a testing email
                 	// address as the shopper's email address in our database
                 	// may not be a valid account.
-                	$to = "tanmingzhe.99@gmail.com";
+                	$to = "awjoeytest@gmail.com";
                 	$from = "awjoeytest@gmail.com";
                 	$from_name = "HelloDonuts";
                 	$subject = "helloDonuts Login Password"; // email title
