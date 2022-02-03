@@ -69,6 +69,12 @@ if(isset($_SESSION["ShopperName"])) {
                     Search
                 </a>
             </li>
+            <div class="vl d-none d-lg-block"></div>
+            <li class="nav-item ">
+                <a href="aboutUs.php" class="nav-link">
+                    About Us
+                </a>
+            </li>
         </ul>
         <ul class="navbar-nav mx-auto">
             <a class="d-none d-lg-block navbar-logo" href="index.php">
