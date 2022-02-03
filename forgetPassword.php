@@ -21,8 +21,9 @@ include("header.php"); // Include the Page Layout header
                     alert(response);
                 }
 				else{
+					console.log(response);
 					alert("Password changed. \nYour new password is password.");
-					window.location.href = "login.php";
+					//window.location.href = "login.php";
 				}
 			},
 			error: function (data) {
