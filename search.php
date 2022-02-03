@@ -42,8 +42,8 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
         echo "<div class='col-8' >"; 
         echo "<h4 style='margin-top: 110px; margin-left: 150px'><a style='color: #63200D;' href=$product>$row[ProductTitle]</a></h4>";
         if (( $row["Quantity"] >0 and $row["Quantity"] <= 100) && ($row["Offered"] == 1) and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now ){
-            echo "<div style='display: flex , margin-left: 150px'>";
-            echo "<div class='onsale'>ON SALE</div>";
+            echo "<div style='display: flex'>";
+            echo "<div class='onsale' style='margin-left: 150px'>ON SALE</div>";
             echo "<div class='onsale2' style='margin-left: 20px'>SELLING FAST</div>";
             echo "</div>";
         }
