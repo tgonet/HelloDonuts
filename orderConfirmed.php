@@ -196,7 +196,7 @@ echo "</div>";
     }
     </script>";
 /*
-	$qry = "SELECT Email FROM Shopper WHERE ID=?";
+	$qry = "SELECT Email FROM Shopper WHERE ShopperID=?";
 	$stmt = $conn->prepare($qry);
 	$stmt->bind_param("i", $_SESSION["ShopperID"]); 	// "s" - string 
 	$stmt->execute();
@@ -215,11 +215,9 @@ echo "</div>";
 		// databaase may not be a valid account.
 		$to = $row["Email"];
 		$from = $row["Email"];
-		$from_name = "Mamaya e-Bookstore";
-		$subject = "Mamaya e-Bookstore Login Password";
-		// HTML body message
-		$body = "<span style='color:black; font-size:12px'>
-					The receipt has been sent to you via email.</span>";
+		$from_name = "Hello Donuts";
+		$subject = "Order: $_SESSION[OrderID]";
+		$body = file_get_contents("orderConfirmed.php");;
 		// Initiate the e-mailing sending process
 		if(smtpmailer($to,$from,$from_name,$subject,$body)){
 			echo "<p>The receipt has been sent to you via email.<p>";
