@@ -17,7 +17,7 @@ $headers = array(
 );
 curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-$data = "To=%2B6596337422&Channel=sms";
+$data = "To=$phone&Channel=sms";
 
 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
