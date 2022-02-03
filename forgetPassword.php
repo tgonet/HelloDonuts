@@ -1,5 +1,6 @@
 <?php 
 session_start(); // Detect the current session
+
 include("header.php"); // Include the Page Layout header
 ?>
 
@@ -20,7 +21,7 @@ include("header.php"); // Include the Page Layout header
                     alert(response);
                 }
 				else{
-					alert("Password changed. Your new password is password.");
+					alert("Password changed. \nYour new password is password.");
 					window.location.href = "login.php";
 				}
 			},
@@ -47,7 +48,7 @@ include("header.php"); // Include the Page Layout header
 				<label for="SecQns" class="col-sm-3 col-form-label">Security Question: </label>
 				<div class="col-sm-9">
 					<select id="SecQns" name="SecQns" class="textfield form-control minimal" required>
-						<option value="" disabled selected>Please choose a security question only you know the answer for</option>
+						<option value="" disabled selected>Select the question you set during registration</option>
 						<option value="Which polytechnic?">Which polytechnic?</option>
                         <option value="Wife's name?">Wife's name?</option>
                         <option value="How many brothers and sisters?">How many brothers and sisters?</option>

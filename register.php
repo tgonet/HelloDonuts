@@ -35,6 +35,27 @@
 
 
 <script>
+    window.onload = function() {
+    var recaptcha = document.forms["register"]["g-recaptcha-response"];
+    recaptcha.required = true;
+    recaptcha.oninvalid = function(e) {
+    alert("Please verify with CAPTCHA before continuing.");
+      }
+   }
+   
+   function getAddress(value){
+        $.ajax({
+            url:'https://developers.onemap.sg/commonapi/search?searchVal=' + value + '&returnGeom=Y&getAddrDetails=Y',
+            type:'GET',
+            success: function(response){
+                document.register.address.value = response.results["0"].ADDRESS;
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            }
+        });
+   }
      function getDate(){
         // For date input (Max Today)
         var today = new Date();
@@ -59,7 +80,7 @@
     {
         e.preventDefault();
         if(document.register.password.value != document.register.password2.value){
-            alert("Passwords not match!");
+            alert("Passwords do not match!");
             //return;
         }
         else{
@@ -126,9 +147,21 @@
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
+                <label for="postalCode" class="col-sm-3 col-form-label">Postal Code:</label>
+                <div class="col-sm-9">
+                    <input onchange="getAddress(value)" type="text" class="form-control textfield" id="postalCode" name="postalCode" required>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom:40px;">
                 <label for="address" class="col-sm-3 col-form-label">Address:</label>
                 <div class="col-sm-9">
                     <textarea class="form-control textfield" id="address" name="address" rows="4" cols="50" placeholder="Please enter your address"  required></textarea>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom:40px;">
+                <label for="unitNo" class="col-sm-3 col-form-label">Unit No:</label>
+                <div class="col-sm-9">
+                    <input onchange="getAddress(value)" type="text" class="form-control textfield" id="unitNo" name="unitNo" required>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
@@ -161,19 +194,22 @@
                 <label for="SecQns" class="col-sm-3 col-form-label">Security Question: </label>
                 <div class="col-sm-9">
                     <select id="SecQns" name="SecQns" class="textfield form-control minimal" required>
-                        <option value="" disabled selected>Please choose a security question only you know the answer for</option>
+                        <option value="" disabled selected>Select a question only you can answer</option>
                         <option value="Which polytechnic?">Which polytechnic?</option>
                         <option value="Wife's name?">Wife's name?</option>
                         <option value="How many brothers and sisters?">How many brothers and sisters?</option>
                     </select>
+                    <span>*You are not allowed to edit this once submitted</span>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="SecAns" class="col-sm-3 col-form-label">Security Answer: </label>
                 <div class="col-sm-9">
                     <input class="form-control textfield" type="test" name="SecAns" id="SecAns" placeholder="Please enter your answer" required/>
+                    <span>*You are not allowed to edit this once submitted</span>
                 </div>
             </div>
+            <div align="center" style="margin-bottom:30px;" class="g-recaptcha" data-sitekey="6LezB0seAAAAALAeBQuG0QP8YRgD25D75TN-_xlB"></div>
             <button type="submit" class="center" style="padding: 10px 150px 10px 150px">Register</button>
         </form>
     </div>

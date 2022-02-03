@@ -2,6 +2,12 @@
     //Detect the current session
     session_start();
 
+    if (!isset($_SESSION["ShopperID"])) {  
+        // redirect to login page if there is no shopper id in session
+        header ("Location: login.php");
+        exit;
+    }
+
     //Include the page layout header
     include("header.php");
 ?>
@@ -78,7 +84,7 @@
                 success: function(response){
                     console.log(response);
                     if(response =="success"){
-                        alert("Profile Updated.");
+                        alert("Profile Updated. \nClick 'OK' to continue shopping with us.");
 					    window.location.href = "index.php";
                     }
                     else if(response == "This email is taken. Please use another email."){
@@ -159,7 +165,6 @@
                     <p align='center' style='font-weight:bold;font-size:20px;'><a style='color:black;' href='changePassword.php'>Change Password</a></p>
                 </form>
             </div>
-        </div>
 
         </div>";
         }

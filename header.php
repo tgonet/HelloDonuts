@@ -12,6 +12,8 @@
         <script src="js/bootstrap.min.js"></script>
         <!-- Site specific Cascading Stylesheet -->
         <link rel="stylesheet" href="css/site.css">
+        <!-- Google reCAPTCHA script -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <!-- Font Families -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
