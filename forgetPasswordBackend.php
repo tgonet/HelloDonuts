@@ -42,7 +42,7 @@
                 	// may not be a valid account.
                 	$to = "tanmingzhe.99@gmail.com";
                 	$from = "awjoeytest@gmail.com";
-                	$from_name = "Mamaya e-BookStore";
+                	$from_name = "HelloDonuts";
                 	$subject = "helloDonuts Login Password"; // email title
                 	$body = "<span style='color:black; font-size:12px'>
                 			Your new password is <span style='font-weight:bold'>
