@@ -39,7 +39,7 @@ include("header.php");
     </div>
     <div class="row" style="margin-bottom:8%">
         <div class="col-sm-6" style="margin-top:8%; align-items:center">
-            <img src="Images/Developers/yuxuan.jpg" id="developers">
+            <img src="Images/Developers/yuxuan.png" id="developers">
             <h2>Wong Yuxuan</h2>
         </div>
         <div class="col-sm-6" style="margin-top:8%; align-items:center">
