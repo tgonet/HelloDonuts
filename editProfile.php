@@ -84,7 +84,7 @@
                 success: function(response){
                     console.log(response);
                     if(response =="success"){
-                        alert("Profile Updated. Click 'OK' to continue shopping with us.");
+                        alert("Profile Updated. \nClick 'OK' to continue shopping with us.");
 					    window.location.href = "index.php";
                     }
                     else if(response == "This email is taken. Please use another email."){

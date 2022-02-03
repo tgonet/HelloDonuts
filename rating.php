@@ -24,7 +24,7 @@
                 data: $("#ratingForm").serialize(),
                 success: function(response){
                     console.log(response);
-                    alert("Rating submitted.");
+                    alert("Rating submitted. \nClick'OK' to continue shopping with us.");
                     history.go(-1);
                 },
                 error: function (data) {
@@ -48,11 +48,10 @@
 <?php
     echo "<div class='background'>";
         echo "<div style='margin-left:20px;margin-right:20px;overflow:hidden'>";
-            //echo "<img src=$img style='width: 70% !important;height: 70% !important;margin: auto;' class='donut-img'>";
             echo "<h3 style='padding-bottom: 15px; font-size: 35px; color: #63200D; font-weight: 900; margin-bottom: 0px;' >$name</h3>";
             echo "<form style='margin: 0px; width:100%; padding:0px;' action='#' method='post' id='ratingForm' onsubmit='validateForm(event)'>";
             echo "<div class='rating col-sm-5' style='padding-left:0;margin-bottom:20px'>
-                    <input type='radio' id='rating1' name='rating' value='1' required />
+                    <input type='radio' id='rating1' name='rating' value='1' required/>
                     <label for='rating1' title='text'></label>
                     <input type='radio' id='rating2' name='rating' value='2' />
                     <label for='rating2' title='text'></label>

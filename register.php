@@ -199,12 +199,14 @@
                         <option value="Wife's name?">Wife's name?</option>
                         <option value="How many brothers and sisters?">How many brothers and sisters?</option>
                     </select>
+                    <span>*You are not allowed to edit this once submitted</span>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom:40px;">
                 <label for="SecAns" class="col-sm-3 col-form-label">Security Answer: </label>
                 <div class="col-sm-9">
                     <input class="form-control textfield" type="test" name="SecAns" id="SecAns" placeholder="Please enter your answer" required/>
+                    <span>*You are not allowed to edit this once submitted</span>
                 </div>
             </div>
             <div align="center" style="margin-bottom:30px;" class="g-recaptcha" data-sitekey="6LezB0seAAAAALAeBQuG0QP8YRgD25D75TN-_xlB"></div>

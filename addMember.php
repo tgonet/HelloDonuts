@@ -59,6 +59,7 @@ else{
         echo "Registration successful! Your ShopperID is $_SESSION[ShopperID]. \nClick 'OK' to start shopping with us.";
         // Save the Shopper Name in a session variable
         $_SESSION["ShopperName"] = $name;
+        unset($_SESSION["phone"]);
     }
     else{  // Error message
         echo "Error in inserting record";
