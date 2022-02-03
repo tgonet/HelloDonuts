@@ -46,10 +46,10 @@ while ($row = $result->fetch_array()) {
         echo "</div>";
     }
     else if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
-        echo "<h5>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>
+		echo "<div class='onsale'>ON SALE</div>";
+		echo "<h5>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>
         S$ $formattedPrice</span>
 		<span style = 'font-weight: bold; font-size: 25px; color: #FA8596'>S$ $formattedOffer</span></h5>";
-		echo "<div class='onsale'>ON SALE</div>";
     }
     else if ($row["Quantity"] >0 and $row["Quantity"] <= 100){
         echo "<div class='onsale2'>SELLING FAST</div>";

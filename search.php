@@ -48,7 +48,7 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
             echo "</div>";
         }
         else if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
-            echo "<div class='onsale'>ON SALE</div>";
+            echo "<div class='onsale'style='margin-left: 150px'>ON SALE</div>";
         }
         else if ($row["Quantity"] >0 and $row["Quantity"] <= 100){
             echo "<div class='onsale2'style='margin-left: 150px'>SELLING FAST</div>";
