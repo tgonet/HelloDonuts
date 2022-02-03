@@ -36,12 +36,26 @@ while ($row = $result->fetch_array()) {
 	$formattedOffer = number_format($row["OfferedPrice"], 2);
 	echo "<div class='col-8'style='margin-top: 110px'>"; 
 	echo "<h4 style ='font-size: 30px' ><a style ='color: #63200D; text-decoration: none' href=$product>$row[ProductTitle]</a></h4>";
-	if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
-		echo "<h5>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>
+	if (( $row["Quantity"] >0 and $row["Quantity"] <= 100) && ($row["Offered"] == 1) and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now ){
+        echo "<div style='display: flex'>";
+        echo "<h5>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>
         S$ $formattedPrice</span>
 		<span style = 'font-weight: bold; font-size: 25px; color: #FA8596'>S$ $formattedOffer</span></h5>";
 		echo "<div class='onsale'>ON SALE</div>";
-	}
+        echo "<div class='onsale2' style='margin-left: 20px'>SELLING FAST</div>";
+        echo "</div>";
+    }
+    else if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
+        echo "<h5>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>
+        S$ $formattedPrice</span>
+		<span style = 'font-weight: bold; font-size: 25px; color: #FA8596'>S$ $formattedOffer</span></h5>";
+		echo "<div class='onsale'>ON SALE</div>";
+    }
+    else if ($row["Quantity"] >0 and $row["Quantity"] <= 100){
+        echo "<div class='onsale2'>SELLING FAST</div>";
+		echo "<h5>Price:<span style='font-weight: bold; color: #FA8596; font-size: 18px'>
+			  S$ $formattedPrice</span></h5>";
+    }
 	else{
 		echo "<h5>Price:<span style='font-weight: bold; color: #FA8596; font-size: 18px'>
 			  S$ $formattedPrice</span></h5>";

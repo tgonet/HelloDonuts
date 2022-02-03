@@ -147,20 +147,6 @@ include("footer.php");
 ?>
 
 <style>
-    button[type="rate"]{
-    display: inline-block; 
-    margin-left: 100px;
-    border-radius: 30px  !important;
-    background: #CAF0F8;
-    border: none;
-    font-weight: 900;
-    font-size: 45px;
-    color: #63200D;
-    clear: both;
-    vertical-align: bottom;
-    width: 300px;
-    height: 100px;
-}
     .suggest{
    margin-top: 150px;
    background-color: #F2F2F2;
