@@ -102,8 +102,8 @@ while ($row = $result->fetch_array()) {
 echo "<form name='product' action='cartFunctions.php' method='post' style='margin: 0 0 0 0 !important'>";
 echo "<input type='hidden' name='action' value='add' />";
 echo "<input type='hidden' name='product_id' value='$pid' />";
-echo "Quantity: <input type='number' name='quantity' value='1'
-                min='1' max='10' style=' margin-right: 20px; ' required />";
+echo "Quantity: <input type='number' id='inputQ' value='1'
+                min='1' max='20' style=' margin-right: 20px; ' required />";
 if ($quantity <= 0){
     echo "<button style='font-weight: bold; margin-top: 30px; background-color: #B1968F ; border-radius: 25px  !important;' disabled>Add to Cart</button>";
     echo "<h2 style='font-size: 20px; margin-top: 25px'>Out of Dough!</h2>";
