@@ -1,12 +1,13 @@
 <?php 
 session_start(); // Detect the current session
-include("header.php"); // Include the Page Layout header
 
 if (!isset($_SESSION["OrderID"])) {  
     // redirect to index page if there is no order id session
 	header ("Location: index.php");
 	exit;
 }
+
+include("header.php"); // Include the Page Layout header
 
 echo "<div class='row' style='padding:20px 0 0 20px'>";
 echo "<div class='col-sm-12'>";

@@ -1,12 +1,19 @@
 <?php 
 session_start(); // Detect the current session
-include("header.php"); // Include the Page Layout header
+
+if (!isset($_SESSION["ShopperID"]))
+{
+    header("Location: login.php");
+    exit;
+}
 
 if (!isset($_GET["orderid"]))
 {
     header("Location: orderHistory.php");
     exit;
 }
+
+include("header.php"); // Include the Page Layout header
 ?>
 <!-- Create a container, 90% width of viewport -->
 <div style='width:90%; margin:auto;'>

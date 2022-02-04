@@ -22,7 +22,6 @@ if($_POST) //Post Data received from Shopping cart page.
 		$stmt->execute();
 		$result = $stmt->get_result()->fetch_array();
 		$stmt->close();
-		// TO EDIT
 		if ($result["Quantity"] < $item["quantity"]) {
 			array_push($outOfStock, $item["name"]);
 		}
@@ -158,10 +157,9 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 	if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || 
 	   "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])) 
 	{
-		// To Do 5 (DIY): Update stock inventory in product table 
+		// Update stock inventory in product table 
 		//                after successful checkout
 
-		/* for this, can I use the "Item" session instead? */
 		$qry = "SELECT ProductID, Quantity FROM ShopCartItem 
 				WHERE ShopCartID = ?";
 		$stmt = $conn->prepare($qry);
@@ -179,10 +177,9 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 			$stmt->close();
 		}
 
-		// End of To Do 5
 		$shipCharge = $_SESSION["DeliveryCharge"] + $_SESSION["DeliveryDiscount"];
 		$discount = $_SESSION["SubTotal"]-$_SESSION["DiscountSubTotal"];
-		// To Do 2: Update shopcart table, close the shopping cart (OrderPlaced=1)
+		// Update shopcart table, close the shopping cart (OrderPlaced=1)
 		$qry = "UPDATE shopcart SET OrderPlaced=1, Quantity=?,
 				SubTotal=?, ShipCharge=?, Tax=?, Total=?, Discount=?
 				WHERE ShopCartID=?";
@@ -194,7 +191,6 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 						  $_SESSION["Cart"]);
 		$stmt->execute();
 		$stmt->close();
-		// End of To Do 2
 		
 		//We need to execute the "GetTransactionDetails" API Call at this point 
 		//to get customer details
