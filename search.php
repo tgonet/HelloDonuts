@@ -27,7 +27,7 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
 
     $keywords=$_GET["keywords"]; 
     
-    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Offered
+    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Offered,p.OfferedPrice, p.OfferStartDate, p.OfferEndDate, p.Quantity
             FROM product p 
             WHERE p.ProductTitle LIKE '%$keywords%'
             ORDER BY ProductTitle"; 
@@ -35,12 +35,23 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
 
     while ($row = $result->fetch_array()) {
         echo "<div class='row' style='padding: 5px'>"; 
-
+        $date_now = date("Y-m-d");
         $product = "productDetails.php?pid=$row[ProductID]";
+        $formattedPrice = number_format($row["Price"], 2);
+	    $formattedOffer = number_format($row["OfferedPrice"], 2);
         echo "<div class='col-8' >"; 
         echo "<h4 style='margin-top: 110px; margin-left: 150px'><a style='color: #63200D;' href=$product>$row[ProductTitle]</a></h4>";
-        if ($row["Offered"] == 1){
+        if (( $row["Quantity"] >0 and $row["Quantity"] <= 100) && ($row["Offered"] == 1) and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now ){
+            echo "<div style='display: flex'>";
             echo "<div class='onsale' style='margin-left: 150px'>ON SALE</div>";
+            echo "<div class='onsale2' style='margin-left: 20px'>SELLING FAST</div>";
+            echo "</div>";
+        }
+        else if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
+            echo "<div class='onsale'style='margin-left: 150px'>ON SALE</div>";
+        }
+        else if ($row["Quantity"] >0 and $row["Quantity"] <= 100){
+            echo "<div class='onsale2'style='margin-left: 150px'>SELLING FAST</div>";
         }
         echo "</div>";
         $img = "./Images/products/$row[ProductImage]";

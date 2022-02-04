@@ -195,46 +195,7 @@ echo "</div>";
         document.body.innerHTML = getFullContent; 
     }
     </script>";
-/*
-	$qry = "SELECT Email FROM Shopper WHERE ID=?";
-	$stmt = $conn->prepare($qry);
-	$stmt->bind_param("i", $_SESSION["ShopperID"]); 	// "s" - string 
-	$stmt->execute();
-	$result = $stmt->get_result();
-	$stmt->close();
-	if ($result->num_rows > 0) {
-		// To Do 1: Update the default new password to shopper"s account
-		$row = $result->fetch_array();
-		$email = $row["Email"];
-		
-		// To Do 2: e-Mail the new password to user
-		include("myMail.php");
-		// The "Send To" shouuld be the e-mail address indicated
-		//by the shopper, i.e. $eMail. In this case, use a testing
-		// e-mail address as the shopper's e-mail address in our
-		// databaase may not be a valid account.
-		$to = $row["Email"];
-		$from = $row["Email"];
-		$from_name = "Mamaya e-Bookstore";
-		$subject = "Mamaya e-Bookstore Login Password";
-		// HTML body message
-		$body = "<span style='color:black; font-size:12px'>
-					The receipt has been sent to you via email.</span>";
-		// Initiate the e-mailing sending process
-		if(smtpmailer($to,$from,$from_name,$subject,$body)){
-			echo "<p>The receipt has been sent to you via email.<p>";
-		}
-		else {
-			echo "<p><span style='color:red'>
-				  Mailer Error:" . $error . "</span>/<p>";
-		}
-		// End of To Do 2
-	}
-	else {
-		echo "<p><span style='color:red;'>
-		      Wrong E-mail address!</span></p>";
-	}
-    */
+    
     $conn->close();
     include("footer.php"); // Include the Page Layout footer
 ?>

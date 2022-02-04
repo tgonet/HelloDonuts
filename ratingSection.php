@@ -6,15 +6,12 @@
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
-    echo "<div class='row' style='margin: 3em 4em 3em 4em;'>";
-    echo "<div class='col-sm-10' style='padding-left:0'>";
-    echo "<h3 style='margin-top:50px; color: #63200D; width: 100%;' >Comments</h3>";    
-    echo "</div>";
-    echo "<div class='col-sm-2'>";
     echo "<form action='rating.php' style='width:100%;margin:0 0;'>";
-    echo "<button align='right' type='rate'>RATE!</button>";
-    echo "</form>";
+    echo "<div class='row' style='margin: 3em 4em 3em 4em;'>";
+    echo "<div  style='padding-left:0;width: 100%;'>";
+    echo "<h3 style='margin-top:50px; color: #63200D; width: 100%;' >Comments <span><button type='rate'>RATE!</button></span></h3>";   
     echo "</div>";
+    echo "</form>";
     while($row = $result->fetch_array()){
         $rating = round($row["RankInput"]);
         echo "<div class='background' style='width:100%; padding:20px 0 20px 0;margin-bottom:2.5em !important;'>";
@@ -39,8 +36,8 @@
 <style>
     button[type="rate"]{
     padding: 6px 30px 6px 30px;
-    display: block; 
-    margin-left: 100px;
+    float: right;
+    margin-left: 500px;
     border-radius: 30px  !important;
     background: #CAF0F8;
     border: none;

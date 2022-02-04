@@ -91,31 +91,8 @@ foreach($_SESSION['Items'] as $key=>$item) {
     echo "</tr>";
 }
 
-// Get today's date
-//$_SESSION["DeliveryDate"] = new DateTime('now');
-
-// Calculate Delivery Charge and Date
-/*
-switch ($_POST["delivery_mode"])
-{
-    case "Express":
-    {
-        $_SESSION["DeliveryCharge"] = 5;
-        $_SESSION["DeliveryDate"]->modify('+2 hour');
-        break;
-    }
-        
-    case "Normal":
-    {
-        $_SESSION["DeliveryCharge"] = 2;
-        $_SESSION["DeliveryDate"]->modify('+1 day');
-        break;
-    }
-}
-*/
 
 echo "<tr class='order-contents'>";
-//$_SESSION["DeliveryDate"] = $_SESSION["DeliveryDate"]->format('Y-m-d');
 echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Date: $_SESSION[DeliveryDate]</td>";
 echo "</tr>";
 
@@ -123,16 +100,6 @@ echo "<tr class='order-contents'>";
 echo "<td colspan='6' id='orderSummaryTitle'>Expected Delivery Time: $_SESSION[DeliveryTime]</td>"; //KIV
 echo "</tr>";
 
-// wait for yx
-//$_SESSION["isWaived"] = "";
-/*
-$_SESSION["DeliveryDiscount"] = 0;
-if ($_SESSION["WaiveDelivery"])
-{
-    $_SESSION["DeliveryDiscount"] = -$_SESSION["DeliveryCharge"];
-    //$_SESSION["isWaived"]  = " (Waived)";
-}
-*/
 
 // Get Current GST Rate from SQL
 $qry = "SELECT TaxRate FROM GST 

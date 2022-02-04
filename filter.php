@@ -38,10 +38,11 @@ if (($_GET["input-max"] && $_GET["input-min"]  != "") || $_GET["myRange"]  != ""
         $priceMax = $_GET["input-max"];
         $priceMin = $_GET["input-min"];
         $sweet = $_GET["myRange"];
+        $date_now = date("Y-m-d");
         $qry =  "SELECT s.SpecName, ps.SpecVal, p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Offered, p.OfferedPrice, p.OfferStartDate, p.OfferEndDate from productspec ps
                         INNER JOIN specification s ON ps.SpecID=s.SpecID
                         INNER JOIN product p ON ps.ProductID=p.ProductID
-                        WHERE ps.SpecID = 2 AND (ps.SpecVal BETWEEN 0 AND $sweet) AND ((p.Price BETWEEN $priceMin AND $priceMax) OR (p.OfferedPrice BETWEEN $priceMin AND $priceMax))
+                        WHERE ps.SpecID = 2 AND (ps.SpecVal BETWEEN 0 AND $sweet) OR (p.OfferStartDate >= $date_now AND p.OfferEndDate<=$date_now)AND((p.Price BETWEEN $priceMin AND $priceMax) OR (p.OfferedPrice BETWEEN $priceMin AND $priceMax))
                         ORDER BY ProductTitle";
 
         $result = $conn->query($qry);
