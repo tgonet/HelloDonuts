@@ -25,6 +25,9 @@
                         <p>
                             MADE BY MING ZHE, JOLENE, YUXUAN, JOEY 
                         </p>
+                        <a href='aboutus.php' style="color:#FFFFFF">
+                            <p>FIND OUT MORE ABOUT US HERE!</p>
+                        </a>
                     </div>
                 </div>
             </div> 
