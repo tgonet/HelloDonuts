@@ -20,10 +20,7 @@ include_once("mysql_conn.php");
 $qry = "SELECT OrderID, ShipName, ShipAddress, ShipPhone, ShipEmail, DateOrdered, DeliveryDate, DeliveryTime, DeliveryMode,Message, ShopCartID
         FROM OrderData
         WHERE OrderID = ?";
-/*$qry = "SELECT o.OrderID, o.ShipName, o.ShipAddress, o.ShipPhone, o.ShipEmail, o.DateOrdered, o.DeliveryDate, o.DeliveryTime, o.DeliveryMode 
-        FROM OrderData o INNER JOIN Shopcart sc on o.ShopCartID = sc.ShopCartID
-        WHERE o.ShopCartID = ?";
-        */
+
 $stmt = $conn->prepare($qry);
 $stmt->bind_param("i", $orderId);
 $stmt->execute();
