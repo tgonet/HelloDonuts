@@ -1,6 +1,5 @@
 <?php
 include_once("deliveryFunction.php");
-include("header.php");
 if (! isset($_SESSION["ShopperID"])) { // Check if user logged in 
 	// redirect to login page if the session variable shopperid is not set
 	header ("Location: login.php");
@@ -10,6 +9,7 @@ if ($_SESSION["NumCartItem"] < 1) {
     header ("Location: index.php");
 	exit;
 }
+include("header.php");
 ?>
 
 <!-- back to previous step -->
