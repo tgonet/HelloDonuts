@@ -1,15 +1,14 @@
 <?php 
     session_start(); // Detect the current session
-    include("header.php"); // Include the Page Layout header
-
+    
     if (!isset($_SESSION["ShopperID"]))
     {
         header("Location: login.php");
         exit;
     }
-
-    // Establish connection with SQL in this page
-    include_once("mysql_conn.php"); 
+    
+    include("header.php"); // Include the Page Layout header
+    include_once("mysql_conn.php"); // Establish connection with SQL in this page
 
     echo "<div style='width:100%; margin:auto; text-align:center'>";
 
