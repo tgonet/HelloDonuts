@@ -55,7 +55,7 @@
 
 <!-- Create a cenrally located container -->
 <div style="margin: 7em 0 7em 0; padding: 0">
-	<div style="width:60%; margin:auto;" class="background">
+	<div class="background">
 		<form id="OTPCheckForm" method="POST" onsubmit="subForm(event)" action="#" style="margin: auto">
 			<h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Register</h3>
             <h5>Please enter the 6 digit OTP sent to your mobile device.</h5>
@@ -65,7 +65,7 @@
                     <input type="tel" class="form-control textfield" id="otp" name="otp" minlength="6" maxlength="6" required>
                 </div>
             </div>
-            <button type="submit" class="center" style="padding: 10px 90px 10px 90px">Next</button>
+            <button type="submit" class="center memberButton">Next</button>
 		</form>
 	</div>
 </div>

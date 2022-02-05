@@ -90,7 +90,7 @@
     height     : 48px;
     padding    : 48px 0 0;
     overflow   : hidden;
-    background : url('donuts.svg') no-repeat top left;
+    background : url('Images/donuts.svg') no-repeat top left;
   }
 
   .rating:not(:hover) input:indeterminate + label,

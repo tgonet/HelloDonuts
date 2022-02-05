@@ -118,7 +118,7 @@
             $row = $result->fetch_array();
             $phoneNo = str_replace("(65) ", "" , $row["Phone"]);
             echo "<div style='margin: 7em 0 7em 0; padding: 0'>
-            <div class='background' style='width: 60% !important'>
+            <div class='background'>
                 <form id='ProfileForm' style='margin: auto' name='editProfile' action='#' method='post' onsubmit='validateForm(event)'>
                     <h3 align='center' style='margin: 0 0 40px 0; font-weight: 600;color:black;'>Edit Profile</h3>
                     <div class='form-group row' style='margin-bottom:40px;'>
@@ -161,8 +161,8 @@
                             <input type='email'class='form-control textfield' id='email' name='email' placeholder='Please enter your email' value='$row[Email]' required>
                         </div>
                     </div>
-                    <button type='submit' class='center' style='padding: 10px 90px 10px 90px'>Save</button>
-                    <p align='center' style='font-weight:bold;font-size:20px;'><a style='color:black;' href='changePassword.php'>Change Password</a></p>
+                    <button type='submit' id='submit' class='center memberButton' style='width:100%'>Save</button>
+                    <p align='center' style='font-weight:bold;font-size:20px;margin-top:10px;'><a style='color:black;' href='changePassword.php'>Change Password</a></p>
                 </form>
             </div>
 
@@ -170,9 +170,6 @@
         }
     }
 ?>
-
-
-
 
 <?php
     //Include the page layout header
