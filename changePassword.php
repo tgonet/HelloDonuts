@@ -98,7 +98,7 @@ include("header.php"); // Include the Page Layout header
                     <span onclick="typeChangeRetype()" id="checkbox2" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 				</div>
 			</div>
-			<button type="submit" class="center" style="padding: 10px 90px 10px 90px">Submit</button>
+			<button type="submit" class="center memberButton" style="padding: 10px 90px 10px 90px">Submit</button>
 		</form>
 	</div>
 </div>

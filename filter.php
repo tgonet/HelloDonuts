@@ -43,7 +43,7 @@ if (($_GET["input-max"] && $_GET["input-min"]  != "") || $_GET["myRange"]  != ""
         $qry =  "SELECT s.SpecName, ps.SpecVal, p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Offered, p.OfferedPrice, p.OfferStartDate, p.OfferEndDate from productspec ps
                         INNER JOIN specification s ON ps.SpecID=s.SpecID
                         INNER JOIN product p ON ps.ProductID=p.ProductID
-                        WHERE ps.SpecID = 2 AND (ps.SpecVal BETWEEN 0 AND $sweet) OR (p.OfferStartDate >= $date_now AND p.OfferEndDate<=$date_now)AND((p.Price BETWEEN $priceMin AND $priceMax) OR (p.OfferedPrice BETWEEN $priceMin AND $priceMax))
+                        WHERE ps.SpecID = 2 AND (ps.SpecVal BETWEEN 0 AND $sweet) AND((p.Price BETWEEN $priceMin AND $priceMax) OR (p.OfferedPrice BETWEEN $priceMin AND $priceMax AND (p.OfferStartDate < now() AND p.OfferEndDate>now())))
                         ORDER BY ProductTitle";
 
         $result = $conn->query($qry);
@@ -83,8 +83,9 @@ if (($_GET["input-max"] && $_GET["input-min"]  != "") || $_GET["myRange"]  != ""
         
     }
     else if ($_GET["myRange"]  != ""){
+        
         $sweet = $_GET["myRange"];
-        $qry =  "SELECT s.SpecName, ps.SpecVal, p.ProductID, p.ProductTitle, p.ProductImage, p.Offered, p.OfferStartDate, p.OfferEndDate from productspec ps
+        $qry =  "SELECT s.SpecName, ps.SpecVal, p.ProductID, p.ProductTitle, p.ProductImage, p.Offered,p.Price,p.OfferedPrice, p.OfferStartDate, p.OfferEndDate from productspec ps
                 INNER JOIN specification s ON ps.SpecID=s.SpecID
                 INNER JOIN product p ON ps.ProductID=p.ProductID
                 WHERE ps.SpecID = 2 AND ps.SpecVal BETWEEN 0 AND $sweet
@@ -95,11 +96,24 @@ if (($_GET["input-max"] && $_GET["input-min"]  != "") || $_GET["myRange"]  != ""
             echo "<div class='row' style='padding: 5px'>"; 
             $date_now = date("Y-m-d");
             $product = "productDetails.php?pid=$row[ProductID]";
+            $formattedPrice = number_format($row["Price"], 2);
+	        $formattedOffer = number_format($row["OfferedPrice"], 2);
             echo "<div class='col-8' >"; 
             echo "<h4 style='margin-top: 110px; margin-left: 150px'><a style='color: #63200D;' href=$product>$row[ProductTitle]</a></h4>";
             echo "<h4 style='margin-left: 150px; font-size: 18px'>Sweetness: <span>$row[SpecVal]</span><h4>";
             if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
-                echo "<div class='onsale' style='margin-left: 150px'>ON SALE</div>";
+                echo"<div style='margin-left: 150px;'>";
+                echo "<h5>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>
+                S$ $formattedPrice</span>
+                <span style = 'font-weight: bold; font-size: 25px; color: #FA8596'>S$ $formattedOffer</span></h5>";
+                echo "<div class='onsale'>ON SALE</div>";
+                echo"</div>";
+            }
+            else{
+                echo"<div style='margin-left: 150px;'>";
+                echo "<h5>Price:<span style='font-weight: bold; color: #FA8596; font-size: 18px'>
+                      S$ $formattedPrice</span></h5>";
+                echo"</div>";
             }
             echo "</div>";
             $img = "./Images/products/$row[ProductImage]";

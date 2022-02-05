@@ -62,7 +62,7 @@ include("header.php"); // Include the Page Layout header
 					<input class="form-control textfield" type="test" name="SecAns" id="SecAns" placeholder="Please enter your answer" required/>
 				</div>
 			</div>
-			<button type="submit" class="center" style="padding: 10px 90px 10px 90px">Submit</button>
+			<button type="submit" class="center memberButton">Submit</button>
 		</form>
 	</div>
 </div>

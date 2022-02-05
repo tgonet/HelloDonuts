@@ -14,6 +14,9 @@ $content2 = "<ul class='dropdown-menu dropdown-menu-right'>
                 <li>
                     <a class='dropdown-item nav-item-dd' href='registerOTP.php'>Sign Up</a>
                 </li>
+                <li>
+                    <a class='dropdown-item nav-item-dd' href='ranking.php'>Top Sellers</a>
+                </li>
             </ul>";
 
 if(isset($_SESSION["ShopperName"])) { 
@@ -30,6 +33,9 @@ if(isset($_SESSION["ShopperName"])) {
                     </li>
                     <li>
                         <a class='dropdown-item nav-item-dd' href='orderHistory.php'>Order History</a>
+                    </li>
+                    <li>
+                        <a class='dropdown-item nav-item-dd' href='ranking.php'>Top Sellers</a>
                     </li>
                     <li>
                         <a class='dropdown-item nav-item-logout' href='logout.php'>Log Out</a>

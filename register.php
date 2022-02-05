@@ -131,7 +131,7 @@
 </script>
 
 <div style="margin: 7em 0 7em 0; padding: 0">
-    <div class="background" style="width: 60% !important">
+    <div class="background">
         <form id="RegisterForm" style="margin: auto" name="register" action="#" method="post" onsubmit="validateForm(event)">
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Register</h3>
             <div class="form-group row" style="margin-bottom:40px;">
@@ -210,7 +210,7 @@
                 </div>
             </div>
             <div align="center" style="margin-bottom:30px;" class="g-recaptcha" data-sitekey="6LezB0seAAAAALAeBQuG0QP8YRgD25D75TN-_xlB"></div>
-            <button type="submit" class="center" style="padding: 10px 150px 10px 150px">Register</button>
+            <button type="submit" class="center memberButton">Register</button>
         </form>
     </div>
 </div>

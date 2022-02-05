@@ -14,7 +14,7 @@
     echo "</form>";
     while($row = $result->fetch_array()){
         $rating = round($row["RankInput"]);
-        echo "<div class='background' style='width:100%; padding:20px 0 20px 0;margin-bottom:2.5em !important;'>";
+        echo "<div class='background' style='width:100% !important; padding:20px 0 20px 0;margin-bottom:2.5em !important;'>";
         echo "<div style='margin-left:20px;'>";
         echo "<p style='font-size:20px;font-weight:600;margin-bottom:0.7rem;'>$row[Name]</p>";
         for ($x = 1; $x <= $rating; $x++) {

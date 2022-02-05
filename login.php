@@ -42,7 +42,7 @@
 </script>
 
 <div style="margin: 7em 0 7em 0; padding: 0">
-    <div class="background" style='width: 60% !important'>
+    <div class="background">
         <form action="#" method="post" id="LoginForm" onsubmit="subForm(event)" style="margin: auto"> 
             <h3 align="center" style="margin: 0 0 40px 0; font-weight: 600;color:black;">Login</h3>
             <p style="color:red" align="center" id="loginMessage"></p>
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <p align="right" style="margin-top: -15px"><a style="color:black" href="forgetPassword.php">Forget Password</a></p>
-            <button type="login" class="center">Time to get that dough!</button>
+            <button type="login" class="center memberButton">Time to get that dough!</button>
             <p align="center" style="padding-top: 25px; font-size: 23px;">New User? <a href="registerOTP.php" style="font-weight: 600;color:black">Register Here</a></p>
         </form>
     </div>
