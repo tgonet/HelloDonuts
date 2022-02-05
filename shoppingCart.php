@@ -97,26 +97,31 @@ if (isset($_SESSION["Cart"])) {
 			$stmt1->execute();
 			$row1 = $stmt1->get_result()->fetch_array();
 			$stmt1->close();
-			
+
+			// product details page
+			$product = "productDetails.php?pid=$row[ProductID]";
+
 			// image
 			$img = "./Images/products/$row1[ProductImage]";
 			echo "<tr>";
-			echo "<td style='width: 8em;'><img src=$img class='donut-img'></td>"; 
+			echo "<td style='width: 8em;'><a href='$product'><img src=$img class='donut-img'></a></td>"; 
 			
 			// name, unit price, offer
 			$formattedPrice = number_format($row["Price"], 2);
 			echo "<td style='text-align: left; vertical-align: middle;'>";
+			echo "<a href='$product' style='text-decoration: none;'>";
 			echo "<span class='tray-donut-name'>$row[Name]</span></br>";
 			if ($row1["Offered"] == 1 && date("Y-m-d") < $row1["OfferEndDate"] 
 			&& date("Y-m-d") > $row1["OfferStartDate"]) {
 				$formattedDiscount = number_format($row1["OfferedPrice"], 2);
-				echo "<span style='font-weight: 600;'>Unit Price: </span>";
-				echo "<span style='font-weight: 600; text-decoration: line-through;'>$$formattedPrice</span>";
+				echo "<span style='font-weight: 600; color: #000'>Unit Price: </span>";
+				echo "<span style='font-weight: 600; text-decoration: line-through; color: #000;'>$$formattedPrice</span>";
 				echo "<span style='font-weight: 700; font-size: 16px; color: #DD8331;'> $$formattedDiscount</span>";
 			} else {
 				$formattedDiscount = $formattedPrice;
 				echo "<span style='font-weight: 600;'>Unit Price: $$formattedPrice</span></br>";
 			}
+			echo "</a>";
 			echo "</td>"; 
 			
 			// column for update quantity of purchase
