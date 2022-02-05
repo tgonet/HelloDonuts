@@ -18,13 +18,14 @@ $result = $stmt->get_result();
 $stmt->close();
 
 while ($row = $result->fetch_array()) {
-    echo "<div style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
-    echo "<div class='row' style='margin: 3em 4em 3em 4em; '>";
+    echo "<div style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; width: 100%'>";
+    echo "<div class='row' style='margin: 3em 4em 3em 4em; width: 100% '>";
     echo "<div style='margin:0 7em 0 0; display: inline;'>";
     $img = "./Images/products/$row[ProductImage]";
     $_SESSION["rateImage"] = $img;
     $_SESSION["rateName"] = $row["ProductTitle"]; 
-    echo "<p><img style='border-radius: 5%; width: 40em; height: 40em; object-fit: cover; margin-bottom: 30px;'src=$img /></p>";
+    
+    echo "<p><img class='pImage' id='pImage' style='border-radius: 5%; width:500px; height: 500px; object-fit: cover; margin-bottom: 30px;'src=$img /></p>";
     echo "</div>"; 
     $date_now = date("Y-m-d");
     echo "<div class='col-sm-5' style='vertical-align:top; padding:5px; display: inline;'>"; 
@@ -131,8 +132,8 @@ while ($row = $result->fetch_array()){
     echo"<li style=' display: inline; margin: 0 50px 50px 50px; justify-content: center; text-align:center'>";
     $product = "productDetails.php?pid=$row[ProductID]";
     $img = "./Images/products/$row[ProductImage]";
-    echo "<div style='height:85%; width:100%; '>";
-    echo "<a href=$product><img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover;' src='$img' /></a>";
+    echo "<div class='hi' style='height:85%; width:100%; '>";
+    echo "<a href=$product><img class='sImage' id='sImage' style='border-radius: 5%; width:200px; height: 200px; object-fit: cover;' src='$img' /></a>";
     echo "</div>"; 
     echo "<h2><a style ='color: #63200D; font-weight: bold; font-size: 25px;text-align:center'  href=$product>$row[ProductTitle]</a></h2>";
     echo"</li>";
@@ -147,6 +148,19 @@ include("footer.php");
 ?>
 
 <style>
+    @media screen and (max-width: 600px) {
+        .pImage {
+          width: 300px !important; 
+          height: 300px !important;
+        }
+        .sImage{
+            width: 150px !important; 
+          height: 150px !important;
+        }
+        .hi{
+            height:65% !important;
+        }
+      }
     .suggest{
    display: flex; 
    flex-wrap: wrap; 
