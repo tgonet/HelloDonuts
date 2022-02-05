@@ -1,5 +1,6 @@
 <?php 
 session_start(); // Detect the current session
+unset($_SESSION["checkOutSuccess"]);
 
 if (!isset($_SESSION["OrderID"])) {  
     // redirect to index page if there is no order id session
@@ -16,7 +17,6 @@ echo "<i class='fas fa-chevron-left back-btn'></i> Back to shopping";
 echo "</a>";
 echo "</div>";
 echo "</div>";
-
 
     // Establish connection with SQL in this page
     include_once("mysql_conn.php"); 

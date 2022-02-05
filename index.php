@@ -19,13 +19,13 @@ $result = $conn->query($qry);
 echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
 
 while ($row = $result->fetch_array()){
-    echo"<li style=' display: inline; margin: 0 50px 50px 50px;'>";
-    $img = "./Images/products/$row[ProductImage]";
-    echo "<img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover; margin-bottom: 10px;' src='$img' />";
     $product = "productDetails.php?pid=$row[ProductID]";
     $formattedPrice = number_format($row["Price"], 2);
     $formattedOffer = number_format($row["OfferedPrice"], 2);
     $date_now = date("Y-m-d");
+    echo"<li style=' display: inline; margin: 0 50px 50px 50px;'>";
+    $img = "./Images/products/$row[ProductImage]";
+    echo "<a href=$product style='overflow:hidden'/><img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover; margin-bottom: 10px;' src='$img'/></a>"; 
     echo "<h2><a style ='color: #63200D; margin-left:15px; font-weight: bold; font-size: 25px;text-align:center'  href=$product>$row[ProductTitle]</a></h2>";
     if ($row["Offered"] == 1 and $row["OfferStartDate"] <= $date_now and $row["OfferEndDate"] >= $date_now){
       echo "<h5 style='margin-left:22px;'>Price:<span class = 'strikethrough' style = 'font-size: 15px; color: #63200D'>

@@ -2,13 +2,14 @@
 // Include the code that contains shopping cart's functions.
 // Current session is detected in "cartFunctions.php, hence need not start session here.
 include_once("cartFunctions.php");
-include("header.php"); // Include the Page Layout header
 
 if (! isset($_SESSION["ShopperID"])) { // Check if user logged in 
 	// redirect to login page if the session variable shopperid is not set
 	header ("Location: login.php");
 	exit;
 }
+
+include("header.php"); // Include the Page Layout header
 
 echo "<div class='row' style='padding:20px 0 0 20px'>";
 echo "<div class='col-sm-12'>";
@@ -62,7 +63,7 @@ if (isset($_SESSION["Cart"])) {
         echo "</div>";
 
 		// the page header of shopping cart page
-		echo "<h1 class='page-title'>My Tray</h1>"; 
+		echo "<h3 class='outsideBackground'>My Tray</h3>"; 
 
 		// the header row of shopping cart page
 		echo "<div class='tray-background'>";
@@ -127,7 +128,7 @@ if (isset($_SESSION["Cart"])) {
 			echo "<i class='fas fa-minus plus-minus-btn'></i>"; 
 			echo "</button>"; 
 			echo "</div>"; 
-			echo "<input class='qty-field' type='number' name='quantity' id='$row[ProductID]' value='$row[Quantity]' min=1 max=100 onChange='this.form.submit()'>"; 
+			echo "<input class='qty-field' type='number' name='quantity' id='$row[ProductID]' value='$row[Quantity]' min=1 max=20 onChange='this.form.submit()'>"; 
 			echo "<div class='input-group-button'>"; 
 			echo "<button type='button' class='button-icon plus' data-quantity='plus' data-field='$row[ProductID]'>"; 
 			echo "<i class='fas fa-plus plus-minus-btn'></i>"; 
@@ -178,13 +179,18 @@ if (isset($_SESSION["Cart"])) {
 		// Display the subtotal at the end of the shopping cart
 		$formattedDiscountSubtotal = number_format($discountSubtotal, 2); // with discount
 		$formattedSubtotal = number_format($subtotal, 2); // with discount
+		
 		echo "<tr class='tray-divider'>";
 		echo "<td></td>";
 		echo "<td></td>";
 		echo "<td class='tray-subtotal'>Subtotal</td>";
 		echo "<td class='tray-subtotal'>"; 
-		echo" <span style='text-decoration: line-through; font-weight: 600; font-size: 18px; color: #bfa288;'>$formattedSubtotal</span>"; 
-		echo " $formattedDiscountSubtotal</td>";
+		if ($formattedDiscountSubtotal != $formattedSubtotal) {
+			echo" <span style='text-decoration: line-through; font-weight: 600; font-size: 18px; color: #bfa288;'>$formattedSubtotal</span>"; 
+			echo " $formattedDiscountSubtotal</td>";
+		} else {
+			echo " $formattedSubtotal</td>";
+		}
 		echo "<td></td>";
 		echo "</tr>";
 		

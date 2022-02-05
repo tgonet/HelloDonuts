@@ -50,17 +50,18 @@ include("header.php");
         </div>
     </div> <!-- end breadcrumb -->
 
-    <h1 class='page-title'>Delivery Mode</h1>
+    <h3 class='outsideBackground'>Delivery Mode</h3>
 
     <form action='deliveryFunction.php' method='post' style='width: 100%; padding: 0;'>
         <div class='tray-background'> <!-- start background -->
             <div class='form-input-grp'>
                 <div class='custom-control custom-radio delivery-radio'>
-                    <input type='radio' class='custom-control-input' name='delivery_mode' id='Normal' value='Normal' checked>
+                    <input type='radio' class='custom-control-input' name='delivery_mode' id='Normal' value='Normal' checked onclick='onClickShow()'>
                     <label for='Normal' class='delivery-choice custom-control-label'>
                         <div class='row'>
                             <div class='col-sm-10'>
                                 <span class='delivery-name'>Normal Delivery</span></br>
+                                <span class='delivery-desc'>Your donuts will be delivered within 1 working day.</span> </br>
                                 <span class='delivery-note'>*Note: Normal delivery is free of charge when subtotal exceeds S$50.</span>
                             </div>
                             <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$2</div>
@@ -69,11 +70,12 @@ include("header.php");
                 </div>
                 
                 <div class='custom-control custom-radio delivery-radio'>
-                    <input type='radio' class='custom-control-input' name='delivery_mode' id='Express' value='Express'>
+                    <input type='radio' class='custom-control-input' name='delivery_mode' id='Express' value='Express' onclick='onClickHide()'>
                     <label for='Express' class='delivery-choice custom-control-label'>
                         <div class='row'>
                             <div class='col-sm-10'>
-                                <span class='delivery-name'>Express Delivery</span> 
+                                <span class='delivery-name'>Express Delivery</span></br>
+                                <span class='delivery-desc'>Your donuts will be delivered within 2 hours (for orders placed before 4pm).</span> 
                             </div>
                             <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$5</div>
                         </div>
@@ -83,52 +85,64 @@ include("header.php");
         </div> <!-- close background -->
 
         <!-- delivery timing -->
-        <h1 class='page-title'>Delivery Timing</h1>
+        <div id='normal-time'>
+            <h3 class='outsideBackground'>Delivery Timing</h3>
 
-        <div class='tray-background'> <!-- start background -->
+            <div class='tray-background'> <!-- start background -->
             <div class='form-input-grp'>
-                <div class='custom-control custom-radio delivery-radio'>
-                    <input type='radio' class='custom-control-input' name='delivery_time' id='9to12' value='9to12' checked>
-                    <label for='9to12' class='delivery-choice custom-control-label'>
-                        <div class='row'>
-                            <div class='col-sm-10'>
-                                <span class='delivery-name'>9 am - 12 pm</span></br>
+                    <div class='custom-control custom-radio delivery-radio'>
+                        <input type='radio' class='custom-control-input' name='delivery_time' id='9to12' value='9to12' checked>
+                        <label for='9to12' class='delivery-choice custom-control-label'>
+                            <div class='row'>
+                                <div class='col-sm-10'>
+                                    <span class='delivery-name'>9 am - 12 pm</span></br>
+                                </div>
                             </div>
-                        </div>
-                    </label></br>
-                </div>
-                
-                <div class='custom-control custom-radio delivery-radio'>
-                    <input type='radio' class='custom-control-input' name='delivery_time' id='12to3' value='12to3'>
-                    <label for='12to3' class='delivery-choice custom-control-label'>
-                        <div class='row'>
-                            <div class='col-sm-10'>
-                                <span class='delivery-name'>12 pm - 3 pm</span></br>
+                        </label></br>
+                    </div>
+                    
+                    <div class='custom-control custom-radio delivery-radio'>
+                        <input type='radio' class='custom-control-input' name='delivery_time' id='12to3' value='12to3'>
+                        <label for='12to3' class='delivery-choice custom-control-label'>
+                            <div class='row'>
+                                <div class='col-sm-10'>
+                                    <span class='delivery-name'>12 pm - 3 pm</span></br>
+                                </div>
                             </div>
-                        </div>
-                    </label></br>
-                </div>
-                
-                <div class='custom-control custom-radio delivery-radio'>
-                    <input type='radio' class='custom-control-input' name='delivery_time' id='3to6' value='3to6'>
-                    <label for='3to6' class='delivery-choice custom-control-label'>
-                        <div class='row'>
-                            <div class='col-sm-10'>
-                                <span class='delivery-name'>3 pm - 6 pm</span> 
+                        </label></br>
+                    </div>
+                    
+                    <div class='custom-control custom-radio delivery-radio'>
+                        <input type='radio' class='custom-control-input' name='delivery_time' id='3to6' value='3to6'>
+                        <label for='3to6' class='delivery-choice custom-control-label'>
+                            <div class='row'>
+                                <div class='col-sm-10'>
+                                    <span class='delivery-name'>3 pm - 6 pm</span> 
+                                </div>
                             </div>
-                        </div>
-                    </label></br>
+                        </label></br>
+                    </div>
                 </div>
-            </div>
-        </div> <!-- close background -->
+            </div> <!-- close background -->
+        </div>
 
         <div class='row'>
             <div class='col-md-12'>
-                <button type='submit'">Continue</button>
+                <button type='submit'>Continue</button>
             </div>
         </div>
     </form>
 </div> <!-- close container -->
+
+<script>
+    function onClickHide(){
+        $("#normal-time").hide();
+    }
+
+    function onClickShow(){
+        $("#normal-time").show();
+    }
+</script>
 
 <?php
 include("footer.php");

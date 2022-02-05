@@ -2,7 +2,6 @@
 //Detect the current session
 session_start();
 date_default_timezone_set('Asia/Singapore');
-
 // get from session, redirected from deliveryFunction.php
 if (!isset($_SESSION["DeliveryMode"])) {  
     // redirect to delivery mode page if no delivery method is provided using $_SESSION variable
@@ -177,27 +176,27 @@ echo "</tbody>";
 echo "</table>";
 echo "</div>";
 echo "</div>";
-echo "<h3 class='outsideBackground'>Payment Method</h3>";
-echo "<div class='background'>";
-echo "<form style='margin: auto' action='checkoutProcess.php' method='post'>";
-echo "<input type='radio' name='paymentMethod' value='paypal' checked>";
-echo "<img src='https://1000logos.net/wp-content/uploads/2021/04/Paypal-logo.png' style='width:30%'>";
-echo "</div>";
 echo "<h3 class='outsideBackground'>Customize Your Order</h3>";
+echo "<form style='margin: auto; width:100%' action='checkoutProcess.php' method='post'>";
 echo "<div class='background'>";
-echo "<div class='form-group row' style='margin-bottom:40px;'>";
-echo "<label for='Message' class='col-md-3 col-form-label tray-donut-name'>Add a Message:</label>";
-echo "<div class='col-md-8' style='padding:0 40px 0 40px'>";
+echo "<div class='form-group row'>";
+echo "<label for='Message' class='col-md-4 col-form-label tray-donut-name'>Add a message for receiver:</label>";
+echo "<div class='col-md-7' style='padding:0 30px 0 30px'>";
 echo "<input type='text' class='form-control textfield' id='Message' name='Message'>";
 echo "</div>";
 echo "</div>";
 echo "</div>";
+echo "<h3 class='outsideBackground'>Payment Method</h3>";
+echo "<div class='background'>";
+echo "<input type='radio' name='paymentMethod' id='paymentMethod' value='PayPal' checked>";
+echo "<img src='https://1000logos.net/wp-content/uploads/2021/04/Paypal-logo.png' style='width:30%'>";
+echo "</div>";
 echo "<div class='row'>";
 echo "<div class='col-md-12'>";
 echo "<button type='submit' action='checkoutProcess.php'>Proceed to Payment</button>";
-echo "</form>";
 echo "</div>";
 echo "</div>"; 
+echo "</form>";
 echo "</div>";
 
 $conn->close(); // Close database connection

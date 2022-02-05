@@ -105,11 +105,11 @@ echo "<input type='hidden' name='product_id' value='$pid' />";
 echo "Quantity: <input type='number' name='quantity' value='1'
                 min='1' max='20' style=' margin-right: 20px; ' required />";
 if ($quantity <= 0){
-    echo "<button style='font-weight: bold; margin-top: 30px; background-color: #B1968F ; border-radius: 25px  !important;' disabled>Add to Cart</button>";
+    echo "<button style='font-weight: bold; margin-top: 30px; background-color: #B1968F ; border-radius: 25px  !important;' disabled>Add to Tray</button>";
     echo "<h2 style='font-size: 20px; margin-top: 25px'>Out of Dough!</h2>";
 }
 else{
-    echo "<button type='submit' style='font-weight: bold; margin-top: 30px; border-radius: 25px  !important; '>Add to Cart</button>";
+    echo "<button type='submit' style='font-weight: bold; margin-top: 30px; border-radius: 25px  !important; '>Add to Tray</button>";
 }
 echo "</form>";
 echo "</div>";
@@ -129,11 +129,11 @@ $stmt->close();
 echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
 while ($row = $result->fetch_array()){
     echo"<li style=' display: inline; margin: 0 50px 50px 50px;'>";
+    $product = "productDetails.php?pid=$row[ProductID]";
     $img = "./Images/products/$row[ProductImage]";
     echo "<div style='height:85%; width:100%;'>";
-    echo "<img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover;' src='$img' />";
+    echo "<a href=$product><img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover;' src='$img' /></a>";
     echo "</div>"; 
-    $product = "productDetails.php?pid=$row[ProductID]";
     echo "<h2><a style ='color: #63200D; margin-left:15px; font-weight: bold; font-size: 25px;text-align:center'  href=$product>$row[ProductTitle]</a></h2>";
     echo"</li>";
 }

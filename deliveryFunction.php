@@ -1,8 +1,8 @@
 <?php 
 session_start();
+date_default_timezone_set('Asia/Singapore');
 
 if (isset($_POST['delivery_mode']) && isset($_POST['delivery_time'])) {
-    date_default_timezone_set('Asia/Singapore');
     $_SESSION["DeliveryDate"] = new DateTime('now');
     $_SESSION["DeliveryDiscount"] = 0;
  	switch ($_POST['delivery_mode']) {
@@ -34,9 +34,29 @@ function normalMode() {
 function expressMode() {
     $_SESSION["DeliveryMode"] = 'Express';
     $_SESSION["DeliveryCharge"] = 5;
-    $_SESSION["DeliveryDate"]->modify('+2 hour');
     $_SESSION["WaiveDelivery"] = false;
-    selectedTime();
+    $timenow = date("H:i:s");
+
+    if ($timenow < '09:00:00' || ($timenow >= '09:00:00') && ($timenow <= '12:00:00'))
+    {
+        $_SESSION['DeliveryTime'] = "9 am - 12 pm";
+        $_SESSION["DeliveryDate"]->modify('+2 hour');
+    }
+    else if (($timenow > '12:00:00') && ($timenow <= '15:00:00'))
+    {
+        $_SESSION['DeliveryTime'] = "12 pm - 3 pm";
+        $_SESSION["DeliveryDate"]->modify('+2 hour');
+    }
+    else if (($timenow > '15:00:00') && ($timenow <= '18:00:00'))
+    {
+        $_SESSION['DeliveryTime'] = "3 pm - 6 pm";
+        $_SESSION["DeliveryDate"]->modify('+2 hour');
+
+    }
+    else{
+        $_SESSION['DeliveryTime'] = "9 am - 12 pm";
+        $_SESSION["DeliveryDate"]->modify('+1 day');
+    }
     formatNumbers();
     header("Location: reviewOrder.php");
 	exit;
