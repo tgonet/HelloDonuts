@@ -4,7 +4,7 @@ include_once("mysql_conn.php");
 include("header.php");
 $count = 1;
 
-$qry = "SELECT r.ProductID, Avg(r.RankInput) as AveRank, p.ProductImage, p.ProductTitle FROM Ranking r INNER JOIN Product p ON r.ProductID = p.ProductID GROUP BY r.ProductID ORDER BY AveRank ASC";
+$qry = "SELECT r.ProductID, Avg(r.RankInput) as AveRank, p.ProductImage, p.ProductTitle FROM Ranking r INNER JOIN Product p ON r.ProductID = p.ProductID GROUP BY r.ProductID ORDER BY AveRank DESC";
 $stmt = $conn->prepare($qry);
 $stmt->execute();
 $result = $stmt->get_result();
