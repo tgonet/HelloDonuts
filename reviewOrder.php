@@ -177,8 +177,8 @@ echo "</table>";
 echo "</div>";
 echo "</div>";
 echo "<h3 class='outsideBackground'>Customize Your Order</h3>";
-echo "<div class='background'style='padding: 2% !important;'>";
 echo "<form style='margin: auto; width:100%' action='checkoutProcess.php' method='post'>";
+echo "<div class='background'>";
 echo "<div class='form-group row'>";
 echo "<label for='Message' class='col-md-4 col-form-label tray-donut-name'>Add a message for receiver:</label>";
 echo "<div class='col-md-7' style='padding:0 30px 0 30px'>";
@@ -188,15 +188,15 @@ echo "</div>";
 echo "</div>";
 echo "<h3 class='outsideBackground'>Payment Method</h3>";
 echo "<div class='background'>";
-echo "<input type='radio' name='paymentMethod' value='paypal' checked>";
+echo "<input type='radio' name='paymentMethod' id='paymentMethod' value='PayPal' checked>";
 echo "<img src='https://1000logos.net/wp-content/uploads/2021/04/Paypal-logo.png' style='width:30%'>";
 echo "</div>";
 echo "<div class='row'>";
 echo "<div class='col-md-12'>";
 echo "<button type='submit' action='checkoutProcess.php'>Proceed to Payment</button>";
-echo "</form>";
 echo "</div>";
 echo "</div>"; 
+echo "</form>";
 echo "</div>";
 
 $conn->close(); // Close database connection

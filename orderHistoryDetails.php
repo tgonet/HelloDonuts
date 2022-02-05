@@ -53,6 +53,23 @@ echo "<h3 class='outsideBackground'style='margin-top: 20px !important;'>Order $o
 // Blue container
 echo "<div class='background' id= 'customerOrder'>";
 
+//Print order
+echo "<div style='text-align:right;padding: 0 50px 20px 0;color:#63200D' onclick='printOrder()'><i class='fas fa-print'></i> Print</div>";
+
+// Company details
+echo "<div class='row company-details'>";
+//Company logo
+echo "<div class='col-sm-6'>";
+echo "<img src='Images/hello_donut_logo.svg' alt='Logo' class='logo-img' style='width:80%'>";
+echo "</div>";
+//Company contact info and location
+echo "<div class='col-sm-6' style='width:80%;'>";
+echo "<p style='text-align:left;padding-left:20px;'>Address: 123 Donut Street 45 #06-12 S123456</p>";
+echo "<p style='text-align:left;padding-left:20px;'>Tel: +65 91234567</p>";
+echo "<p style='text-align:left;padding-left:20px;'>Email: hello@donut.com</p>";
+echo "</div>";
+echo "</div>";
+
 // Order details
 echo "<div class='row customer-details' style='padding-top:20px;'>";
 //Column 1 - Customer details and order id
@@ -65,9 +82,10 @@ echo "</div>";
 //Column 2 - Delivery, payment, and order details
 echo "<div class='col-sm-6' style='width:80%;'>";
 echo "<p style='text-align:left;padding-left:20px;'>Date Ordered: $result[DateOrdered]</p>";
+echo "<p style='text-align:left;padding-left:20px;'>Payment Method: PayPal</p>";
 echo "<p style='text-align:left;padding-left:20px;'>Delivery Mode: $result[DeliveryMode]</p>";
-echo "<p style='text-align:left;padding-left:20px;'>Delivery Date: $result[DeliveryDate]</p>";
-echo "<p style='text-align:left;padding-left:20px;'>Delivery Time: $result[DeliveryTime]</p>";
+echo "<p style='text-align:left;padding-left:20px;'>Delivery Date & Time: $result[DeliveryDate] , $result[DeliveryTime]</p>";
+//echo "<p style='text-align:left;padding-left:20px;'>Delivery Time: $result[DeliveryTime]</p>";
 echo "</div>";
 echo "</div>";
 
@@ -167,6 +185,25 @@ echo "</tbody>";
 echo "</table>";
 echo "</div>";
 echo "</div>";
+
+
+echo "<script>
+function printOrder() {
+    var getFullContent = document.body.innerHTML;
+    
+    // Add css
+    var head = document.getElementsByTagName('HEAD')[0]; 
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';       
+    link.href = 'css/site.css'; 
+    head.appendChild(link); 
+
+    var printsection = document.getElementById('customerOrder').innerHTML;
+    document.body.innerHTML = printsection;
+    window.print();
+    document.body.innerHTML = getFullContent; 
+}
+</script>";
 
 include("footer.php"); // Include the Page Layout footer
 ?>
