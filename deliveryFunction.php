@@ -47,7 +47,7 @@ function expressMode() {
         $_SESSION['DeliveryTime'] = "12 pm - 3 pm";
         $_SESSION["DeliveryDate"]->modify('+2 hour');
     }
-    else if (($timenow > '15:00:00') && ($timenow <= '18:00:00'))
+    else if (($timenow > '15:00:00') && ($timenow <= '17:30:00'))
     {
         $_SESSION['DeliveryTime'] = "3 pm - 6 pm";
         $_SESSION["DeliveryDate"]->modify('+2 hour');
