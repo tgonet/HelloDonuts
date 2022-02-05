@@ -4,7 +4,7 @@ include("header.php");
 date_default_timezone_set('Asia/Singapore');
 ?>
 
-<div style=' margin: 0 10em 0 10em;'>
+<div style=' margin: 0 10% 0 10%;'>
 <div class="row" style="padding:5px; ">
 	<div class="col-12">
 		<h3 style='text-align: center; padding-top: 40px; padding-bottom: 10px; font-size: 55px; color: #FA8596; font-weight: 900;'><?php echo "$_GET[catName]"; ?></h3>
@@ -64,7 +64,7 @@ while ($row = $result->fetch_array()) {
 
 	$img = "./Images/products/$row[ProductImage]";
 	echo "<div class='col-4' >";
-	echo "<a href=$product><img style='border-radius: 10%; width: 20em; height: 20em; object-fit: cover; margin-bottom: 30px;' src='$img' alt='Images\Products\Donut_summersnow.jpg'/></a>";
+	echo "<a href=$product><img class='help' style='border-radius: 10%; width: 20em; height: 20em; object-fit: cover; margin-bottom: 30px;' src='$img' alt='Images\Products\Donut_summersnow.jpg'/></a>";
 	echo "</div>";
 
 	echo "</div>"; 
@@ -76,6 +76,28 @@ include("footer.php");
 ?>
 
 <style>
+	@media screen and (max-width: 600px) {
+        button[type="search"] {
+			padding: 10px 120px 10px 10px !important;
+        }
+        .onsale{
+            width: 150px !important; 
+			font-size: 15px !important;
+			border-radius: 10px !important;
+			height: 25px !important;
+        }
+        .onsale2{
+            width: 150px !important; 
+			font-size: 15px !important;
+			border-radius: 10px !important;
+			height: 50px !important;
+        }
+		.help{
+			margin-top:100px;
+			width: 120px !important; 
+			height: 120px !important; 
+		}
+      }
     button[type="search"]{
     padding: 10px 600px 10px 10px;
     display: block; 
