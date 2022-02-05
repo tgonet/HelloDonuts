@@ -3,13 +3,10 @@ session_start();
 include("header.php"); 
 ?>
 
-<div style="margin: 0 10em 0 10em;">
+<div style="margin: 0 10% 0 10%;">
 <div class="row" > 
     <div class="col-12">
     <h3 style='text-align: center; padding-top: 40px; padding-bottom: 50px; font-size: 55px; color: #FA8596; font-weight: 900'>Product Categories</h3>
-    </div>
-</div> 
-
 <?php 
 include_once("mysql_conn.php");
 
@@ -30,6 +27,8 @@ while ($row = $result->fetch_array()){
 }
 echo"</ul>";
 $conn->close(); 
+echo "</div>"; 
+echo "</div>"; 
 echo "</div>"; 
 include("footer.php"); 
 ?>
