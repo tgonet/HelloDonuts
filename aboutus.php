@@ -4,8 +4,6 @@ session_start();
 // Include the Page Layout header
 include("header.php");
 ?>
-<!-- CSS to invert columns -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" />
 <!-- Create a centrally located container -->
 <div style="width:80%; margin:auto; text-align:center">
     <h1>ABOUT US</h1>
