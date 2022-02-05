@@ -18,8 +18,8 @@ $result = $stmt->get_result();
 $stmt->close();
 
 while ($row = $result->fetch_array()) {
-    echo "<div style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
-    echo "<div class='row' style='margin: 3em 4em 3em 4em; '>";
+    echo "<div style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; width: 100%'>";
+    echo "<div class='row' style='margin: 3em 4em 3em 4em; width: 100% '>";
     echo "<div style='margin:0 7em 0 0; display: inline;'>";
     $img = "./Images/products/$row[ProductImage]";
     $_SESSION["rateImage"] = $img;

@@ -17,9 +17,9 @@ $qry = "SELECT * FROM Category";
 $result = $conn->query($qry);
 echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center;'>";
 while ($row = $result->fetch_array()){
+    echo"<li style=' margin: 0 40px 0 40px; display: inline;'>";
     $catname = urlencode($row["CatName"]);
     $catproduct = "catProduct.php?cid=$row[CategoryID]&catName=$catname";
-    echo"<li style=' margin: 0 40px 0 40px; display: inline;'>";
     $img = "./Images/category/$row[CatImage]";
     echo "<a href=$catproduct><img style='border-radius: 20%; width: 25em; height: 25em; object-fit: cover; margin-bottom: 30px;' src='$img' /></a>";
     echo "<div style='margin-left: 20px'>";

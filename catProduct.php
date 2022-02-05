@@ -7,7 +7,7 @@ date_default_timezone_set('Asia/Singapore');
 <div style=' margin: 0 10em 0 10em;'>
 <div class="row" style="padding:5px; ">
 	<div class="col-12">
-		<h3 style='text-align: center; padding-top: 40px; padding-bottom: 10px; font-size: 55px; color: #FA8596; font-weight: 900'><?php echo "$_GET[catName]"; ?></h3>
+		<h3 style='text-align: center; padding-top: 40px; padding-bottom: 10px; font-size: 55px; color: #FA8596; font-weight: 900;'><?php echo "$_GET[catName]"; ?></h3>
 	</div>
 	<a href="search.php" style="margin:0 auto; text-decoration: none">
 	<button type="search" style="text-align: center; color: #C3BFBF; " >SEARCH...</button>
@@ -29,7 +29,7 @@ $result = $stmt->get_result();
 $stmt->close();
 
 while ($row = $result->fetch_array()) {
-	echo "<div class='row' style='padding: 5px'>"; 
+	echo "<div class='row' style='padding: 5px;'>"; 
 	$date_now = date("Y-m-d");
 	$product = "productDetails.php?pid=$row[ProductID]";
 	$formattedPrice = number_format($row["Price"], 2);
