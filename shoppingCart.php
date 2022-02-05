@@ -63,7 +63,7 @@ if (isset($_SESSION["Cart"])) {
         echo "</div>";
 
 		// the page header of shopping cart page
-		echo "<h1 class='page-title'>My Tray</h1>"; 
+		echo "<h3 class='outsideBackground'>My Tray</h3>"; 
 
 		// the header row of shopping cart page
 		echo "<div class='tray-background'>";
