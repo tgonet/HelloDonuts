@@ -141,6 +141,10 @@ button[type="moredonut"] {
     padding: 0 !important;
 }
 
+.delete-btn:focus, .delete-btn:focus-visible {
+    outline: none;
+}
+
 /* shopping cart and checkout breadcrumb */
 .back-btn {
     padding: 8px 11px;

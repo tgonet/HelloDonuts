@@ -1,5 +1,6 @@
 <?php 
 session_start();
+date_default_timezone_set('Asia/Singapore');
 
 if (isset($_POST['delivery_mode']) && isset($_POST['delivery_time'])) {
     date_default_timezone_set('Asia/Singapore');
@@ -36,7 +37,7 @@ function expressMode() {
     $_SESSION["DeliveryCharge"] = 5;
     $_SESSION["DeliveryDate"]->modify('+2 hour');
     $_SESSION["WaiveDelivery"] = false;
-    selectedTime();
+    $_SESSION['DeliveryTime'] = date('g:i a', time() + 7200);
     formatNumbers();
     header("Location: reviewOrder.php");
 	exit;
