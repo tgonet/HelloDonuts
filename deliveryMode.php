@@ -61,6 +61,7 @@ include("header.php");
                         <div class='row'>
                             <div class='col-sm-10'>
                                 <span class='delivery-name'>Normal Delivery</span></br>
+                                <span class='delivery-desc'>Your donuts will be delivered within 1 working day.</span> </br>
                                 <span class='delivery-note'>*Note: Normal delivery is free of charge when subtotal exceeds S$50.</span>
                             </div>
                             <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$2</div>
@@ -73,7 +74,8 @@ include("header.php");
                     <label for='Express' class='delivery-choice custom-control-label'>
                         <div class='row'>
                             <div class='col-sm-10'>
-                                <span class='delivery-name'>Express Delivery</span> 
+                                <span class='delivery-name'>Express Delivery</span></br>
+                                <span class='delivery-desc'>Your donuts will be delivered within 2 hours (for orders placed before 4pm).</span> 
                             </div>
                             <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$5</div>
                         </div>
