@@ -354,6 +354,11 @@ input::-webkit-inner-spin-button {
     color: #63200d;
 }
 
+.delivery-desc {
+    font-weight: 600;
+    color: #dd8331;
+}
+
 .delivery-note {
     font-size: 14px;
     font-weight: 600;
