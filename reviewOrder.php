@@ -2,7 +2,6 @@
 //Detect the current session
 session_start();
 date_default_timezone_set('Asia/Singapore');
-
 // get from session, redirected from deliveryFunction.php
 if (!isset($_SESSION["DeliveryMode"])) {  
     // redirect to delivery mode page if no delivery method is provided using $_SESSION variable
