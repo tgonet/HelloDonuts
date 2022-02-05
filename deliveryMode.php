@@ -50,7 +50,7 @@ include("header.php");
         </div>
     </div> <!-- end breadcrumb -->
 
-    <h1 class='page-title'>Delivery Mode</h1>
+    <h3 class='outsideBackground'>Delivery Mode</h3>
 
     <form action='deliveryFunction.php' method='post' style='width: 100%; padding: 0;'>
         <div class='tray-background'> <!-- start background -->
@@ -86,9 +86,7 @@ include("header.php");
 
         <!-- delivery timing -->
         <div id='normal-time'>
-            <h1 class='page-title'>
-                Delivery Timing
-            </h1>
+            <h3 class='outsideBackground'>Delivery Timing</h3>
 
             <div class='tray-background'> <!-- start background -->
             <div class='form-input-grp'>
