@@ -86,13 +86,12 @@ include("header.php");
         <div id='normal-time'>
             <h1 class='page-title'>
                 Delivery Timing
-                <span style="font-size: 0.55em; font-weight: 600;">(Optional)</span>
             </h1>
 
             <div class='tray-background'> <!-- start background -->
             <div class='form-input-grp'>
                     <div class='custom-control custom-radio delivery-radio'>
-                        <input type='radio' class='custom-control-input' name='delivery_time' id='9to12' value='9to12'>
+                        <input type='radio' class='custom-control-input' name='delivery_time' id='9to12' value='9to12' checked>
                         <label for='9to12' class='delivery-choice custom-control-label'>
                             <div class='row'>
                                 <div class='col-sm-10'>
@@ -122,10 +121,6 @@ include("header.php");
                                 </div>
                             </div>
                         </label></br>
-                    </div>
-                    
-                    <div class='custom-control custom-radio delivery-radio'>
-                        <input type='radio' class='custom-control-input' name='delivery_time' id='nil' value='nil' style='display: none;' checked>
                     </div>
                 </div>
             </div> <!-- close background -->
