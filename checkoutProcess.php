@@ -36,7 +36,7 @@ if($_POST) //Post Data received from Shopping cart page.
 	}
 
 	// End of To Do 6
-	
+	else{
 	$paypal_data = '';
 	// Get all items from the shopping cart, concatenate to the variable $paypal_data
 	// $_SESSION['Items'] is an associative array
@@ -99,7 +99,7 @@ if($_POST) //Post Data received from Shopping cart page.
 		<span style='color:red'>the online checkout system is down.</span></br>
 		Do reach us at <a href='tel:+65 91234567'>+65 91234567</a> or 
 		email us at <a href='mailto:hello@donut.com'>hello@donut.com</a> for orders or enquires. 
-		</br>We thank you for your kind understanding.</div>'";
+		</br>We thank you for your understanding.</div>'";
 		echo "<script>
 		console.log('SetExpressCheckOut failed:".urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."');
 		</script>";
@@ -264,7 +264,7 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 			<span style='color:red'>the online checkout system is down.</span></br>
 			Do reach us at <a href='tel:+65 91234567'>+65 91234567</a> or 
 			email us at <a href='mailto:hello@donut.com'>hello@donut.com</a> for orders or enquires. 
-			</br>We thank you for your kind understanding.</div>'";
+			</br>We thank you for your understanding.</div>'";
 			echo "<script>
 			console.log('GetTransactionDetails failed:".urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."');
 			</script>";
@@ -278,11 +278,12 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 		<span style='color:red'>the online checkout system is down.</span></br>
 		Do reach us at <a href='tel:+65 91234567'>+65 91234567</a> or 
 		email us at <a href='mailto:hello@donut.com'>hello@donut.com</a> for orders or enquires. 
-		</br>We thank you for your kind understanding.</div>'";
+		</br>We thank you for your understanding.</div>'";
 		echo "<script>
 		console.log('DoExpressCheckoutPayment failed:".urldecode($httpParsedResponseAr["L_LONGMESSAGE0"])."');
 		</script>";
 	}
+}
 }
 
 include("footer.php"); // Include the Page Layout footer
