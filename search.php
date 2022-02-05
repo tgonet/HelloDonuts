@@ -56,7 +56,7 @@ if (isset($_GET["keywords"]) && trim($_GET['keywords']) != "") {
         echo "</div>";
         $img = "./Images/products/$row[ProductImage]";
         echo "<div class='col-4' >";
-        echo "<img style='border-radius: 10%; width: 20em; height: 20em; object-fit: cover; margin-bottom: 30px;' src='$img' />";
+        echo "<a href=$product><img style='border-radius: 10%; width: 20em; height: 20em; object-fit: cover; margin-bottom: 30px;' src='$img' /></a>";
         echo "</div>";
         echo "</div>"; 
     }
