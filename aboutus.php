@@ -27,7 +27,7 @@ include("header.php");
     <h1>OUR TEAM</h1>
     <div class="row" style="margin-top:10%; align-items:center">
         <div class="col-sm-6">
-            <img src="Images/Developers/mingzhe.jpeg" id="developers">
+            <img src="Images/Developers/mingzhe.jpg" id="developers">
             <h2>Tan Ming Zhe</h2>
         </div>
         <div class="col-sm-6" style="align-items:center">
