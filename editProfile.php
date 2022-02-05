@@ -161,7 +161,7 @@
                             <input type='email'class='form-control textfield' id='email' name='email' placeholder='Please enter your email' value='$row[Email]' required>
                         </div>
                     </div>
-                    <button type='submit' id='submit' class='center memberButton' style='width:100%'>Save</button>
+                    <button type='submit' id='submit' class='center memberButton'>Save</button>
                     <p align='center' style='font-weight:bold;font-size:20px;margin-top:10px;'><a style='color:black;' href='changePassword.php'>Change Password</a></p>
                 </form>
             </div>
