@@ -35,6 +35,9 @@ if(isset($_SESSION["ShopperName"])) {
                         <a class='dropdown-item nav-item-dd' href='orderHistory.php'>Order History</a>
                     </li>
                     <li>
+                        <a class='dropdown-item nav-item-dd' href='ranking.php'>Top Sellers</a>
+                    </li>
+                    <li>
                         <a class='dropdown-item nav-item-logout' href='logout.php'>Log Out</a>
                     </li>
                 </ul>";

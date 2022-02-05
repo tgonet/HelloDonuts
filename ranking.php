@@ -19,7 +19,7 @@ foreach($result as $i){
     echo "<tr>";
     echo "<div class='row' style='margin:0 15px 0 30px;'>";
     echo "<td>";
-            echo "<h4 style ='color: #63200D;'>$count</h4>";
+            echo "<h4 id='rank' style ='color: #63200D;margin-left:30px;'>$count.</h4>";
         echo "</td>";
         echo "<td style='padding:15px;'>";
             echo "<img id='imgs' style='border-radius: 10%; width: 14em; height: 14em; object-fit: cover; margin-bottom: 30px;' src='$img' />";
@@ -66,6 +66,9 @@ include("footer.php");
         h4{
             font-size:20px !important;
         }
+        #rank{
+            margin-left:10px !important;
+        }
 
     }
 
@@ -76,8 +79,8 @@ include("footer.php");
             margin-bottom:0 !important;
         }
         img{
-            width: 1.9em !important;
-            height:1.9em !important;
+            width: 1.5em !important;
+            height:1.5em !important;
             object-fit: cover;
         }
     }
