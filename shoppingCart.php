@@ -119,7 +119,7 @@ if (isset($_SESSION["Cart"])) {
 				echo "<span style='font-weight: 700; font-size: 16px; color: #DD8331;'> $$formattedDiscount</span>";
 			} else {
 				$formattedDiscount = $formattedPrice;
-				echo "<span style='font-weight: 600;'>Unit Price: $$formattedPrice</span></br>";
+				echo "<span style='font-weight: 600; color: #000;'>Unit Price: $$formattedPrice</span></br>";
 			}
 			echo "</a>";
 			echo "</td>"; 
