@@ -14,7 +14,7 @@ include("header.php"); // Include the Page Layout header
 echo "<div class='row' style='padding:20px 0 0 20px'>";
 echo "<div class='col-sm-12'>";
 echo "<a class='back-link' href='category.php'>";
-echo "<i class='fas fa-chevron-left back-btn'></i> Back to shopping";
+echo "<i class='fas fa-chevron-left back-btn'></i> Back to Shopping";
 echo "</a>";
 echo "</div>";
 echo "</div>";

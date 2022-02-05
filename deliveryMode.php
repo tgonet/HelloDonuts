@@ -75,7 +75,7 @@ include("header.php");
                         <div class='row'>
                             <div class='col-sm-10'>
                                 <span class='delivery-name'>Express Delivery</span></br>
-                                <span class='delivery-desc'>Your donuts will be delivered within 2 hours (for orders placed before 4pm).</span> 
+                                <span class='delivery-desc'>Your donuts will be delivered within 2 hours (for orders placed before 5:30 pm).</span> 
                             </div>
                             <div class='col-sm-2' style='text-align: right; color: #63200d; font-weight: 600;'>$5</div>
                         </div>
