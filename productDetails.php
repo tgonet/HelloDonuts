@@ -126,15 +126,15 @@ $stmt->bind_param("i", $pid);
 $stmt->execute();
 $result = $stmt->get_result();
 $stmt->close();
-echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px'>";
+echo"<ul style='display: flex; flex-wrap: wrap; justify-content: center; margin-bottom: 30px;'>";
 while ($row = $result->fetch_array()){
-    echo"<li style=' display: inline; margin: 0 50px 50px 50px;'>";
+    echo"<li style=' display: inline; margin: 0 50px 50px 50px; justify-content: center; text-align:center'>";
     $product = "productDetails.php?pid=$row[ProductID]";
     $img = "./Images/products/$row[ProductImage]";
-    echo "<div style='height:85%; width:100%;'>";
+    echo "<div style='height:85%; width:100%; '>";
     echo "<a href=$product><img style='border-radius: 10%; width: 18em; height: 18em; object-fit: cover;' src='$img' /></a>";
     echo "</div>"; 
-    echo "<h2><a style ='color: #63200D; margin-left:15px; font-weight: bold; font-size: 25px;text-align:center'  href=$product>$row[ProductTitle]</a></h2>";
+    echo "<h2><a style ='color: #63200D; font-weight: bold; font-size: 25px;text-align:center'  href=$product>$row[ProductTitle]</a></h2>";
     echo"</li>";
 }
 echo"</ul>";
@@ -148,9 +148,11 @@ include("footer.php");
 
 <style>
     .suggest{
+   display: flex; 
+   flex-wrap: wrap; 
    margin-top: 150px;
    background-color: #F2F2F2;
    width: 100%;
-   height: 500px !important;
+   height: 30%;
 }
 </style>
