@@ -9,11 +9,13 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
+        <a href="productDetails.php?pid=2">
           <img
               style="width:100%"
               src="Images\Products\Donut_honeydewchocolate.jpg" 
               alt="Honeydew Chocolate"
           />
+          </a>
           <div class="carousel-caption">
           <a style="text-decoration: none"href="productDetails.php?pid=2">
             <h3>Honeydew Chocolate</h3>
@@ -21,24 +23,26 @@
           </div>
       </div>
       <div class="carousel-item">
+        <a href="productDetails.php?pid=9">
           <img
               style="width:100%"
               src="Images\Products\Donut_earlgrey.jpg" 
               alt="Earl Grey"
-          />
+          /></a>
           <div class="carousel-caption">
           <a style="text-decoration: none"href="productDetails.php?pid=9">
-            <h3>Earl Grey</h3>
+            <h3>Earl Grey Delights</h3>
           </div>
           </a>
       </div>
       <div class="carousel-item">
+        <a href="productDetails.php?pid=1">
           <img
               style="width:100%"
               src="Images\Products\Donut_cinnamoncircle.jpg" 
               alt="Cinnamon Circle"
               
-          />
+          /></a>
           <div class="carousel-caption">
             <a style="text-decoration: none"href="productDetails.php?pid=1">
             <h3>Cinnamon Circle</h3>
@@ -50,22 +54,22 @@
 </div>
 <div class="child2">
   <div class="image-wrapper">
+  <a href="productDetails.php?pid=8">
   <img
     class="side-image"
     src="Images\Products\Donut_matcha.png" 
     alt="Matcha Ring Donut"
   />
-  <a href="productDetails.php?pid=8">
   <h3 class="image1" >Try Our New Flavour Here!</h3>
   </a>
   </div>
   <div class="image-wrapper">
+  <a href="register.php">
   <img
     class="side-image2"
     src="Images\join_now.jpg" 
     alt="Join Donut"
   />
-  <a href="register.php">
   <h3 class="image2">Sign Up </br>Now!</h3>
   </a>
   </div>
@@ -102,7 +106,7 @@
     height: 100%;
     text-align: center;
   }
-  .carousel-inner > .carousel-item > img {
+  .carousel-inner > .carousel-item > a > img {
   height:520px;
   object-fit:cover;
   opacity: 0.85;

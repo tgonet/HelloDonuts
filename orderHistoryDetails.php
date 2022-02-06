@@ -172,7 +172,7 @@ echo "<tr class='order-contents-summary'>";
 echo "<td colspan='2' id='orderSummaryTitle'>Tax</td>";
 echo "<td></td>";
 $tax = number_format($result["Tax"],2);
-echo "<td>S$$result[Tax]</td>";
+echo "<td>S$$tax</td>";
 echo "</tr>";
 
 echo "<tr style='font-weight:800; color:#DD8331; font-size:20px'>";
@@ -191,7 +191,6 @@ echo "<script>
 function printOrder() {
     var getFullContent = document.body.innerHTML;
     
-    // Add css
     var head = document.getElementsByTagName('HEAD')[0]; 
     var link = document.createElement('link');
     link.rel = 'stylesheet';       
