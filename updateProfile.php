@@ -24,7 +24,7 @@
 
     if(isset($_POST["email"])) {
         $name = $_POST["name"];
-        $_SESSION["ShopperID"] = $name;
+        $_SESSION["ShopperName"] = $name;
         $DOB = $_POST["bday"];
         $address = $_POST["address"];
         $country = $_POST["country"];
